@@ -24,11 +24,12 @@ help()
     		-t <language> [folder name] 获取指定开发语言的模块程序模块 
                 <language> 开发语言 ，如java
                 [folder name] 下载到指定名字的目录下
+            -l 查看支持的模板列表    
     		-n 获取NULS2.0运行环境(从nuls-v2/nuls-engine分支拉)
     		-p <模块目录>   集成指定模块到NULS2.0运行环境中
             -a 添加一个基础模块
             -r 移除一个基础模块
-            -s 查看配置的待打包模块列表
+            -s 查看配置的待打包的基础模块列表            
     		-h 查看帮助
     		
 EOF
