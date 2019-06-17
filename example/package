@@ -1,0 +1,96 @@
+#!/bin/bash
+cd `dirname $0`
+. build/func
+ROOT_PATH=`pwd`
+BUILD_PATH="${ROOT_PATH}/build"
+OUT_PATH="${ROOT_PATH}/outer"
+if [ -d $OUT_PATH ]; then
+    rm -rf $OUT_PATH
+fi
+mkdir $OUT_PATH
+APP_NAME=`getModuleItem ./module.ncf APP_NAME`
+if [ -z "${APP_NAME}" ]; then
+    echo "must setting APP_NAME in module.ncf"
+    exit 0
+fi
+cd build
+if [ ! -d "tmp" ]; then
+    mkdir tmp
+fi
+cd $ROOT_PATH
+moduleName=`getModuleItem  ./module.ncf "APP_NAME"`;
+version=`getModuleItem  ./module.ncf "VERSION"`;
+if [ ! -d "${OUT_PATH}/${moduleName}" ];then
+	mkdir ${OUT_PATH}/${moduleName}
+fi
+if [ -d "${OUT_PATH}/${moduleName}/${version}" ]; then
+	rm -r "${OUT_PATH}/${moduleName}/${version}"
+fi
+moduleOutPath="${OUT_PATH}/${moduleName}/${version}"
+if [ ! -d "$moduleOutPath" ]; then
+    mkdir $moduleOutPath
+fi
+mainClass=`getModuleItem  ./module.ncf "MAIN_CLASS"`;
+mainClassName=`awk -v s="${mainClass}" 'BEGIN{ len = split(s,ary,"."); print ary[len]}'`
+moduleBuildPath="${BUILD_PATH}/tmp"
+if [ ! -d "${moduleBuildPath}" ]; then
+	mkdir "${moduleBuildPath}"
+fi
+moduleNcf="${moduleBuildPath}/module.1.ncf";
+if [ -f $moduleNcf ]; then
+	rm $moduleNcf
+fi
+touch $moduleNcf
+while read line
+do
+	TEMP=`echo $line|grep -Eo '\[.+\]'`
+	if [ -n "$TEMP" ]; then
+	  echo "set cfg domain ${TEMP}"
+	  cfgDomain=$TEMP
+	fi
+		if [ "${cfgDomain}" != "[JAVA]" ]; then
+			echo $line >> $moduleNcf
+		fi
+done < ./module.ncf
+cfgDomain=""
+sedCommand="sed "
+${ROOT_PATH}/build/merge-ncf "${ROOT_PATH}/build/module-prod.ncf" $moduleNcf $moduleName
+#rm $moduleNcf
+sedCommand+=" -e 's/%APP_NAME%/${moduleName}/g' "
+sedCommand+=" -e 's/%VERSION%/${version}/g' "
+sedCommand+=" -e 's/%MAIN_CLASS%/${mainClass}/g' "
+echo $sedCommand
+if [ -z `echo "${sedCommand}" | grep -o "%JOPT_XMS%"` ]; then
+	sedCommand="${sedCommand}  -e 's/%JOPT_XMS%/256/g' "
+fi
+if [ -z `echo "${sedCommand}" | grep -o "%JAVA_OPTS%"` ]; then
+	sedCommand="${sedCommand}  -e 's/%JAVA_OPTS%//g' "
+fi
+if [ -z `echo "${sedCommand}" | grep -o "%JOPT_XMX%"` ]; then
+	sedCommand="${sedCommand}  -e 's/%JOPT_XMX%/256/g' "
+fi
+if [ -z `echo "${sedCommand}" | grep -o "%JOPT_METASPACESIZE%"` ]; then
+	sedCommand="${sedCommand}  -e 's/%JOPT_METASPACESIZE%/128/g' "
+fi
+if [ -z `echo "${sedCommand}" | grep -o "%JOPT_MAXMETASPACESIZE%"` ]; then
+	sedCommand="${sedCommand}  -e 's/%JOPT_MAXMETASPACESIZE%/256/g' "
+fi
+startSh="${BUILD_PATH}/start-temp"
+stopSh="${BUILD_PATH}/stop-temp"
+# echo $sedCommand
+eval "${sedCommand}  ${startSh} > ${moduleBuildPath}/start.sh"
+cp "${moduleBuildPath}/start.sh" "${OUT_PATH}/start.sh"
+chmod +x "${OUT_PATH}/start.sh"
+echo "copy ${moduleBuildPath}/start.sh to ${OUT_PATH}/start.sh"
+eval "${sedCommand}  ${stopSh} > ${moduleBuildPath}/stop.sh"
+cp "${moduleBuildPath}/stop.sh" "${OUT_PATH}/stop.sh"
+chmod +x "${OUT_PATH}/stop.sh"
+echo "copy ${moduleBuildPath}/stop.sh to ${OUT_PATH}/stop.sh"
+cp "${moduleBuildPath}/module.temp.ncf" "${OUT_PATH}/Module.ncf"
+echo "copy ${moduleBuildPath}/module.temp.ncf to ${OUT_PATH}/Module.ncf"
+
+
+cd $ROOT_PATH
+mvn package -Dmaven.test.skip=true
+mv "target/${APP_NAME}.jar" ${OUT_PATH}/${APP_NAME}-${version}.jar
+cp -r "target/libs" "${OUT_PATH}/lib"
