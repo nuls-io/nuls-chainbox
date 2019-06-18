@@ -108,6 +108,7 @@ checkJDKAndMaven
 #检查是否已经clone了nuls2.0
 initAndUpdateNulsRuntime()
 {
+
     if [ ! -d "$NULS2_REPO_DIR" ]; 
     then
         git clone $NULS2_REPO $NULS2_REPO_DIR
@@ -116,6 +117,15 @@ initAndUpdateNulsRuntime()
     else
         cd $NULS2_REPO_DIR
         git pull         
+    fi
+    if [ -x "mvn" ]; then
+        if [ ! -d "./lib/maven" ]; then
+            tar -xvf ./lib/apache-maven-3.6.1-bin.tar.gz
+            mv ./apache-maven-3.6.1 ./maven
+        fi
+        path=`pwd`
+        export MAVEN_HOME=${path}/lib/maven
+        export ${PATH}:${MAVEN_HOME}/bin
     fi
     ./package -a "mykernel"
     ./package -N -o "../$1"
@@ -132,10 +142,10 @@ getModuleTemplate(){
     case "$templateName" in
         "java" )
             git clone $JAVA_MODULE_TEMP_REPO $dirName
-            git clone $NULS2_REPO $NULS2_REPO_DIR
-            cd $NULS2_REPO_DIR/common
-            mvn install -Dmaven.test.skip=true
-            cd ../..
+           # git clone $NULS2_REPO $NULS2_REPO_DIR
+           # cd $NULS2_REPO_DIR/common
+           # mvn install -Dmaven.test.skip=true
+           # cd ../..
             cd $dirName
             cat README.md
             exit 0;

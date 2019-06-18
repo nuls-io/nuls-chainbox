@@ -59,4 +59,4 @@ logs
 .NULS2.0/
 NULS-WALLET-RUNTIME
 NULS-WALLET
-nuls-module-java
+lib/apache-maven-3.6.1
