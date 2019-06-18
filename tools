@@ -21,17 +21,17 @@ help()
     cat <<- EOF
     Desc: NULS-engine 脚本程序
     Usage: ./tools
-    		-t <language> [folder name] 获取指定开发语言的模块程序模块 
+            -t <language> [folder name] 获取指定开发语言的模块程序模块 
                 <language> 开发语言 ，如java
                 [folder name] 下载到指定名字的目录下
             -l 查看支持的模板列表    
-    		-n 获取NULS2.0运行环境(从nuls-v2/nuls-engine分支拉)
-    		-p <模块目录>   集成指定模块到NULS2.0运行环境中
+            -n 获取NULS2.0运行环境(从nuls-v2/nuls-engine分支拉)
+            -p <模块目录>   集成指定模块到NULS2.0运行环境中
             -a 添加一个基础模块
             -r 移除一个基础模块
             -s 查看配置的待打包的基础模块列表            
-    		-h 查看帮助
-    		
+            -h 查看帮助
+            
 EOF
     exit 0
 }
@@ -100,7 +100,7 @@ checkMaven(){
 
 checkJDKAndMaven(){
     checkJavaVersion
-    checkMaven
+    # checkMaven
 }
 
 checkJDKAndMaven
@@ -108,6 +108,7 @@ checkJDKAndMaven
 #检查是否已经clone了nuls2.0
 initAndUpdateNulsRuntime()
 {
+
     if [ ! -d "$NULS2_REPO_DIR" ]; 
     then
         git clone $NULS2_REPO $NULS2_REPO_DIR
@@ -116,6 +117,21 @@ initAndUpdateNulsRuntime()
     else
         cd $NULS2_REPO_DIR
         git pull         
+    fi
+    if [ ! -x "mvn" ]; then
+        if [ ! -d "./lib" ]; then
+            mkdir ./lib
+        fi    
+        if [ ! -d "./lib/maven" ]; then
+            cd ./lib
+            wget http://mirrors.tuna.tsinghua.edu.cn/apache/maven/maven-3/3.6.1/binaries/apache-maven-3.6.1-bin.tar.gz
+            tar -xvf ./apache-maven-3.6.1-bin.tar.gz
+            mv ./apache-maven-3.6.1 ./maven
+            cd ..
+        fi
+        path=`pwd`
+        export MAVEN_HOME=${path}/lib/maven
+        export ${PATH}:${MAVEN_HOME}/bin
     fi
     ./package -a "mykernel"
     ./package -N -o "../$1"
