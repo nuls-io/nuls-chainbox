@@ -119,6 +119,9 @@ initAndUpdateNulsRuntime()
         git pull         
     fi
     if [ -x "mvn" ]; then
+        if [ ! -d "./lib" ]; then
+            mkdir ./lib
+        fi    
         if [ ! -d "./lib/maven" ]; then
             cd ./lib
             wget http://mirrors.tuna.tsinghua.edu.cn/apache/maven/maven-3/3.6.1/binaries/apache-maven-3.6.1-bin.tar.gz
