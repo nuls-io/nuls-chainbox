@@ -45,7 +45,7 @@ NULS2.0是用JAVA语言编写的分布式微服务架构的程序，整个节点
 ### 创建交易流程
 ![节点创建交易](./images/createtx.png)
 ### 处理网络交易流程
-![处理网络广播交易](./images/hand network tx.png)
+![处理网络广播交易](./images/handnetworktx.png)
 
 从图中可以看出扩展一个新的业务模块主要需要做4件事
 1. 在交易模块注册自己的交易类型。
