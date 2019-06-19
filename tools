@@ -121,7 +121,7 @@ initAndUpdateNulsRuntime()
         fi
         path=`pwd`
         export MAVEN_HOME=${path}/lib/maven
-        export ${PATH}:${MAVEN_HOME}/bin
+        export PATH=${PATH}:${MAVEN_HOME}/bin
     fi
     if [ ! -d "$NULS2_REPO_DIR" ]; 
     then
@@ -132,7 +132,6 @@ initAndUpdateNulsRuntime()
         cd $NULS2_REPO_DIR
         git pull         
     fi
-    
     ./package -a "mykernel"
     ./package -N -o "../$1"
     cd ..
