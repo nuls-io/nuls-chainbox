@@ -107,7 +107,7 @@ tools -t java
 tools -n
 ```
 ### 获取指定语言模块开发模板
-####命令:tools -t &lt;language> [out folder]
+#### 命令:tools -t &lt;language> [out folder]
 #### 参数列表
 | 参数 | 说明 |
 | --- | --- |
@@ -118,21 +118,21 @@ tools -n
 tools -t java demo
 ```
 ### 查看可用模板列表
-####命令：tools -l
-####参数列表
+#### 命令：tools -l
+#### 参数列表
 无
-#####示例
+##### 示例
 
 ```
 doto
 ```
-###将模块集成到NULS2.0运行环境
-####命令:tools -p &lt;module folder>
-####参数列表
+### 将模块集成到NULS2.0运行环境
+#### 命令:tools -p &lt;module folder>
+#### 参数列表
 | 参数 | 说明 |
 | --- | --- |
 | &lt;out folder> | 模块的文件夹名 |
-####示例
+#### 示例
 ```
 ./tools -p demo
 ```
