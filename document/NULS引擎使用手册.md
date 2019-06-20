@@ -1,6 +1,6 @@
 # 目录结构介绍
 ## tools
-NULS引擎操作入口，提供获取程序、集成打包等操作。[命令参数文档](#3)。
+NULS引擎操作入口，提供获取程序、集成打包等操作。[命令参数文档](#cmd-doc)。
 ## document
 文档列表
 ## example
@@ -63,10 +63,134 @@ NULS2.0是用JAVA语言编写的分布式微服务架构的程序，整个节点
 
 最后当交易打入区块，并且区块已经确认后，将在通过交易类型找到存储业务数据的回调函数，通知业务模块可以保持业务数据导节点本地。有些情况可能会出现区块回滚。当区块发生回滚时，也会通过交易类型匹配到对应的交易回滚回调函数，对业务数据进行回滚处理。
 
-以上就是扩展一种交易类型需要完成的几个核心步骤。
+以上就是扩展一种交易类型需要完成的几个核心步骤。验证交易、保存业务数据、回滚业务数据3个接口由业务模块实现，查看具体[接口协议](#registerTx)。
+## 获取各种开发语言的模块开发模板
+理论上只要通过websocket与模块建立连接，然后按照约定的协议与模块进行信息交换就可以实现业务模块的扩展。但是这样从头造轮子的方式效率比较低，门槛也比较高，为了降低模块开发的难度，我们将为各种语言提供快速开始的模板(目前只提供了java），开发人员只需要在模板中的指定位置插入具体的业务逻辑代码就可以完成扩展模块的开发。
 
+通过tools脚本可以非常简单的获取到指定的语言的模块开发模板。
+
+```
+tools -t java 
+```
+执行完成后，会在当前目录创建一个nuls-module-java的文件夹，导入常用的开发工具就可以开始开发业务了。每个模板里都会有对应的使用文档。
+## 将业务模块集成到NULS2.0运行环境中
+业务模块开发
 # 附录
-## tools脚本使用手册
-balbal
+## <span id="cmd-doc">tools脚本使用手册</span>
+### 获取NULS2.0运行环境
+#### 命令：tools -n
+#### 参数列表
+无
+#### 示例
+```
+tools -n
+```
+### 获取指定语言模块开发模板
+####命令:tools -t &lt;language> [out folder]
+#### 参数列表
+| 参数 | 说明 |
+| --- | --- |
+| &lt;language> | 语言模板名称 |
+| [out folder] | 输出的文件夹名 |
+#### 示例
+```
+tools -t java demo
+```
+### 查看可用模板列表
+####命令：tools -l
+####参数列表
+无
+#####示例
+
+```
+doto
+```
+###将模块集成到NULS2.0运行环境
+####命令:tools -p &lt;module folder>
+####参数列表
+| 参数 | 说明 |
+| --- | --- |
+| &lt;out folder> | 模块的文件夹名 |
+####示例
+```
+./tools -p demo
+```
+##<span id="registerTx">业务模块相关接口协议</span>
+业务模块需要给交易模块提供3个回调函数，交易模块会通过websocket调用这3个函数，3个函数的参数相同，命名不同。
+### 验证交易
+cmd名称：txValidator
+
+用于业务模块验证txData数据是否合法，同时也可以验证coinData等数据是否符合业务要求。如果验证不通过，交易模块将丢弃此笔交易。
+### 保存交易业务数据
+cmd名称：txCommit
+
+用于将交易中的业务数据保存到节点本地数据库，或做相应的业务逻辑处理。到达此步的交易都是达成共识的数据。
+### 回滚交易业务数据
+cmd名称：txRollback
+
+当区块发生回滚时，会触发回调此函数，业务模块应该在函数中清除掉此笔交易相关的业务数据，或做相应的逆向处理。
+### 回调函数参数列表
+| 参数名称 | 类型 | 参数说明 |
+| --- | --- | --- |
+| chainId | int | 链id（节点运行多链时区分数据来源） |
+| txList | list | 交易列表 |
+| blockHeader | object | 区块头 |
+
+####  反序列化
+txList和blockHeader两个参数的数据是通过16进制数据的形式传输，首先需要将16进制转换成byte数组，然后再根据不同的规则反序列化成结构化数据。
+##### [Transaction](https://github.com/nuls-io/nuls-v2/blob/master/common/nuls-base/src/main/java/io/nuls/base/data/Transaction.java)
+txList存储的是一个Transaction对象的列表，每一个item里面是Transaction对象序列化成16进制的字符串。反序列化txList首先从[通用协议](https://github.com/nuls-io/nuls-v2-docs/blob/master/design-zh-CHS/r.rpc-tool-websocket%E8%AE%BE%E8%AE%A1v1.3.md)中取出txList参数的值，是一个json的字符串数组，然后遍历数组取得单个Transaction对象的序列化值。将序列化值转换成byte数组。再从byte数组中逐个取出对应的数据值。
+byte数组中读取数据的规则如下：
+1. 2个byte存储无符号的16位int保存交易类型。
+2. 4个byte存储无符号的32位int保存交易时间戳（1970年1月1日到当前的秒数）
+3. 变长类型存储remark字符串，见[变长类型读取方式](#变长类型)
+4. 变成类型存储txData字符串，业务自定义，但任然需要先转换成byte数组。
+5. 变长类型存储coinData字符串，为coinData对象序列化后的16进制的字符串。见[CoinData反序列化方法](#CoinData)
+6. 变长类型存储交易签名字符串,为TransactionSignature对象序列化后的16进制的字符串。
+
+##### <span id="CoinData">[CoinData](https://github.com/nuls-io/nuls-v2/blob/master/common/nuls-base/src/main/java/io/nuls/base/data/CoinData.java)</span>
+CoinData对象存储了一笔交易中出入金关系，一笔交易出金账户和入金账户支持多对多的关系，只要出金总额大于等于入金总额加手续费交易就可以成立。
+1. [varint](https://learnmeabitcoin.com/glossary/varint)类型存储出金账户信息的列表个数。
+2. 按顺序存储出金账户信息列表，出金账户信息为CoinFrom对象，注意此处并没有对CoinFrom对象进行16进制字符串处理。
+3. [varint](https://learnmeabitcoin.com/glossary/varint)类型存储入金账户信息的列表个数。
+4. 按顺序存储入金账户信息列表，入金账户信息为CoinTo对象，注意此处并没有对CoinTo对象进行16进制字符串处理。
+
+##### <span id="CoinFrom">[CoinFrom](https://github.com/nuls-io/nuls-v2/blob/master/common/nuls-base/src/main/java/io/nuls/base/data/CoinFrom.java)</span>
+1. 变长类型存储账户地址。[Address序列化代码](https://github.com/nuls-io/nuls-v2/blob/master/common/nuls-base/src/main/java/io/nuls/base/basic/AddressTool.java)
+2. 2个byte存储无符号16位int保存资产链id。
+3. 2个byte存储无符号16位int保存资产id。
+4. 32个byte存储BigInteger类型的数值数据保存出金资产数量。
+5. 变长类型存储账户nonce值。
+6. 1个byte存储锁定状态（共识用）
+
+##### <span id="CoinTo">[CoinTo](https://github.com/nuls-io/nuls-v2/blob/master/common/nuls-base/src/main/java/io/nuls/base/data/CoinTo.java)</span>
+1. 变长类型存储账户地址。[Address序列化代码](https://github.com/nuls-io/nuls-v2/blob/master/common/nuls-base/src/main/java/io/nuls/base/basic/AddressTool.java)
+2. 2个byte存储无符号16位int保存资产链id。
+3. 2个byte存储无符号16位int保存资产id。
+4. 32个byte存储BigInteger类型的数值数据保存出金资产数量。
+5. 8个byte存储带符号的64位long保存锁定时间（锁定资产的时间）
+
+##### <span id="TransactionSignature">[TransactionSignature](https://github.com/nuls-io/nuls-v2/blob/master/common/nuls-base/src/main/java/io/nuls/base/signture/TransactionSignature.java)</span>
+交易前面会存在多人签名的情况，所以TransactionSignature里面存储的实际上是签名数据列表。byte数组中按顺序依次存储多个签名。反序列化时依次轮训。
+1. 1个byte存储公钥长度。
+2. 公钥数据（长度根据1中获取）
+3. 变长类型存储签名数据。
+
+##### <span id="BlockHeader">[BlockHeader](https://github.com/nuls-io/nuls-v2/blob/master/common/nuls-base/src/main/java/io/nuls/base/data/BlockHeader.java)</span>
+BlockHeader为区块头对象，主要存储前一块的hash值、[merkle tree](https://en.wikipedia.org/wiki/Merkle_tree)的根hash值、出块时间戳、区块高度、块中的交易总数、区块签名、扩展数据。
+序列化规则：
+1. 32个byte存储前一个块的hash值。
+2. 32个byte存储merkle根的hash值。
+3. 4个byte存储无符号的32位int保存出块时间戳（1970年1月1日到当前的秒数）。
+4. 4个byte存储无符号的32位int保存区块高度。
+5. 4个byte存储无符号的32位int保存当前块中的交易总数。
+6. 变长类型存储扩展数据。
+7. 变长类型存储交易签名字符串,为BlockSignature对象序列化后的16进制的字符串。
+
+##### <span id="BlockSignature">[BlockSignature](https://github.com/nuls-io/nuls-v2/blob/master/common/nuls-base/src/main/java/io/nuls/base/signture/BlockSignature.java)</span>
+1. 1个byte存储公钥长度。
+2. 公钥数据（长度根据1中获取）
+3. 变长类型存储签名数据。
+
 
 
