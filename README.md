@@ -180,7 +180,7 @@ nuls>>> network info  #查看节点状态，如果高度为0，等待10秒后再
 ```
 ### 7. 运行加密邮件demo
 1. 准备测试账户。
-    准备2个账户，用于测试发送和接收邮件,这两个地址是测试环境创世块中定义的地址，账户中有一定数量的资产供测试使用。
+    准备2个账户，用于测试发送和接收邮件,这两个地址是测试环境创世块中定义的地址，账户中有一定数量的资产供测试使用。  
     
     ```
     nuls>>> import 477059f40708313626cccd26f276646e4466032cabceccbf571a7c46f954eb75
@@ -195,6 +195,7 @@ Enter your password:**********
 Please confirm new password:**********
 tNULSeBaMrbMRiFAUeeAt6swb4xVBNyi81YL24
     ```
+    
 1. 绑定账户邮箱地址。
     进入NULS-WELLET/Modules/Nuls/mail-example/1.0.0目录，用浏览器打开ui.html（这是一个简单的测试页面，可以测试绑定邮箱地址、收发邮件等功能）。
     ![](./document/images/bindmail.png)
