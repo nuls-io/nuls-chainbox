@@ -43,9 +43,9 @@ NULS2.0运行环境包含一套最基础的区块链程序，里面包含了账�
 ## 如何开发自己的模块
 NULS2.0是用JAVA语言编写的分布式微服务架构的程序，整个节点程序由多个模块组成，每个模块之间通过websocket协议通信。NULS2.0定义了一套标准的[模块通信协议](https://github.com/nuls-io/nuls-v2-docs/blob/master/design-zh-CHS/r.rpc-tool-websocket%E8%AE%BE%E8%AE%A1v1.3.md)，可以通过各种开发语言实现此标准协议与其他模块通信，进而实现自己的业务逻辑。扩展自己的业务逻辑主要是通过扩展新的交易类型实现，在交易的txData中存储自己的业务数据，txData将跟随交易存储在链上。
 ### 创建交易流程
-![节点创建交易](./document/images/createtx.png)
+![节点创建交易](./images/createtx.png)
 ### 处理网络交易流程
-![处理网络广播交易](./document/images/handnetworktx.png)
+![处理网络广播交易](./images/handnetworktx.png)
 
 从图中可以看出扩展一个新的业务模块主要需要做4件事
 1. 在交易模块注册自己的交易类型。
