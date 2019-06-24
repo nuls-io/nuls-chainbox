@@ -94,3 +94,4 @@ cd $ROOT_PATH
 mvn package -Dmaven.test.skip=true
 mv "target/${APP_NAME}.jar" ${OUT_PATH}/${APP_NAME}-${version}.jar
 cp -r "target/libs" "${OUT_PATH}/lib"
+echo "============ PACKAGE FINISH 🍺🍺🍺🎉🎉🎉 ==============="

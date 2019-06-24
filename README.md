@@ -1,217 +1,237 @@
-# 目录结构介绍
-## tools
-NULS引擎操作入口，提供获取程序、集成打包等操作。[命令参数文档](#cmd-doc)。
-## document
-文档列表
-## example
-基于java模块模板开发的一个加密邮件的示例模块程序源码。
-## template
-存储目前支持的语言的模板列表
-# 准备开发环境
-1. 暂时只支持macOS,centos,ubuntu等linux内核的操作系统。
-2. NULS引擎会通过git命令在github.com上拉取代码，需要提前安装git客户端程序。
-3. NULS2.0是基于JAVA语言开发，要运行NULS2.0节点需要安装JDK，目前依赖的JDK版本是jdk-11.0.2
+# NULS-Chainbox
+## NULS-Chainbox是什么
+NULS-Chainbox是一个基于NULS2.0区块链底层运行环境构建的一套区块链应用快速开发平台。它可以帮助区块链应用开发者快速构建自己的区块链应用，而无需关心区块链复杂的底层实现逻辑。它包含一套友好的开发流程和支撑流程的开发工具，以及若干的模块开发模板。
 
-# 获取NULS2.0运行环境
-NULS2.0运行环境包含一套最基础的区块链程序，里面包含了账户、账本、区块、网络、交易、共识（poc）6大核心模块。运行NULS2.0基础运行环境你可以得到包含账户模型、转账交易、POC共识激励等区块链底层的核心功能。如果只想发一条简单的转账交易的链，修改一下配置文件就完成了（完整的配置列表）。你可以在基础环境中集成自己的业务模块，通过扩展一个新的交易类型的方式完成自己的业务，在下面一个段落中我会详细介绍如何构建自己的业务。
+NULS2.0区块链底层运行环境基于微服务架构实现，支持多语言模块接入，Chainbox通过各种开发模板隐藏与NULS2.0模块通信的实现成本，让开发者专注于业务的实现。
+##### 注：目前暂时只有java语言的模块开发模板，后续会逐渐开发其他语言，如goland、nodejs等。
+## 解决的问题和适合的用户
+NULS-Chainbox设计的初衷是帮助应用开发者在区块链上能快速构建自己的应用场景，专注自己的业务实现，绕开晦涩、复杂的区块链底层逻辑。可以这样类比，如果区块链应用是一辆汽车，那么业务开发者只需要设计自己汽车的外形、新的功能，而不需要关心底盘、发动机、变速箱、轮子等。
 
-使用tools脚本获取NULS2.0运行环境
+通常来说我们假设NULS-Chainbox的用户应该具备一些先决条件，比如对区块链有一定的了解、具备一定的编程能力、至少能熟练使用一门开发语言。但在未来即便不会开发，也可以用别人写好的一些模板通过完成一些配置或使用模板提供的工具完成具备一些特殊能力的区块链应用的搭建，当然这种方式就相当于只是给车子改变了颜色或增大了轮胎的尺寸而已，而无法将你的车子从轿车变成越野车。
+## 特点
+NULS-Chainbox本质上是NULS2.0的一个扩展应用，它的定位是一站式区块链开发平台。它有3个核心特点：
+1. 快速搭建开发环境。
+2. 通过模板降低应用开发入门门槛。
+3. 通过约定和脚本解决模板集成的难度，实现一键生成可运行程序。
 
-```
-./tools -n
-```
-脚本会首先检查当前环境，然后从拉取NULS2.0在github仓库里的代码，执行package完成NULS2.0编译打包，将可运行程序输出到./NULS-WALLET-RUNTIME目录中。
-当看到以下内容时表示打包完成。
+## 快速体验
+在下面这个case中，你将体验到使用NULS-Chainbox快速构建一套提供加密邮件服务的区块链应用（加密邮件模块是NULS-Chainbox中的示例程序）。
+### 0. 检查先决条件
+1. 确保您使用的是macOS、centos7+、ubuntu 14+或者其他linux内核的操作系统。
+2. 确保在您的系统中安装了git、maven、jdk11。
 
-```
-============ ~/nuls-engine/NULS-WALLET-RUNTIME PACKAGE FINISH 🍺🍺🍺🎉🎉🎉 ===============
-```
-## NULS-WALLET-RUNTIME目录结构
-### start-mykernel
-启动节点
-### stop-mykernel
-停止节点
-### check-status 
-检查各个模块运行状态
-### cmd
-命令行启动脚本
-### create-address
-创建地址工具
-### nuls.ncf
-配置文件（首次运行start-mykernel脚本后创建）
-#### 更多使用方法参考（NULS2.0钱包使用手册）
-## 如何开发自己的模块
-NULS2.0是用JAVA语言编写的分布式微服务架构的程序，整个节点程序由多个模块组成，每个模块之间通过websocket协议通信。NULS2.0定义了一套标准的[模块通信协议](https://github.com/nuls-io/nuls-v2-docs/blob/master/design-zh-CHS/r.rpc-tool-websocket%E8%AE%BE%E8%AE%A1v1.3.md)，可以通过各种开发语言实现此标准协议与其他模块通信，进而实现自己的业务逻辑。扩展自己的业务逻辑主要是通过扩展新的交易类型实现，在交易的txData中存储自己的业务数据，txData将跟随交易存储在链上。
-### 创建交易流程
-![节点创建交易](./document/images/createtx.png)
-### 处理网络交易流程
-![处理网络广播交易](./document/images/handnetworktx.png)
-
-从图中可以看出扩展一个新的业务模块主要需要做4件事
-1. 在交易模块注册自己的交易类型。
-2. 组装交易数据，调用交易模块创建新的交易。
-3. 验证交易中的业务数据是否合法。
-4. 将交易中的业务数据保存到节点数据库中。
-
-当然除了上面4步，还需要根据具体的业务需求对业务数据进行使用。下面我就对以上4步进行详细介绍。
-
-在系统中每种交易都需要定义一个整数类型的唯一的交易类型（扩展的交易通常用200以上的值），用于区分处理的交易的回调函数。通常应该在模块启动的时候调用交易模块提供的注册交易接口（请查看交易模块的RPC接口文档）。当交易模块拿到一条待处理的交易时，会根据交易类型路由到注册的验证函数对交易业务数据的合法性进行校验。除了验证以外还有commitTx(保存交易业务数据）、rollbackTx（回滚交易的业务数据）两个函数。
-
-通常由业务模块组装自己扩展的交易类型，一条合法的交易中包括交易类型、时间戳、CoinData、txData、备注、签名几个部分。其中CoinData中包含了转账数据，转出账户、转入账户、转账金额、资产信息等。而txData中主要用了保存业务数据，底层不会对txData字段进行验证和处理，业务模块根据业务设计在txData中存储自己的业务数据。签名字段通过椭圆形曲线算法对所有交易数据进行签名，确保在传输过程中数据不被串改。组装完成后，调用交易模块接口创建交易。
-
-交易模块会通过当前节点自己创建获得交易，也会通过网络模块接收其他节点广播过来的交易。交易模块拿到交易后，首先会对交易数据的参数是否合法，然后检查账户余额是否足够支付交易手续费，然后验证账户的nonce值(通过控制交易顺序来保证余额不被重复使用的一种算法）是否合法。验证通过后根据交易类型找到业务验证的回调函数，对交易进行业务验证。
-
-最后当交易打入区块，并且区块已经确认后，将在通过交易类型找到存储业务数据的回调函数，通知业务模块可以保持业务数据导节点本地。有些情况可能会出现区块回滚。当区块发生回滚时，也会通过交易类型匹配到对应的交易回滚回调函数，对业务数据进行回滚处理。
-
-以上就是扩展一种交易类型需要完成的几个核心步骤。验证交易、保存业务数据、回滚业务数据3个接口由业务模块实现，查看具体[接口协议](#registerTx)。
-## 获取各种开发语言的模块开发模板
-理论上只要通过websocket与模块建立连接，然后按照约定的协议与模块进行信息交换就可以实现业务模块的扩展。但是这样从头造轮子的方式效率比较低，门槛也比较高，为了降低模块开发的难度，我们将为各种语言提供快速开始的模板(目前只提供了java），开发人员只需要在模板中的指定位置插入具体的业务逻辑代码就可以完成扩展模块的开发。
-
-通过tools脚本可以非常简单的获取到指定的语言的模块开发模板。
+### 1. 获取NULS-Chainbox程序
 
 ```
-tools -t java 
+git clone https://github.com/lijunzhou/nuls-engine.git chainbox
+``` 
+### 2. 构建业务模块
+我们已经在chainbox/example中为您准备了加密邮件模块的源码。这个example是基于nuls-module-template-java这个模块开发模板开发。
+
 ```
-执行完成后，会在当前目录创建一个nuls-module-java的文件夹，导入常用的开发工具就可以开始开发业务了。每个模板里都会有对应的使用文档。
-### 模块调试方法
-在模块开发过程中需要与基础模块进行联调，获取到NULS2.0运行环境后，执行start-mykernel脚本启动NULS2.0基础模块，然后在业务模块中向ws://127.0.0.1:7771地址进行注册，注册协议。完成注册后，就可以获取到所依赖的各个模块的通信地址，调用模块的接口。
-## 将业务模块集成到NULS2.0运行环境中
-业务模块开发完成后，需要将业务模块集成到NULS2.0运行环境中，然后将输出的程序部署到生产环境中或输出到外部节点运行。使用tools脚本完成集成需要满足以下几个约定。
-1. 打包好的可运行程序应该放在模块开发目录下的outer目录下。
-2. outer目录中必须有一个Module.ncf的配置文件。文件内容如下（以java为例）
+cd example   #进入示例文件夹
+./package    #执行构建脚本（模板提供）
+...
+# 看见以下内容表示构建完成
+============ PACKAGE FINISH 🍺🍺🍺🎉🎉🎉 ===============
+```
+完成后会在example中生成outer文件夹。
+### 3. 集成业务模块到NULS2.0运行环境中
+回到chainbox根目录，执行tools脚本进行模块集成。
+```
+./tools -p example
+...
+# 看见以下内容表示构建完成
+============ PACKAGE FINISH 🍺🍺🍺🎉🎉🎉 ===============
+```
+完成后会在chainbox根目录生成NULS-WALLET文件夹，此文件夹包含了集成了加密邮件模块的NULS2.0运行程序。
+### 4. 修改区块链配置
+进入NULS-WELLET文件夹，打开.default-config.ncf修改配置文件（如果同目录下有nuls.ncf，请修改nuls.ncf）。请修改以下几项:
+1. minNodeAmount=2 改为 0，修改后确保1个节点也能出块。
 
     ```
-    [Core]
-    Language=JAVA      # 注明开发语言
-    Managed=1          # 1表示模块跟随节点程序一起启动，0表示手动启动
-    
-    [Libraries]
-    JRE=11.0.2         # 模块运营环境版本
-    
-    [Script]
-    Scripted=1         # 是否使用脚本启动  1表示是
-    StartScript=start  # 启动模块脚本(start必须在outer目录下)
-    StopScript=stop    # 停止模块脚本(stop必须在outer目录下)
+    #最小链接节点数,当链接到的网络节点低于此参数时,会持续等待
+    minNodeAmount=0
+    ```
+2. seedNodes=tNULSeBaMkrt4z9FYEkkR9D6choPVvQr94oYZp,tNULSeBaMoGr2RkLZPfJeS5dFzZeNj1oXmaYNe,tNULSeBaMnG8hGcyeygVeyaL5cXV38bQm1rw9M,tNULSeBaMtFXBLB35WSAnoN9ezGLLCbh7sPNNN，改为seedNodes=tNULSeBaMkrt4z9FYEkkR9D6choPVvQr94oYZp。去掉多余的出块种子地址，修改后确保在1个节点运行时也能10秒钟出一个块。
     
     ```
-3. 可以通过2中配置的脚本启动模块和停止模块。
-#### 如果使用模块开发模板创建模块不用关心以上约定。
-# 附录
-## <span id="cmd-doc">tools脚本使用手册</span>
-### 获取NULS2.0运行环境
-#### 命令：tools -n
-#### 参数列表
-无
-#### 示例
-```
-tools -n
-```
-### 获取指定语言模块开发模板
-#### 命令:tools -t &lt;language> [out folder]
-#### 参数列表
-| 参数 | 说明 |
-| --- | --- |
-| &lt;language> | 语言模板名称 |
-| [out folder] | 输出的文件夹名 |
-#### 示例
-```
-tools -t java demo
-```
-### 查看可用模板列表
-#### 命令：tools -l
-#### 参数列表
-无
-##### 示例
+    #种子节点出块地址
+    seedNodes=tNULSeBaMkrt4z9FYEkkR9D6choPVvQr94oYZp
+    ```
+3. 查看种子节点出块地址默认密码
+
+    ```
+    #请记住此密码
+    password=nuls123456
+    ```
+5. packetMagic=20201113 改为任意的无符号16进制整数（大于0，小于4294967295），修改后确保不与网络中的其他节点组成同一网络。
+    
+    ```
+    #网络魔法参数
+    packetMagic=9999999
+    ``` 
+    
+### 5. 启动节点程序
+配置完成后，就可以启动节点程序。
 
 ```
-doto
+ ./start-mykernel
+LOG PATH    : ~/NULS-WALLET/Logs
+DATA PATH   : ~/NULS-WALLET/data
+CONFIG FILE : ~/NULS-WALLET/nuls.ncf
+DEBUG       : 0
+JAVA_HOME   : /Library/java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home
+java version "11.0.2" 2019-01-15 LTS
+Java(TM) SE Runtime Environment 18.9 (build 11.0.2+9-LTS)
+Java HotSpot(TM) 64-Bit Server VM 18.9 (build 11.0.2+9-LTS, mixed mode)
+
+====================
+NULS-WALLET STARING
+====================
 ```
-### 将模块集成到NULS2.0运行环境
-#### 命令:tools -p &lt;module folder>
-#### 参数列表
-| 参数 | 说明 |
-| --- | --- |
-| &lt;out folder> | 模块的文件夹名 |
-#### 示例
+看到以上内容说明模块进入启动环节。
+### 6. 检查各个模块启动状态
+NULS2.0提供了检查基础模块启动状态的工具，通过工具查看各个基础模块是否启动完成。
+
 ```
-./tools -p demo
+./check-status 
+
+==================MODULE PROCESS====================
+account PROCESS IS START
+block PROCESS IS START
+consensus PROCESS IS START
+ledger PROCESS IS START
+network PROCESS IS START
+transaction PROCESS IS START
+==================RPC REDAY MODULE==================
+account RPC READY
+block RPC READY
+consensus RPC READY
+ledger RPC READY
+network RPC READY
+transaction RPC READY
+======================REDAY MODULE==================
+account STATE IS READY
+block STATE IS READY
+consensus STATE IS READY
+ledger STATE IS READY
+network STATE IS READY
+transaction STATE IS READY
+================TRY RUNNING MODULE==================
+account TRY RUNNING
+block TRY RUNNING
+consensus TRY RUNNING
+ledger TRY RUNNING
+network TRY RUNNING
+transaction TRY RUNNING
+===================RUNNING MODULE===================
+account STATE IS RUNNING
+block STATE IS RUNNING
+consensus STATE IS RUNNING
+ledger STATE IS RUNNING
+network STATE IS RUNNING
+transaction STATE IS RUNNING
+==================NULS WALLET STATE=================
+==========================
+NULS WALLET IS RUNNING
+==========================
 ```
-## <span id="registerTx">业务模块相关接口协议</span>
-业务模块需要给交易模块提供3个回调函数，交易模块会通过websocket调用这3个函数，3个函数的参数相同，命名不同。
-### 验证交易
-cmd名称：txValidator
+看到以上内容表示节点基础模块已完成启动工作。
+### 6. 导入种子出块节点地址
+进入命令行导入默认的种子出块地址。
 
-用于业务模块验证txData数据是否合法，同时也可以验证coinData等数据是否符合业务要求。如果验证不通过，交易模块将丢弃此笔交易。
-### 保存交易业务数据
-cmd名称：txCommit
+```
+./cmd 
+JAVA_HOME:/Library/java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home
+java version "11.0.2" 2019-01-15 LTS
+Java(TM) SE Runtime Environment 18.9 (build 11.0.2+9-LTS)
+Java HotSpot(TM) 64-Bit Server VM 18.9 (build 11.0.2+9-LTS, mixed mode)
 
-用于将交易中的业务数据保存到节点本地数据库，或做相应的业务逻辑处理。到达此步的交易都是达成共识的数据。
-### 回滚交易业务数据
-cmd名称：txRollback
+Service Manager URL: ws://127.0.0.1:7771
 
-当区块发生回滚时，会触发回调此函数，业务模块应该在函数中清除掉此笔交易相关的业务数据，或做相应的逆向处理。
-### 回调函数参数列表
-| 参数名称 | 类型 | 参数说明 |
-| --- | --- | --- |
-| chainId | int | 链id（节点运行多链时区分数据来源） |
-| txList | list | 交易列表 |
-| blockHeader | object | 区块头 |
+ __    __ __    __ __        ______          ______          ______  __       ______
+/  \  /  /  |  /  /  |      /      \        /      \        /      \/  |     /      |
+$$  \ $$ $$ |  $$ $$ |     /$$$$$$  |      /$$$$$$  |      /$$$$$$  $$ |     $$$$$$/
+$$$  \$$ $$ |  $$ $$ |     $$ \__$$/       $$____$$ |      $$ |  $$/$$ |       $$ |
+$$$$  $$ $$ |  $$ $$ |     $$      \        /    $$/       $$ |     $$ |       $$ |
+$$ $$ $$ $$ |  $$ $$ |      $$$$$$  |      /$$$$$$/        $$ |   __$$ |       $$ |
+$$ |$$$$ $$ \__$$ $$ |_____/  \__$$ |      $$ |_____       $$ \__/  $$ |_____ _$$ |_
+$$ | $$$ $$    $$/$$       $$    $$/       $$       |      $$    $$/$$       / $$   |
+$$/   $$/ $$$$$$/ $$$$$$$$/ $$$$$$/        $$$$$$$$/        $$$$$$/ $$$$$$$$/$$$$$$/
 
-####  反序列化，[通用协议](https://github.com/nuls-io/nuls-v2-docs/blob/master/design-zh-CHS/h.%E9%80%9A%E7%94%A8%E5%8D%8F%E8%AE%AE%E8%AE%BE%E8%AE%A1v1.3.md)
-txList和blockHeader两个参数的数据是通过16进制数据的形式传输，首先需要将16进制转换成byte数组，然后再根据不同的规则反序列化成结构化数据。
-##### [Transaction](https://github.com/nuls-io/nuls-v2/blob/master/common/nuls-base/src/main/java/io/nuls/base/data/Transaction.java)
-txList存储的是一个Transaction对象的列表，每一个item里面是Transaction对象序列化成16进制的字符串。反序列化txList首先从[通用协议](https://github.com/nuls-io/nuls-v2-docs/blob/master/design-zh-CHS/r.rpc-tool-websocket%E8%AE%BE%E8%AE%A1v1.3.md)中取出txList参数的值，是一个json的字符串数组，然后遍历数组取得单个Transaction对象的序列化值。将序列化值转换成byte数组。再从byte数组中逐个取出对应的数据值。
-byte数组中读取数据的规则如下：
-1. 2个byte存储无符号的16位int保存交易类型。
-2. 4个byte存储无符号的32位int保存交易时间戳（1970年1月1日到当前的秒数）
-3. 变长类型存储remark字符串，见[变长类型读取方式](#变长类型)
-4. 变成类型存储txData字符串，业务自定义，但任然需要先转换成byte数组。
-5. 变长类型存储coinData字符串，为coinData对象序列化后的16进制的字符串。见[CoinData反序列化方法](#CoinData)
-6. 变长类型存储交易签名字符串,为TransactionSignature对象序列化后的16进制的字符串。
+Module:cmd-client
 
-##### <span id="CoinData">[CoinData](https://github.com/nuls-io/nuls-v2/blob/master/common/nuls-base/src/main/java/io/nuls/base/data/CoinData.java)</span>
-CoinData对象存储了一笔交易中出入金关系，一笔交易出金账户和入金账户支持多对多的关系，只要出金总额大于等于入金总额加手续费交易就可以成立。
-1. [varint](https://learnmeabitcoin.com/glossary/varint)类型存储出金账户信息的列表个数。
-2. 按顺序存储出金账户信息列表，出金账户信息为CoinFrom对象，注意此处并没有对CoinFrom对象进行16进制字符串处理。
-3. [varint](https://learnmeabitcoin.com/glossary/varint)类型存储入金账户信息的列表个数。
-4. 按顺序存储入金账户信息列表，入金账户信息为CoinTo对象，注意此处并没有对CoinTo对象进行16进制字符串处理。
+waiting nuls-wallet base module ready
+ 2 3nuls-wallet base module ready
+nuls>>> import b54db432bba7e13a6c4a28f65b925b18e63bcb79143f7b894fa735d5d3d09db5 #通过私钥导入种子节点地址（此私钥与第4步第2条修改的地址相匹配，必须严格保持一致）
+Please enter the password (password is between 8 and 20 inclusive of numbers and letters), If you do not want to set a password, return directly.
+Enter your password:**********  #设置导入地址的密码，此密码与第4步第3条记录的密码必须一致）
+Please confirm new password:********** #重复上一步输入的密码
+tNULSeBaMkrt4z9FYEkkR9D6choPVvQr94oYZp #导入地址成功，验证此地址是否与第4步第2条的配置项完全一致
+nuls>>> network info  #查看节点状态，如果高度为0，等待10秒后再重新执行查看。
+{
+  "localBestHeight" : 1,  #本地区块高度
+  "netBestHeight" : 1,    #网络区块高度(本示例只有1个节点，所以网络高度等于本地高度
+  "timeOffset" : 12,
+  "inCount" : 0,
+  "outCount" : 0
+}
+```
+### 7. 运行加密邮件demo
+1. 准备测试账户。
+    准备2个账户，用于测试发送和接收邮件,这两个地址是测试环境创世块中定义的地址，账户中有一定数量的资产供测试使用。
+    
+    ```
+    nuls>>> import 477059f40708313626cccd26f276646e4466032cabceccbf571a7c46f954eb75
+Please enter the password (password is between 8 and 20 inclusive of numbers and letters), If you do not want to set a password, return directly.
+Enter your password:**********
+Please confirm new password:**********
+tNULSeBaMnrs6JKrCy6TQdzYJZkMZJDng7QAsD
+nuls>>> 
+nuls>>> import 8212e7ba23c8b52790c45b0514490356cd819db15d364cbe08659b5888339e78
+Please enter the password (password is between 8 and 20 inclusive of numbers and letters), If you do not want to set a password, return directly.
+Enter your password:**********
+Please confirm new password:**********
+tNULSeBaMrbMRiFAUeeAt6swb4xVBNyi81YL24
+    ```
+1. 绑定账户邮箱地址。
+    进入NULS-WELLET/Modules/Nuls/mail-example/1.0.0目录，用浏览器打开ui.html（这是一个简单的测试页面，可以测试绑定邮箱地址、收发邮件等功能）。
+    ![](./document/images/bindmail.png)
+    输入两个测试账户地址、设置一个邮箱地址、输入刚才设置的测试账户密码。提交成功后将返回此交易的hash值。此处我们申请邮箱地址分别为asd@nuls.io和l24@nuls.io。
+2. 发送邮件。
+    现在我们测试用asd@nuls.io向l24@nuls.io发送邮件。注意发件人使用的是账户地址。
+    ![](./document/images/sendmail.png)
+    
+    输入收件人邮箱地址、发件人账户地址、发件人账户密码。提交成功后将返回此交易的hash值。
+1. 查看邮件内容
+    等待大约10秒钟后（确保交易已经确认），通过发送邮件的hash值查看邮件内容，只有发件人和收件人才能查看。
+    ![](./document/images/viewmail.png)
+    
+    ```
+    {
+        "senderMailAddress": "asd@nuls.io",   //发件人邮箱地址
+        "receiverMailAddress": "24@nuls.io",  //收件人邮箱地址
+        "title": "this is title",             //邮件标题
+        "content": "NULS 666.",               //邮件内容
+        "sender": "tNULSeBaMnrs6JKrCy6TQdzYJZkMZJDng7QAsD",   //发件人账户地址
+        "date": 1561365228904                 //发件时间戳（1970年1月1日到当前的毫秒数）
+    }
+    ```
+### 8. 加密邮件模块设计文档
+[加密邮件模块设计文档](./example/模块设计文档.md)
 
-##### <span id="CoinFrom">[CoinFrom](https://github.com/nuls-io/nuls-v2/blob/master/common/nuls-base/src/main/java/io/nuls/base/data/CoinFrom.java)</span>
-1. 变长类型存储账户地址。[Address序列化代码](https://github.com/nuls-io/nuls-v2/blob/master/common/nuls-base/src/main/java/io/nuls/base/basic/AddressTool.java)
-2. 2个byte存储无符号16位int保存资产链id。
-3. 2个byte存储无符号16位int保存资产id。
-4. 32个byte存储BigInteger类型的数值数据保存出金资产数量。
-5. 变长类型存储账户nonce值。
-6. 1个byte存储锁定状态（共识用）
-
-##### <span id="CoinTo">[CoinTo](https://github.com/nuls-io/nuls-v2/blob/master/common/nuls-base/src/main/java/io/nuls/base/data/CoinTo.java)</span>
-1. 变长类型存储账户地址。[Address序列化代码](https://github.com/nuls-io/nuls-v2/blob/master/common/nuls-base/src/main/java/io/nuls/base/basic/AddressTool.java)
-2. 2个byte存储无符号16位int保存资产链id。
-3. 2个byte存储无符号16位int保存资产id。
-4. 32个byte存储BigInteger类型的数值数据保存出金资产数量。
-5. 8个byte存储带符号的64位long保存锁定时间（锁定资产的时间）
-
-##### <span id="TransactionSignature">[TransactionSignature](https://github.com/nuls-io/nuls-v2/blob/master/common/nuls-base/src/main/java/io/nuls/base/signture/TransactionSignature.java)</span>
-交易前面会存在多人签名的情况，所以TransactionSignature里面存储的实际上是签名数据列表。byte数组中按顺序依次存储多个签名。反序列化时依次轮训。
-1. 1个byte存储公钥长度。
-2. 公钥数据（长度根据1中获取）
-3. 变长类型存储签名数据。
-
-##### <span id="BlockHeader">[BlockHeader](https://github.com/nuls-io/nuls-v2/blob/master/common/nuls-base/src/main/java/io/nuls/base/data/BlockHeader.java)</span>
-BlockHeader为区块头对象，主要存储前一块的hash值、[merkle tree](https://en.wikipedia.org/wiki/Merkle_tree)的根hash值、出块时间戳、区块高度、块中的交易总数、区块签名、扩展数据。
-序列化规则：
-1. 32个byte存储前一个块的hash值。
-2. 32个byte存储merkle根的hash值。
-3. 4个byte存储无符号的32位int保存出块时间戳（1970年1月1日到当前的秒数）。
-4. 4个byte存储无符号的32位int保存区块高度。
-5. 4个byte存储无符号的32位int保存当前块中的交易总数。
-6. 变长类型存储扩展数据。
-7. 变长类型存储交易签名字符串,为BlockSignature对象序列化后的16进制的字符串。
-
-##### <span id="BlockSignature">[BlockSignature](https://github.com/nuls-io/nuls-v2/blob/master/common/nuls-base/src/main/java/io/nuls/base/signture/BlockSignature.java)</span>
-1. 1个byte存储公钥长度。
-2. 公钥数据（长度根据1中获取）
-3. 变长类型存储签名数据。
-
-
-
+## 模块模板列表
+[java模块开发模板](https://github.com/nuls-io/nuls-module-template-java)
+区块链浏览器模板
+浏览器钱包模板
+## 文档列表
+[NULS-Chainbox使用指南](./document/use-guide.md)
+[java模块开发模板使用文档](https://github.com/nuls-io/nuls-module-template-java)
+[机密邮件示例模块设计文档](./example/模块设计文档.md)
+账户模块RPC接口文档
+账本模块RPC接口文档
+交易模块RPC接口文档
+区块模块RPC接口文档
+共识模块RPC接口文档
+网络模块RPC接口文档
