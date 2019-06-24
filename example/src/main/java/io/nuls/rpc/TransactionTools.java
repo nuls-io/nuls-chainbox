@@ -15,10 +15,7 @@ import io.nuls.core.rpc.netty.processor.ResponseMessageProcessor;
 import io.nuls.rpc.vo.TxRegisterDetail;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 
 /**
@@ -46,28 +43,23 @@ public class TransactionTools implements CallRpc {
      * 向交易模块注册交易
      * Register transactions with the transaction module
      */
-    public boolean registerTx() {
+    public boolean registerTx(String moduleName,int... txTyps) {
         try {
             List<TxRegisterDetail> txRegisterDetailList = new ArrayList<>();
-            TxRegisterDetail detail = new TxRegisterDetail();
-            detail.setSystemTx(false);
-            detail.setTxType(Constant.TX_TYPE_CREATE_MAIL_ADDRESS);
-            detail.setUnlockTx(false);
-            detail.setVerifySignature(true);
-            detail.setVerifyFee(true);
-            txRegisterDetailList.add(detail);
-            detail = new TxRegisterDetail();
-            detail.setSystemTx(false);
-            detail.setTxType(Constant.TX_TYPE_SEND_MAIL);
-            detail.setUnlockTx(false);
-            detail.setVerifySignature(true);
-            detail.setVerifyFee(true);
-            txRegisterDetailList.add(detail);
+            Arrays.stream(txTyps).forEach(txType->{
+                TxRegisterDetail detail = new TxRegisterDetail();
+                detail.setSystemTx(false);
+                detail.setTxType(txType);
+                detail.setUnlockTx(false);
+                detail.setVerifySignature(true);
+                detail.setVerifyFee(true);
+                txRegisterDetailList.add(detail);
+            });
             //向交易管理模块注册交易
             Map<String, Object> params = new HashMap<>();
             params.put(Constants.VERSION_KEY_STR, "1.0");
             params.put(Constants.CHAIN_ID, config.getChainId());
-            params.put("moduleCode", "mail");
+            params.put("moduleCode", moduleName);
             params.put("list", txRegisterDetailList);
             params.put("delList",List.of());
             return callRpc(ModuleE.TX.abbr, "tx_register", params,(Function<Map<String,Object>, Boolean>)  res -> (Boolean) res.get("value"));

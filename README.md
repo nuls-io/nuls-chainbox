@@ -136,7 +136,7 @@ doto
 ```
 ./tools -p demo
 ```
-##<span id="registerTx">业务模块相关接口协议</span>
+## <span id="registerTx">业务模块相关接口协议</span>
 业务模块需要给交易模块提供3个回调函数，交易模块会通过websocket调用这3个函数，3个函数的参数相同，命名不同。
 ### 验证交易
 cmd名称：txValidator

@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>jQuery File Upload Example</title>
+</head>
+<body>
+<h1>绑定邮箱地址</h1>
+<hr />
+<label>账户地址：</label><input id="1_address" type="text" size="100"  /><br>
+<label>邮箱地址: </label><input id="1_mailAddress" size="100" /><br>
+<label>密码：</label><input id="1_password" type="password"  ><br>
+<button id="createMail" >提交</button><br><br><label id="1_res">
+
+</label>
+<h1>发送邮件</h1>
+<hr />
+<label>收件人：</label><input id="2_mailAddress" type="text" size="100"  /><br>
+<label>发件人: </label><input id="2_address" size="100" /><br>
+<label>密码：</label><input id="2_password" type="password"  ><br>
+<label>title:</label><input id="2_title" type="text" size="100"  /><br>
+<label>content:</label><textarea rows="30" cols="100" id="2_content" ></textarea><br>
+<button id="sendMail" >发送</button><br>
+<label id="2_res">
+</label><br>
+<h1>查看邮件内容</h1>
+<hr />
+<label>账户地址：</label><input id="3_address" type="text" size="100"  /><br>
+<label>密码：</label><input id="3_password" type="password"  ><br>
+<label>hash:</label><input id="3_hash" type="text" size="100"  /><br>
+<button id="viewMail" >查看</button><br>
+<label id="3_res">
+</label>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    $(function () {
+        $("#createMail").click(function(){
+            var address = $("#1_address").val();
+            var mailAddress = $("#1_mailAddress").val();
+            var password = $("#1_password").val();
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:9999/mail/createMailAddress",
+                data: JSON.stringify({
+                    "address" : address,
+                    "password" : password,
+                    "mailAddress" : mailAddress
+                }),
+                success: function(data){
+                    console.log(data)
+                    if(data.success){
+                        $("#1_res").text(data.data);
+                    }else{
+                        $("#1_res").text(data.msg)
+                    }
+                },
+                contentType: 'application/json',
+                dataType: "json"
+            });
+        });
+        $("#viewMail").click(function(){
+            var address = $("#3_address").val();
+            var hash = $("#3_hash").val();
+            var password = $("#3_password").val();
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:9999/mail/viewMail",
+                data: JSON.stringify({
+                    "address" : address,
+                    "password" : password,
+                    "hash" : hash
+                }),
+                success: function(data){
+                    console.log(data)
+                    if(data.success){
+                        $("#3_res").text(JSON.stringify(data.data));
+                    }else{
+                        $("#3_res").text(data.msg)
+                    }
+                },
+                contentType: 'application/json',
+                dataType: "json"
+            });
+        });
+        $("#sendMail").click(function(){
+            var address = $("#2_address").val();
+            var mailAddress = $("#2_mailAddress").val();
+            var password = $("#2_password").val();
+            var title = $("#2_title").val();
+            var content = $("#2_content").val();
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:9999/mail/sendMail",
+                data: JSON.stringify({
+                    "senderAddress" : address,
+                    "password" : password,
+                    "mailAddress" : mailAddress,
+                    "title" : title,
+                    "content" : content
+                }),
+                success: function(data){
+                    console.log(data)
+                    if(data.success){
+                        $("#2_res").text(data.data);
+                    }else{
+                        $("#2_res").text(data.msg)
+                    }
+                },
+                contentType: 'application/json',
+                dataType: "json"
+            });
+        });
+    });
+</script>
+</body>
+</html>

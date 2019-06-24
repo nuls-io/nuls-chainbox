@@ -54,7 +54,6 @@ public class SendMailProcessor implements TransactionProcessor {
             }
             MailContent mailContent = new MailContent();
             mailContent.parse(new NulsByteBuffer(tx.getTxData()));
-            //验证邮箱地址是否已被使用
             //验证当前地址是否已经绑定了邮箱地址
             if(!mailAddressService.hasAddressOrMailAddress(AddressTool.getStringAddressByBytes(mailContent.getReceiverAddress()),null)){
                 return false;

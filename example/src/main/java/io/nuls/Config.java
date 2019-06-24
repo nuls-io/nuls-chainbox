@@ -11,7 +11,7 @@ import java.math.BigInteger;
  * @Time: 2019-06-12 13:53
  * @Description: 功能描述
  */
-@Configuration(domain = "mail")
+@Configuration(domain = "mail-example")
 public class Config {
 
     /**

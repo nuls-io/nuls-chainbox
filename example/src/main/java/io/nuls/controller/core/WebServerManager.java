@@ -39,22 +39,21 @@ import javax.servlet.ServletRegistration;
 import javax.ws.rs.core.UriBuilder;
 import java.io.IOException;
 import java.net.URI;
-import java.util.Map;
 
 /**
  * @author: Niels Wang
  */
-public class RpcServerManager {
+public class WebServerManager {
 
 
-    private static final RpcServerManager INSTANCE = new RpcServerManager();
+    private static final WebServerManager INSTANCE = new WebServerManager();
 
     private HttpServer httpServer;
 
-    private RpcServerManager() {
+    private WebServerManager() {
     }
 
-    public static RpcServerManager getInstance() {
+    public static WebServerManager getInstance() {
         return INSTANCE;
     }
 

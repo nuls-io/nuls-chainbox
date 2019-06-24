@@ -73,8 +73,29 @@ NULS2.0是用JAVA语言编写的分布式微服务架构的程序，整个节点
 tools -t java 
 ```
 执行完成后，会在当前目录创建一个nuls-module-java的文件夹，导入常用的开发工具就可以开始开发业务了。每个模板里都会有对应的使用文档。
+### 模块调试方法
+在模块开发过程中需要与基础模块进行联调，获取到NULS2.0运行环境后，执行start-mykernel脚本启动NULS2.0基础模块，然后在业务模块中向ws://127.0.0.1:7771地址进行注册，注册协议。完成注册后，就可以获取到所依赖的各个模块的通信地址，调用模块的接口。
 ## 将业务模块集成到NULS2.0运行环境中
-业务模块开发
+业务模块开发完成后，需要将业务模块集成到NULS2.0运行环境中，然后将输出的程序部署到生产环境中或输出到外部节点运行。使用tools脚本完成集成需要满足以下几个约定。
+1. 打包好的可运行程序应该放在模块开发目录下的outer目录下。
+2. outer目录中必须有一个Module.ncf的配置文件。文件内容如下（以java为例）
+
+    ```
+    [Core]
+    Language=JAVA      # 注明开发语言
+    Managed=1          # 1表示模块跟随节点程序一起启动，0表示手动启动
+    
+    [Libraries]
+    JRE=11.0.2         # 模块运营环境版本
+    
+    [Script]
+    Scripted=1         # 是否使用脚本启动  1表示是
+    StartScript=start  # 启动模块脚本(start必须在outer目录下)
+    StopScript=stop    # 停止模块脚本(stop必须在outer目录下)
+    
+    ```
+3. 可以通过2中配置的脚本启动模块和停止模块。
+#### 如果使用模块开发模板创建模块不用关心以上约定。
 # 附录
 ## <span id="cmd-doc">tools脚本使用手册</span>
 ### 获取NULS2.0运行环境
@@ -86,7 +107,7 @@ tools -t java
 tools -n
 ```
 ### 获取指定语言模块开发模板
-####命令:tools -t &lt;language> [out folder]
+#### 命令:tools -t &lt;language> [out folder]
 #### 参数列表
 | 参数 | 说明 |
 | --- | --- |
@@ -97,25 +118,25 @@ tools -n
 tools -t java demo
 ```
 ### 查看可用模板列表
-####命令：tools -l
-####参数列表
+#### 命令：tools -l
+#### 参数列表
 无
-#####示例
+##### 示例
 
 ```
 doto
 ```
-###将模块集成到NULS2.0运行环境
-####命令:tools -p &lt;module folder>
-####参数列表
+### 将模块集成到NULS2.0运行环境
+#### 命令:tools -p &lt;module folder>
+#### 参数列表
 | 参数 | 说明 |
 | --- | --- |
 | &lt;out folder> | 模块的文件夹名 |
-####示例
+#### 示例
 ```
 ./tools -p demo
 ```
-##<span id="registerTx">业务模块相关接口协议</span>
+## <span id="registerTx">业务模块相关接口协议</span>
 业务模块需要给交易模块提供3个回调函数，交易模块会通过websocket调用这3个函数，3个函数的参数相同，命名不同。
 ### 验证交易
 cmd名称：txValidator
@@ -136,7 +157,7 @@ cmd名称：txRollback
 | txList | list | 交易列表 |
 | blockHeader | object | 区块头 |
 
-####  反序列化
+####  反序列化，[通用协议](https://github.com/nuls-io/nuls-v2-docs/blob/master/design-zh-CHS/h.%E9%80%9A%E7%94%A8%E5%8D%8F%E8%AE%AE%E8%AE%BE%E8%AE%A1v1.3.md)
 txList和blockHeader两个参数的数据是通过16进制数据的形式传输，首先需要将16进制转换成byte数组，然后再根据不同的规则反序列化成结构化数据。
 ##### [Transaction](https://github.com/nuls-io/nuls-v2/blob/master/common/nuls-base/src/main/java/io/nuls/base/data/Transaction.java)
 txList存储的是一个Transaction对象的列表，每一个item里面是Transaction对象序列化成16进制的字符串。反序列化txList首先从[通用协议](https://github.com/nuls-io/nuls-v2-docs/blob/master/design-zh-CHS/r.rpc-tool-websocket%E8%AE%BE%E8%AE%A1v1.3.md)中取出txList参数的值，是一个json的字符串数组，然后遍历数组取得单个Transaction对象的序列化值。将序列化值转换成byte数组。再从byte数组中逐个取出对应的数据值。

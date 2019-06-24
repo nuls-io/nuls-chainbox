@@ -82,6 +82,16 @@ while [ ! -z $1 ] ; do
             #log "NulstarUrl is : $2"; 
             NulstarUrl=$2;    
             shift 2 ;;
+        "--config")
+            config=$2;
+            shift 2 ;;
+        "--datapath")
+            datapath="-DdataPath=$2";
+            shift 2 ;;
+        "--logpath")
+            LOGS_DIR="$2/$APP_NAME"
+            logpath="-Dlog.path=$2/$APP_NAME";
+            shift 2 ;;
         * ) shift
     esac
 done  
@@ -90,8 +100,24 @@ if [ ! -d $LOGS_DIR ]; then
     mkdir $LOGS_DIR
 fi
 START_DATE=`date +%Y%m%d%H%M%S`
-STDOUT_FILE=$LOGS_DIR/stdout.log
 
+if [ -z "${config}" ]; then
+    config="../../../../nuls.ncf"
+fi
+
+_dataPath=`getModuleItem ${config} "dataPath"`
+_logPath=`getModuleItem ${config} "logPath"`
+cd `dirname ${config}`
+if [ ! -d ${_dataPath} ]; then
+    mkdir ${_dataPath}
+fi
+STDOUT_FILE="`get_fullpath ${_logPath}`/$APP_NAME/stdout.log"
+datapath="-DdataPath=`get_fullpath ${_dataPath}`"
+logpath="-Dlog.path=`get_fullpath ${_logPath}`/$APP_NAME";
+
+if [ ! -d ${_logPath} ]; then
+    mkdir ${_logPath}
+fi
 cd $MODULE_PATH
 
 checkLogDir(){
@@ -142,7 +168,7 @@ CLASSPATH=" -classpath ./lib/*"
 CLASSPATH="${CLASSPATH}:${JAR_FILE}"
 JAVA_OPTS=" -server -XX:+UseG1GC -XX:MaxGCPauseMillis=50 -Xms${JOPT_XMS}m -Xmx${JOPT_XMX}m -XX:MetaspaceSize=${JOPT_METASPACESIZE}m -XX:MaxMetaspaceSize=${JOPT_MAXMETASPACESIZE}m -XX:+ParallelRefProcEnabled -XX:+TieredCompilation -XX:+ExplicitGCInvokesConcurrent $JAVA_OPTS"
 JAVA_OOM_DUMP="-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=${LOGS_DIR}/oom-${START_DATE}.hprof"
-JAVA_OPTS="$JAVA_OPTS $JAVA_GC_LOG $JAVA_OOM_DUMP  -Dapp.name=$APP_NAME "
+JAVA_OPTS="$JAVA_OPTS $JAVA_GC_LOG $JAVA_OOM_DUMP  -Dapp.name=$APP_NAME ${logpath} ${datapath} "
 echo "${JAVA} ${JAVA_OPTS} ${CLASSPATH} ${MAIN_CLASS} ${NulstarUrl}"
 CMD="${JAVA} ${JAVA_OPTS} ${CLASSPATH} ${MAIN_CLASS} ${NulstarUrl} "
 CMD="${CMD} > ${STDOUT_FILE}"

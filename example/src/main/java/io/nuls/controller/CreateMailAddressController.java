@@ -7,6 +7,7 @@ import io.nuls.base.basic.AddressTool;
 import io.nuls.base.basic.TransactionFeeCalculator;
 import io.nuls.base.data.*;
 import io.nuls.base.signture.P2PHKSignature;
+import io.nuls.controller.core.BaseController;
 import io.nuls.controller.core.Result;
 import io.nuls.controller.vo.CreateMailAddressReq;
 import io.nuls.service.dto.MailAddress;

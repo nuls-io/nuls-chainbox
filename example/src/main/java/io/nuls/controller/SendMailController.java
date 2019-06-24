@@ -10,6 +10,7 @@ import io.nuls.base.data.CoinFrom;
 import io.nuls.base.data.CoinTo;
 import io.nuls.base.data.Transaction;
 import io.nuls.base.signture.P2PHKSignature;
+import io.nuls.controller.core.BaseController;
 import io.nuls.controller.core.Result;
 import io.nuls.controller.vo.MailAddressData;
 import io.nuls.service.dto.MailContent;

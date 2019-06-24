@@ -12,7 +12,7 @@ NULS2_BRANCH="develop"
 NULS2_RUNTIME_DIR="NULS-WALLET-RUNTIME"
 NULS2_REPO_DIR=".NULS2.0"
 
-JAVA_MODULE_TEMP_REPO="git@github.com:lijunzhou/nuls-java-module-template.git"
+JAVA_MODULE_TEMP_REPO="https://github.com/nuls-io/nuls-module-template-java.git"
 
 TEMPLATLIST="java"
 
@@ -142,7 +142,7 @@ getModuleTemplate(){
     templateName=$1
     dirName=$2
     if [ -z "$dirName" ]; then
-        dirName="nuls-module-java"
+        dirName="nuls-module-$1"
     fi
     case "$templateName" in
         "java" )
@@ -152,6 +152,10 @@ getModuleTemplate(){
            # mvn install -Dmaven.test.skip=true
            # cd ../..
             cd $dirName
+            if [ -x ./init.sh ]; then 
+                ./init.sh $dirName
+                rm -f ./init.sh
+            fi
             cat README.md
             exit 0;
             ;;

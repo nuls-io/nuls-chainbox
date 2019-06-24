@@ -31,6 +31,11 @@ import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import javax.ws.rs.Path;
+import javax.ws.rs.container.ContainerRequestContext;
+import javax.ws.rs.container.ContainerResponseContext;
+import javax.ws.rs.container.ContainerResponseFilter;
+import javax.ws.rs.ext.Provider;
+import java.io.IOException;
 import java.util.Collection;
 
 /**
@@ -38,10 +43,24 @@ import java.util.Collection;
  */
 public class NulsResourceConfig extends ResourceConfig {
 
+    public static class CORSFilter implements ContainerResponseFilter {
+
+        @Override
+        public void filter(ContainerRequestContext request,
+                           ContainerResponseContext response) throws IOException {
+            response.getHeaders().add("Access-Control-Allow-Origin", "*");
+            response.getHeaders().add("Access-Control-Allow-Headers",
+                    "origin, content-type, accept, authorization");
+            response.getHeaders().add("Access-Control-Allow-Credentials", "true");
+            response.getHeaders().add("Access-Control-Allow-Methods",
+                    "GET, POST, PUT, DELETE, OPTIONS, HEAD");
+        }
+    }
+
     public NulsResourceConfig() {
         register(MultiPartFeature.class);
         register(JacksonJsonProvider.class);
-
+        register(new CORSFilter());
         Collection<Object> list = SpringLiteContext.getAllBeanList();
         for (Object object : list) {
             if (object.getClass().getAnnotation(Path.class) != null) {

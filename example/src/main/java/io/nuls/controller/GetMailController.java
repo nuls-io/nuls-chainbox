@@ -2,6 +2,7 @@ package io.nuls.controller;
 
 import io.nuls.Config;
 import io.nuls.base.basic.AddressTool;
+import io.nuls.controller.core.BaseController;
 import io.nuls.controller.core.Result;
 import io.nuls.controller.vo.GetMailListReq;
 import io.nuls.controller.vo.MailContentData;
@@ -13,9 +14,6 @@ import io.nuls.core.crypto.HexUtil;
 import io.nuls.core.exception.CryptoException;
 import io.nuls.core.exception.NulsException;
 import io.nuls.rpc.AccountTools;
-import io.nuls.rpc.LegderTools;
-import io.nuls.rpc.TransactionTools;
-import io.nuls.service.MailAddressService;
 import io.nuls.service.SendMailService;
 
 import javax.ws.rs.POST;
