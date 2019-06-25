@@ -157,6 +157,7 @@ getModuleTemplate(){
                 rm -f ./init.sh
             fi
             cat README.md
+            rm -rf .git
             exit 0;
             ;;
         ?)

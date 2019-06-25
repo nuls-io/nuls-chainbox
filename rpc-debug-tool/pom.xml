@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.nuls.v2.module</groupId>
-    <artifactId>mail-example</artifactId>
+    <artifactId>rpc-debug-tool</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -17,12 +17,12 @@
         <dependency>
             <groupId>io.nuls.v2</groupId>
             <artifactId>nuls-core-rpc</artifactId>
-            <version>1.0.0-alpha</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>io.nuls.v2</groupId>
             <artifactId>nuls-base</artifactId>
-            <version>1.0.0-alpha</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
@@ -93,7 +93,7 @@
     </dependencies>
 
     <build>
-        <finalName>mail-example</finalName>
+        <finalName>rpc-debug-tool</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

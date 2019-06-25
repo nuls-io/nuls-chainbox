@@ -1,0 +1,11 @@
+[JAVA]
+MAIN_CLASS=io.nuls.NulsModuleBootstrap
+JOPT_XMS=256
+JOPT_XMX=256
+JAVA_OPTS=
+
+[Core]
+APP_NAME=rpc-debug-tool
+VERSION=1.0.0
+Managed=1
+
