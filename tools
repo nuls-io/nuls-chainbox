@@ -7,7 +7,7 @@
 
 cd `dirname $0`
 
-NULS2_REPO="git@github.com:nuls-io/nuls-v2.git"
+NULS2_REPO="https://github.com/nuls-io/nuls-v2.git"
 NULS2_BRANCH="develop"
 NULS2_RUNTIME_DIR="NULS-WALLET-RUNTIME"
 NULS2_REPO_DIR=".NULS2.0"
@@ -25,8 +25,8 @@ help()
                 <language> 开发语言 ，如java
                 [folder name] 下载到指定名字的目录下
             -l 查看支持的模板列表    
-            -n 获取NULS2.0运行环境(从nuls-v2/nuls-engine分支拉)
-            -p <模块目录>   集成指定模块到NULS2.0运行环境中
+            -n [模块目录...] 获取NULS2.0运行环境(从nuls-v2/nuls-engine分支拉) 默认构建6个核心模块，可以通过传入可选模块名称的方式添加可选模块
+            -p <模块目录> [模块目录...]   集成指定模块到NULS2.0运行环境中
             -a 添加一个基础模块
             -r 移除一个基础模块
             -s 查看配置的待打包的基础模块列表            
@@ -105,9 +105,51 @@ checkJDKAndMaven(){
 
 checkJDKAndMaven
 
+PACKAGE_CONFIG="`pwd`/.package.ncf"
+
+#编辑.package.ncf
+updatePackage(){
+    c="sed -n '/^$1/p' $PACKAGE_CONFIG"
+    has=`eval $c`;
+    if [ -n "$has" ];
+    then
+        os=`uname`
+        if [ "$os" == "Darwin" ];
+        then
+            eval "sed -i '' 's/^$has/$1=$2/' $PACKAGE_CONFIG"
+        else
+            eval "sed -i 's/^$has/$1=$2/' $PACKAGE_CONFIG"
+        fi
+    else
+        if [ $2 == "1" ]; then
+            echo "${1}=1" >> $PACKAGE_CONFIG
+            echo "" >> $PACKAGE_CONFIG
+        fi
+    fi
+    # exit 0
+}
+
+showPackageModule(){
+    log "=========================="
+    log "package module list"
+    while read line
+    do
+        TEMP=`echo $line|grep -Eo '\[.+\]'`
+        if [ -z "$TEMP" ]; then
+            isPackage=`echo $line |grep "=1"`
+            if [ -n "$isPackage" ]; then
+                log "---->$line" | awk -F '=' '{print $1}'
+            fi
+        fi
+    done < $PACKAGE_CONFIG
+    log "=========================="
+}
+
+
 #检查是否已经clone了nuls2.0
 initAndUpdateNulsRuntime()
 {
+
     if [ ! -x "mvn" ]; then
         if [ ! -d "./lib" ]; then
             mkdir ./lib
@@ -132,6 +174,17 @@ initAndUpdateNulsRuntime()
         cd $NULS2_REPO_DIR
         git pull         
     fi
+    if [ ! -f "${PACKAGE_CONFIG}" ]; then
+        cp "./build/package-base.ncf" ${PACKAGE_CONFIG}
+        #statements
+    fi
+    len=$#
+    for ((i=2;i<=$len;i++));do
+        module=`eval echo '$'"$i"`
+        # echo $module
+        updatePackage $module 1
+    done  
+    cp ${PACKAGE_CONFIG} ./.package.ncf
     ./package -a "mykernel"
     ./package -N -o "../$1"
     cd ..
@@ -170,48 +223,63 @@ getModuleTemplate(){
 }
 
 packageToNuls(){
-    module=$1
-    if [ ! -d $module ]; then
-        echo "wrong module folder"
-        exit 0;
-    fi
-    cd $module
-    if [ ! -d "outer" ]; then
-        echo "not found outer folder"
-        exit 0
-    fi
-    if [ ! -f "outer/Module.ncf" ]; then
-        echo "not found Module.ncf"
-        exit 0
-    fi
-    moduleName=`getModuleItem  "outer/Module.ncf" "APP_NAME"`;
-    version=`getModuleItem  "outer/Module.ncf" "VERSION"`;
-    if [ -z "$moduleName" ]; then
-        echo "must setting APP_NAME"
-        exit 0
-    fi
-    if [ -z "$version" ]; then
-        echo "must setting VERSION"
-        exit 0
-    fi
-    cd ..
     initAndUpdateNulsRuntime "./NULS-WALLET"
-    if [ ! -d "./NULS-WALLET/Modules/Nuls/$moduleName" ]; then
-        mkdir "./NULS-WALLET/Modules/Nuls/$moduleName"
-    fi
-    if [ -d "./NULS-WALLET/Modules/Nuls/$moduleName/$version" ]; then
-        rm -rf "./NULS-WALLET/Modules/Nuls/$moduleName/$version"
-    fi
-    mkdir "./NULS-WALLET/Modules/Nuls/$moduleName/$version"
-    cp -r "${module}/outer/" "./NULS-WALLET/Modules/Nuls/$moduleName/$version"
+    for module in $@
+    do
+        # module=$1
+        echo "packing ${module}"
+        if [ ! -d $module ]; then
+            echo "wrong module folder"
+            exit 0;
+        fi
+        cd $module
+        if [ ! -d "outer" ]; then
+            echo "not found outer folder"
+            exit 0
+        fi
+        if [ ! -f "outer/Module.ncf" ]; then
+            echo "not found Module.ncf"
+            exit 0
+        fi
+        moduleName=`getModuleItem  "outer/Module.ncf" "APP_NAME"`;
+        version=`getModuleItem  "outer/Module.ncf" "VERSION"`;
+        if [ -z "$moduleName" ]; then
+            echo "must setting APP_NAME"
+            exit 0
+        fi
+        if [ -z "$version" ]; then
+            echo "must setting VERSION"
+            exit 0
+        fi
+        cd ..
+        
+        if [ ! -d "./NULS-WALLET/Modules/Nuls/$moduleName" ]; then
+            mkdir "./NULS-WALLET/Modules/Nuls/$moduleName"
+        fi
+        if [ -d "./NULS-WALLET/Modules/Nuls/$moduleName/$version" ]; then
+            rm -rf "./NULS-WALLET/Modules/Nuls/$moduleName/$version"
+        fi
+        mkdir "./NULS-WALLET/Modules/Nuls/$moduleName/$version"
+        cp -r "${module}/outer/" "./NULS-WALLET/Modules/Nuls/$moduleName/$version"
+        echo "copy ${module}/outer/ to ./NULS-WALLET/Modules/Nuls/$moduleName/$version"
+        # echo $moduleName
+        echo $moduleName >> ./NULS-WALLET/.modules
+        echo "package ${module} finish"
+    done
 }
 
 
-while getopts nt:p:h name
+while getopts nt:p:ha:r:s name
 do
             case $name in
             p)     
-                   packageToNuls "$OPTARG"
+                   modules=()
+                   len=$#
+                   for ((i=$OPTIND - 1;i<=$len;i++));do
+                       dir=`eval echo '$'"$i"`
+                       modules[${#modules[@]}]=$dir
+                   done    
+                   packageToNuls ${modules[@]}
                    exit
                    ;;
             t)     
@@ -219,8 +287,22 @@ do
                    getModuleTemplate "$OPTARG" "$dir"
                    exit 0
                    ;;
-            n)     initAndUpdateNulsRuntime $NULS2_RUNTIME_DIR
+            n)     modules=()
+                   len=$#
+                   for ((i=$OPTIND - 1;i<=$len;i++));do
+                       dir=`eval echo '$'"$i"`
+                       modules[${#modules[@]}]=$dir
+                   done   
+                   initAndUpdateNulsRuntime $NULS2_RUNTIME_DIR ${modules[@]}
                    exit 0
+                   ;;
+            a)     updatePackage "$OPTARG" 1
+                   exit 0
+                   ;;
+            r)     updatePackage "$OPTARG" 0
+                   exit 0
+                   ;;
+            s)     showPackageModule
                    ;;
             h)     help
                    exit 0
