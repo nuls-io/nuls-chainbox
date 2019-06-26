@@ -60,3 +60,4 @@ logs
 NULS-WALLET-RUNTIME
 NULS-WALLET
 lib/maven
+.package.ncf
