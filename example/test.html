@@ -3,37 +3,90 @@
 <head>
     <meta charset="utf-8">
     <title>jQuery File Upload Example</title>
+    <style>
+        label {
+            min-width: 150px;
+            display:inline-block;
+            text-align: right;
+            vertical-align: top;
+        }
+        input,textarea {
+            width: 540px;
+        }
+        .row {
+            padding: 5px 0px;
+
+        }
+        .row-btn {
+            padding-left: 596px;
+        }
+        button {
+            height: 30px;
+            width: 100px;
+            border-radius: 3px;
+            background-color: darkturquoise;
+            color: #fff;
+            font-size: 16px;
+            margin-right: 0px;
+        }
+    </style>
 </head>
 <body>
 <h1>绑定邮箱地址</h1>
 <hr />
-<label>账户地址：</label><input id="1_address" type="text" size="100"  /><br>
-<label>邮箱地址: </label><input id="1_mailAddress" size="100" /><br>
-<label>密码：</label><input id="1_password" type="password"  ><br>
-<button id="createMail" >提交</button><br><br><label id="1_res">
-
-</label>
+<div class="row"><label for="1_address">账户地址：</label><input id="1_address" type="text" size="100"  /></div>
+<div class="row"><label for="1_mailAddress">邮箱地址：</label><input id="1_mailAddress" size="100" /><br></div>
+<div class="row"><label>密码：</label><input id="1_password" type="password"  ><br></div>
+<div class="row row-btn"><button id="createMail" >提交</button></div>
+<label id="1_res"></label>
 <h1>发送邮件</h1>
 <hr />
-<label>收件人：</label><input id="2_mailAddress" type="text" size="100"  /><br>
-<label>发件人: </label><input id="2_address" size="100" /><br>
-<label>密码：</label><input id="2_password" type="password"  ><br>
-<label>title:</label><input id="2_title" type="text" size="100"  /><br>
-<label>content:</label><textarea rows="30" cols="100" id="2_content" ></textarea><br>
-<button id="sendMail" >发送</button><br>
-<label id="2_res">
-</label><br>
+<div class="row"><label class="label">收件人：</label><input id="2_mailAddress" type="text" size="100"  /><br></div>
+<div class="row"><label>发件人：</label><input id="2_address" size="100" /><br></div>
+<div class="row"><label>密码：</label><input id="2_password" type="password"  ><br></div>
+<div class="row"><label>title：</label><input id="2_title" type="text" size="100"  /><br></div>
+<div class="row"><label>content：</label><textarea rows="30" cols="100" id="2_content" ></textarea><br></div>
+<div class="row row-btn"><button id="sendMail" >发送</button><br></div>
+<label id="2_res"></label><br>
 <h1>查看邮件内容</h1>
 <hr />
-<label>账户地址：</label><input id="3_address" type="text" size="100"  /><br>
-<label>密码：</label><input id="3_password" type="password"  ><br>
-<label>hash:</label><input id="3_hash" type="text" size="100"  /><br>
-<button id="viewMail" >查看</button><br>
-<label id="3_res">
-</label>
+<div class="row"><label>账户地址：</label><input id="3_address" type="text" size="100"  /><div>
+<div class="row"><label>密码：</label><input id="3_password" type="password"  ><div>
+<div class="row"><label>hash：</label><input id="3_hash" type="text" size="100"  /><br></div>
+<div class="row row-btn"><button id="viewMail" >查看</button><br></div>
+<div class="row"><label id="3_res"></label></div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>
+
+    function formatJson(msg) {
+        var rep = "~";
+        var jsonStr = JSON.stringify(msg, null, rep)
+        var str = "";
+        for (var i = 0; i < jsonStr.length; i++) {
+            var text2 = jsonStr.charAt(i)
+            if (i > 1) {
+                var text = jsonStr.charAt(i - 1)
+                if (rep != text && rep == text2) {
+                    str += "<br/>"
+                }
+            }
+            str += text2;
+        }
+        jsonStr = "";
+        for (var i = 0; i < str.length; i++) {
+            var text = str.charAt(i);
+            if (rep == text)
+                jsonStr += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+            else {
+                jsonStr += text;
+            }
+            if (i == str.length - 2)
+                jsonStr += "<br/>"
+        }
+        return jsonStr;
+    }
+
     $(function () {
         $("#createMail").click(function(){
             var address = $("#1_address").val();

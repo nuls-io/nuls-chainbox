@@ -87,10 +87,6 @@ checkJavaVersion(){
 }
 
 checkMaven(){
-    MVN="$MAVEN_HOME/bin/mvn"
-    if [ ! -r "$MVN" ]; then
-        MVN='mvn'
-    fi
     MAVEN_EXIST=`${MVN} -version 2>&1 |grep "Apache Maven"`
     if [ ! -n "$MAVEN_EXIST" ]; then
             log "maven not install"
@@ -167,8 +163,9 @@ showTemplateList(){
 #检查是否已经clone了nuls2.0
 initAndUpdateNulsRuntime()
 {
-
-    if [ ! -x "mvn" ]; then
+    MAVEN_EXIST=`mvn -version 2>&1 |grep "Apache Maven"`
+    echo $MAVEN_EXIST
+    if [ ! -n "$MAVEN_EXIST" ]; then
         if [ ! -d "./lib" ]; then
             mkdir ./lib
         fi    
@@ -272,7 +269,7 @@ packageToNuls(){
             rm -rf "./NULS-WALLET/Modules/Nuls/$moduleName/$version"
         fi
         mkdir "./NULS-WALLET/Modules/Nuls/$moduleName/$version"
-        cp -r "${module}/outer/*" "./NULS-WALLET/Modules/Nuls/$moduleName/$version"
+        cp -r ${module}/outer/* "./NULS-WALLET/Modules/Nuls/$moduleName/$version"
         echo "copy ${module}/outer/ to ./NULS-WALLET/Modules/Nuls/$moduleName/$version"
         # echo $moduleName
         echo $moduleName >> ./NULS-WALLET/.modules
