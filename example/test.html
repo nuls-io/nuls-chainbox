@@ -13,6 +13,9 @@
         input,textarea {
             width: 540px;
         }
+        textarea {
+            height: 100px;
+        }
         .row {
             padding: 5px 0px;
 
@@ -155,7 +158,7 @@
                 success: function(data){
                     console.log(data)
                     if(data.success){
-                        $("#2_res").text(data.data);
+                        $("#2_res").text(formatJson(data.data));
                     }else{
                         $("#2_res").text(data.msg)
                     }

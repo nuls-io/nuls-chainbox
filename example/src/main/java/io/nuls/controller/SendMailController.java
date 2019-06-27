@@ -83,16 +83,15 @@ public class SendMailController implements BaseController {
             Objects.requireNonNull(req.getPassword(),"sender address password can't null");
             Objects.requireNonNull(req.getTitle(),"title can't null");
             int chainId = config.getChainId();
-            //验证账户有效性
-            if (!AddressTool.validAddress(chainId, req.getSenderAddress())) {
-                throw new NulsRuntimeException(CommonCodeConstanst.PARAMETER_ERROR);
+//            //验证账户有效性
+//            if (!AddressTool.validAddress(chainId, req.getSenderAddress())) {
+//                throw new NulsRuntimeException(CommonCodeConstanst.PARAMETER_ERROR);
+//            }
+            Optional<MailAddressData> mailAddressData = mailAddressService.getMailAddressPubKey(req.getSenderAddress());
+            if (mailAddressData.isEmpty()) {
+                throw new NulsRuntimeException(CommonCodeConstanst.FAILED, "无效的发件人地址");
             }
-            accountTools.accountValid(config.getChainId(), req.getSenderAddress(), req.getPassword());
-            Optional<MailAddressData> mailAddressData = mailAddressService.getMailAddress(req.getSenderAddress());
-            if(mailAddressData.isEmpty()){
-                throw new NulsRuntimeException(CommonCodeConstanst.FAILED,"you must apply for mail address for your account");
-            }
-            Account account = accountTools.getAccountByAddress(req.getSenderAddress());
+            Account account = accountTools.getAccountByAddress(mailAddressData.get().getAddress());
             Transaction tx = createSendMailTrasaction(account, req);
             //签名别名交易
             signTransaction(tx, account, req.getPassword());
@@ -116,7 +115,7 @@ public class SendMailController implements BaseController {
         }
         //获取邮箱地址对应的账户和公钥
         byte[] receiverAddress = AddressTool.getAddress(mailAddressData.get().getAddress());
-        byte[] senderAddress = AddressTool.getAddress(req.getSenderAddress());
+        byte[] senderAddress = AddressTool.getAddress(account.getAddress());
         if(Arrays.equals(receiverAddress,senderAddress)){
             throw new NulsRuntimeException(CommonCodeConstanst.PARAMETER_ERROR,"sender equals receiver");
         }

@@ -164,13 +164,18 @@ showTemplateList(){
 initAndUpdateNulsRuntime()
 {
     MAVEN_EXIST=`mvn -version 2>&1 |grep "Apache Maven"`
-    echo $MAVEN_EXIST
-    if [ ! -n "$MAVEN_EXIST" ]; then
+    # echo $MAVEN_EXIST
+    if [ -z "$MAVEN_EXIST" ]; then
         if [ ! -d "./lib" ]; then
             mkdir ./lib
         fi    
         if [ ! -d "./lib/maven" ]; then
             cd ./lib
+            WGET_EXIST=`wget -V 2>&1 |grep "GNU Wget"`
+            if [ -z "$WGET_EXIST" ]; then
+                echoRed "not found wget , install wget "
+                exit 0;
+            fi
             wget http://mirrors.tuna.tsinghua.edu.cn/apache/maven/maven-3/3.6.1/binaries/apache-maven-3.6.1-bin.tar.gz
             tar -xvf ./apache-maven-3.6.1-bin.tar.gz
             mv ./apache-maven-3.6.1 ./maven

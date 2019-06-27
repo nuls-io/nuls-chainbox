@@ -60,6 +60,7 @@ public class GetMailController implements BaseController {
             String priKey = accountTools.getAddressPriKey(config.getChainId(),req.getAddress(),req.getPassword());
             ECKey ecKey = ECKey.fromPrivate(HexUtil.decode(priKey));
             MailContentData mcd = sendMailService.getMailContent(req.getHash(),ecKey,AddressTool.getAddress(req.getAddress()));
+            mcd.setHash(req.getHash());
             return new Result<>(mcd);
         });
     }
