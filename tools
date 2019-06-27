@@ -272,7 +272,7 @@ packageToNuls(){
             rm -rf "./NULS-WALLET/Modules/Nuls/$moduleName/$version"
         fi
         mkdir "./NULS-WALLET/Modules/Nuls/$moduleName/$version"
-        cp -r "${module}/outer/" "./NULS-WALLET/Modules/Nuls/$moduleName/$version"
+        cp -r "${module}/outer" "./NULS-WALLET/Modules/Nuls/$moduleName/$version"
         echo "copy ${module}/outer/ to ./NULS-WALLET/Modules/Nuls/$moduleName/$version"
         # echo $moduleName
         echo $moduleName >> ./NULS-WALLET/.modules
