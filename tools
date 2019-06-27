@@ -291,7 +291,7 @@ do
                        dir=`eval echo '$'"$i"`
                        modules[${#modules[@]}]=$dir
                    done    
-                   packageToNuls ${modules[@]}
+                   packageToNuls ${modules[@]/\//}
                    exit
                    ;;
             t)     
