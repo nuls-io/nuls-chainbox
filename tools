@@ -6,7 +6,7 @@
 #定义打包函数
 
 cd `dirname $0`
-
+ROOT_PATH=`pwd`
 NULS2_REPO="https://github.com/nuls-io/nuls-v2.git"
 NULS2_BRANCH="develop"
 NULS2_RUNTIME_DIR="NULS-WALLET-RUNTIME"
@@ -145,6 +145,24 @@ showPackageModule(){
     log "=========================="
 }
 
+showTemplateList(){
+    while read line
+    do
+        
+        TEMP=`echo $line|grep -Eo '\[.+\]'`
+        if [ -z "$TEMP" ]; then
+            pname=`echo $line | awk -F '=' '{print $1}'`
+            echo $pname
+            gitUrl=`getModuleItem "${ROOT_PATH}/template" ${pname}`
+            # curl "${gitUrl}/.describe"
+            # isPackage=`echo $line |grep "=1"`
+            # if [ -n "$isPackage" ]; then
+            #     log "---->$line" | awk -F '=' '{print $1}'
+            #fi
+        fi
+        
+    done < "${ROOT_PATH}/template"
+}
 
 #检查是否已经clone了nuls2.0
 initAndUpdateNulsRuntime()
@@ -195,9 +213,15 @@ getModuleTemplate(){
     templateName=$1
     dirName=$2
     if [ -z "$dirName" ]; then
-        dirName="nuls-module-$1"
+        dirName="$1"
     fi
     gitUrl=`getModuleItem ./template $templateName`
+    if [ -z "$gitUrl" ]; then
+        #statements 
+        echo "not found template : $templateName"
+        echo "template list : ${TEMPLATLIST}"
+        exit 0
+    fi
     echo $gitUrl
     git clone $gitUrl $dirName
     cd $dirName
@@ -207,8 +231,7 @@ getModuleTemplate(){
     fi
     cat README.md
     rm -rf .git
-    echo "not found template : $templateName"
-    echo "template list : ${TEMPLATLIST}"
+
 }
 
 packageToNuls(){
@@ -258,7 +281,7 @@ packageToNuls(){
 }
 
 
-while getopts nt:p:ha:r:s name
+while getopts nt:p:ha:r:sl name
 do
             case $name in
             p)     
@@ -293,6 +316,7 @@ do
                    ;;
             s)     showPackageModule
                    ;;
+            l)     showTemplateList ;;       
             h)     help
                    exit 0
                    ;;
