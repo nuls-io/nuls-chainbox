@@ -34,7 +34,7 @@ NULS ChainBox本质上是NULS2.0的一个扩展应用，它的定位是一站式
 打开终端，执行以下命令
 
 ```
-git clone https://github.com/lijunzhou/nuls-engine.git chainbox
+git clone https://github.com/nuls-io/nuls-chainbox.git chainbox
 ```
 ### 3 构建加密邮件模块
 执行命令进入chainbox/example目录
