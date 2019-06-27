@@ -100,6 +100,11 @@ checkJDKAndMaven(){
 }
 
 checkJDKAndMaven
+WGET_EXIST=`wget -V 2>&1 |grep "GNU Wget"`
+if [ -z "$WGET_EXIST" ]; then
+    echoRed "not found wget , install wget "
+    exit 0;
+fi
 
 PACKAGE_CONFIG="`pwd`/.package.ncf"
 
