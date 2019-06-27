@@ -52,7 +52,7 @@ getModuleItem(){
                             }
                             print r
                         }
-                    '`
+                    '`        
         if [ "${pname}" == $2 ]; then
             echo ${pvalue};
             return 1;
@@ -197,27 +197,16 @@ getModuleTemplate(){
     if [ -z "$dirName" ]; then
         dirName="nuls-module-$1"
     fi
-    case "$templateName" in
-        "java" )
-            git clone $JAVA_MODULE_TEMP_REPO $dirName
-           # git clone $NULS2_REPO $NULS2_REPO_DIR
-           # cd $NULS2_REPO_DIR/common
-           # mvn install -Dmaven.test.skip=true
-           # cd ../..
-            cd $dirName
-            if [ -x ./init.sh ]; then 
-                ./init.sh $dirName
-                rm -f ./init.sh
-            fi
-            cat README.md
-            rm -rf .git
-            exit 0;
-            ;;
-        ?)
-            
-            exit 0;
-            ;;    
-    esac
+    gitUrl=`getModuleItem ./template $templateName`
+    echo $gitUrl
+    git clone $gitUrl $dirName
+    cd $dirName
+    if [ -x ./init.sh ]; then 
+        ./init.sh $dirName
+        rm -f ./init.sh
+    fi
+    cat README.md
+    rm -rf .git
     echo "not found template : $templateName"
     echo "template list : ${TEMPLATLIST}"
 }

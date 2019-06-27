@@ -1,1 +1,3 @@
-java:https://github.com/lijunzhou/nuls-java-module-template.git
+[nuls-module-template]
+java-module=https://github.com/nuls-io/nuls-module-template-java.git
+nuls-module-explorer=https://github.com/nuls-io/explorer_2.0.git
