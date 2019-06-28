@@ -228,7 +228,6 @@ tNULSeBaMkrt4z9FYEkkR9D6choPVvQr94oYZp #导入地址成功，验证此地址是�
 ## 模块模板列表
 * [java模块开发模板](https://github.com/nuls-io/nuls-module-template-java)
 * 区块链浏览器模板
-* 浏览器钱包模板
 
 ## 文档列表
 * [NULS ChainBox使用指南](./document/use-guide.md)
