@@ -132,6 +132,11 @@ public class SendMailService implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws NulsException {
+        //初始化数据存储文件夹
+        File file = new File(config.getDataPath());
+        if(!file.exists()){
+            file.mkdir();
+        }
         createDir(getMailData());
         createDir(getRecipientMappingPath());
         createDir(getSenderMappingPath());
