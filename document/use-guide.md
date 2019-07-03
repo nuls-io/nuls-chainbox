@@ -2,9 +2,11 @@
 ## tools
 NULS引擎操作入口，提供获取程序、集成打包等操作。[命令参数文档](#cmd-doc)。
 ## document
-文档列表
+文档列表。
 ## example
 基于java模块模板开发的一个加密邮件的示例模块程序源码。
+## rpc-debug-tool
+基础模块rpc接口调试工具。
 # 准备开发环境
 1. 暂时只支持macOS,centos,ubuntu等linux内核的操作系统。
 2. NULS引擎会通过git命令在github.com上拉取代码，需要提前安装git客户端程序。
