@@ -253,8 +253,14 @@ packageToNuls(){
         fi
         cd $module
         if [ ! -d "outer" ]; then
-            echo "not found outer folder"
-            exit 0
+            if [ -f "./package" ]; then
+                ./package
+            fi
+            if [ ! -d "outer" ]; then
+                echo "not found outer folder"
+                exit 0
+            fi
+            
         fi
         if [ ! -f "outer/Module.ncf" ]; then
             echo "not found Module.ncf"
