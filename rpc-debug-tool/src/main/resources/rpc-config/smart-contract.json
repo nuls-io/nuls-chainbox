@@ -1,0 +1,2994 @@
+[
+  {
+    "cmdName": "sc_batch_begin",
+    "des": "执行合约一个批次的开始通知，生成当前批次的信息/batch begin",
+    "scope": "public",
+    "version": 1.0,
+    "md": "sc\\_batch\\_begin\n================\n### scope:public\n### version:1.0\n执行合约一个批次的开始通知，生成当前批次的信息/batch begin\n\n参数列表\n----\n| 参数名            |  参数类型  | 参数描述         | 是否非空 |\n| -------------- |:------:| ------------ |:----:|\n| chainId        | string | 链id          |  是   |\n| blockHeight    | string | 当前打包的区块高度    |  是   |\n| blockTime      | string | 当前打包的区块时间    |  是   |\n| packingAddress | string | 当前打包的区块打包地址  |  是   |\n| preStateRoot   | string | 上一个stateRoot |  是   |\n\n返回值\n---\n| 字段名 | 字段类型 | 参数描述           |\n| --- |:----:| -------------- |\n| N/A | void | 无特定返回值，没有错误即成功 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "blockHeight",
+        "des": "当前打包的区块高度",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "blockTime",
+        "des": "当前打包的区块时间",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "packingAddress",
+        "des": "当前打包的区块打包地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "preStateRoot",
+        "des": "上一个stateRoot",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "N/A",
+        "des": "无特定返回值，没有错误即成功",
+        "type": "void",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "sc_invoke_contract",
+    "des": "批次通知开始后，一笔一笔执行合约/invoke contract one by one",
+    "scope": "public",
+    "version": 1.0,
+    "md": "sc\\_invoke\\_contract\n====================\n### scope:public\n### version:1.0\n批次通知开始后，一笔一笔执行合约/invoke contract one by one\n\n参数列表\n----\n| 参数名     |  参数类型  | 参数描述           | 是否非空 |\n| ------- |:------:| -------------- |:----:|\n| chainId | string | 链id            |  是   |\n| tx      | string | 交易序列化的HEX编码字符串 |  是   |\n\n返回值\n---\n| 字段名 | 字段类型 | 参数描述                          |\n| --- |:----:| ----------------------------- |\n| N/A | void | 无特定返回值，没有错误即成功，如果返回错误，则丢弃这笔交易 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "tx",
+        "des": "交易序列化的HEX编码字符串",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "N/A",
+        "des": "无特定返回值，没有错误即成功，如果返回错误，则丢弃这笔交易",
+        "type": "void",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "sc_batch_before_end",
+    "des": "交易模块打包完交易，在做统一验证前，通知合约模块，合约模块停止接收交易，开始异步处理这个批次的结果/batch before end",
+    "scope": "public",
+    "version": 1.0,
+    "md": "sc\\_batch\\_before\\_end\n======================\n### scope:public\n### version:1.0\n交易模块打包完交易，在做统一验证前，通知合约模块，合约模块停止接收交易，开始异步处理这个批次的结果/batch before end\n\n参数列表\n----\n| 参数名         |  参数类型  | 参数描述      | 是否非空 |\n| ----------- |:------:| --------- |:----:|\n| chainId     | string | 链id       |  是   |\n| blockHeight | string | 当前打包的区块高度 |  是   |\n\n返回值\n---\n| 字段名 | 字段类型 | 参数描述                                                 |\n| --- |:----:| ---------------------------------------------------- |\n| N/A | void | 无特定返回值，没有错误即成功，如果返回错误，则废弃这个批次，批次内已执行的合约交易退还到待打包交易队列中 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "blockHeight",
+        "des": "当前打包的区块高度",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "N/A",
+        "des": "无特定返回值，没有错误即成功，如果返回错误，则废弃这个批次，批次内已执行的合约交易退还到待打包交易队列中",
+        "type": "void",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "sc_batch_end",
+    "des": "通知当前批次结束并返回结果/batch end",
+    "scope": "public",
+    "version": 1.0,
+    "md": "sc\\_batch\\_end\n==============\n### scope:public\n### version:1.0\n通知当前批次结束并返回结果/batch end\n\n参数列表\n----\n| 参数名         |  参数类型  | 参数描述      | 是否非空 |\n| ----------- |:------:| --------- |:----:|\n| chainId     | string | 链id       |  是   |\n| blockHeight | string | 当前打包的区块高度 |  是   |\n\n返回值\n---\n| 字段名       |      字段类型       | 参数描述                                   |\n| --------- |:---------------:| -------------------------------------- |\n| stateRoot |     string      | 当前stateRoot                            |\n| txList    | list&lt;string> | 合约新生成的交易序列化字符串列表(可能有合约转账、合约共识、合约返回GAS) |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "blockHeight",
+        "des": "当前打包的区块高度",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "stateRoot",
+        "des": "当前stateRoot",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "txList",
+        "des": "合约新生成的交易序列化字符串列表(可能有合约转账、合约共识、合约返回GAS)",
+        "type": "list&lt;String>",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "sc_contract_offline_tx_hash_list",
+    "des": "返回指定区块中合约生成交易（合约返回GAS交易除外）的hash列表（合约新生成的交易除合约返回GAS交易外，不保存到区块中，合约模块保存了这些交易和指定区块的关系）/contract offline tx hash list",
+    "scope": "public",
+    "version": 1.0,
+    "md": "sc\\_contract\\_offline\\_tx\\_hash\\_list\n=====================================\n### scope:public\n### version:1.0\n返回指定区块中合约生成交易（合约返回GAS交易除外）的hash列表（合约新生成的交易除合约返回GAS交易外，不保存到区块中，合约模块保存了这些交易和指定区块的关系）/contract offline tx hash list\n\n参数列表\n----\n| 参数名       |  参数类型  | 参数描述   | 是否非空 |\n| --------- |:------:| ------ |:----:|\n| chainId   | string | 链id    |  是   |\n| blockHash | string | 区块hash |  是   |\n\n返回值\n---\n| 字段名  |      字段类型       | 参数描述                       |\n| ---- |:---------------:| -------------------------- |\n| list | list&lt;string> | 合约交易序列化字符串列表(可能有合约转账、合约共识) |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "blockHash",
+        "des": "区块hash",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "list",
+        "des": "合约交易序列化字符串列表(可能有合约转账、合约共识)",
+        "type": "list&lt;String>",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "sc_initial_account_token",
+    "des": "初始化账户token信息，节点导入账户时调用/initial account token",
+    "scope": "public",
+    "version": 1.0,
+    "md": "sc\\_initial\\_account\\_token\n===========================\n### scope:public\n### version:1.0\n初始化账户token信息，节点导入账户时调用/initial account token\n\n参数列表\n----\n| 参数名     |  参数类型  | 参数描述 | 是否非空 |\n| ------- |:------:| ---- |:----:|\n| chainId | string | 链id  |  是   |\n| address | string | 账户地址 |  是   |\n\n返回值\n---\n| 字段名 | 字段类型 | 参数描述           |\n| --- |:----:| -------------- |\n| N/A | void | 无特定返回值，没有错误即成功 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "N/A",
+        "des": "无特定返回值，没有错误即成功",
+        "type": "void",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "sc_register_cmd_for_contract",
+    "des": "其他模块向合约模块注册可被合约调用的命令，注册后，可在合约代码内调用注册的命令/register cmd for contract",
+    "scope": "public",
+    "version": 1.0,
+    "md": "sc\\_register\\_cmd\\_for\\_contract\n================================\n### scope:public\n### version:1.0\n其他模块向合约模块注册可被合约调用的命令，注册后，可在合约代码内调用注册的命令/register cmd for contract\n\n参数列表\n----\n| 参数名             |  参数类型  | 参数描述   | 是否非空 |\n| --------------- |:------:| ------ |:----:|\n| chainId         | string | 链id    |  是   |\n| moduleCode      | string | 模块代码   |  是   |\n| cmdRegisterList | string | 注册信息列表 |  是   |\n\n返回值\n---\n| 字段名 | 字段类型 | 参数描述           |\n| --- |:----:| -------------- |\n| N/A | void | 无特定返回值，没有错误即成功 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "moduleCode",
+        "des": "模块代码",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "cmdRegisterList",
+        "des": "注册信息列表",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "N/A",
+        "des": "无特定返回值，没有错误即成功",
+        "type": "void",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "sc_trigger_payable_for_consensus_contract",
+    "des": "共识奖励收益地址是合约地址时，会触发合约的_payable(String[][] args)方法，参数是节点收益地址明细<br>args[0] = new String[]{address, amount}<br>...<br>/trigger payable for consensus contract",
+    "scope": "public",
+    "version": 1.0,
+    "md": "sc\\_trigger\\_payable\\_for\\_consensus\\_contract\n==============================================\n### scope:public\n### version:1.0\n共识奖励收益地址是合约地址时，会触发合约的_payable(String[][] args)方法，参数是节点收益地址明细<br>args[0] = new String[]{address, amount}<br>...<br>/trigger payable for consensus contract\n\n参数列表\n----\n| 参数名             |  参数类型  | 参数描述                     | 是否非空 |\n| --------------- |:------:| ------------------------ |:----:|\n| chainId         | string | 链id                      |  是   |\n| stateRoot       | string | 当前的stateRoot             |  是   |\n| blockHeight     | string | 当前打包的区块高度                |  是   |\n| contractAddress | string | 合约地址                     |  是   |\n| tx              | string | 当前打包区块中的CoinBase交易序列化字符串 |  是   |\n\n返回值\n---\n| 字段名   |  字段类型  | 参数描述          |\n| ----- |:------:| ------------- |\n| value | string | 变化后的stateRoot |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "stateRoot",
+        "des": "当前的stateRoot",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "blockHeight",
+        "des": "当前打包的区块高度",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractAddress",
+        "des": "合约地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "tx",
+        "des": "当前打包区块中的CoinBase交易序列化字符串",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "变化后的stateRoot",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "sc_constructor",
+    "des": "contract code constructor",
+    "scope": "public",
+    "version": 1.0,
+    "md": "sc\\_constructor\n===============\n### scope:public\n### version:1.0\ncontract code constructor\n\n参数列表\n----\n| 参数名          |  参数类型  | 参数描述                 | 是否非空 |\n| ------------ |:------:| -------------------- |:----:|\n| chainId      |  int   | 链ID                  |  是   |\n| contractCode | string | 智能合约代码(字节码的Hex编码字符串) |  是   |\n\n返回值\n---\n| 字段名                                                                                                      |      字段类型       | 参数描述               |\n| -------------------------------------------------------------------------------------------------------- |:---------------:| ------------------ |\n| constructor                                                                                              |     object      | 合约构造函数详情           |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name                                                     |     string      | 方法名称               |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;desc                                                     |     string      | 方法描述               |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;args                                                     | list&lt;object> | 方法参数列表             |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type     |     string      | 参数类型               |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name     |     string      | 参数名称               |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;required |     boolean     | 是否必填               |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;returnArg                                                |     string      | 返回值类型              |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;view                                                     |     boolean     | 是否视图方法（调用此方法数据不上链） |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;event                                                    |     boolean     | 是否是事件              |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;payable                                                  |     boolean     | 是否是可接受主链资产转账的方法    |\n| isNrc20                                                                                                  |     boolean     | 是否是NRC20合约         |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链ID",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractCode",
+        "des": "智能合约代码(字节码的Hex编码字符串)",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "constructor",
+        "des": "合约构造函数详情",
+        "type": "object",
+        "list": [
+          {
+            "name": "name",
+            "des": "方法名称",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "desc",
+            "des": "方法描述",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "args",
+            "des": "方法参数列表",
+            "type": "list&lt;object>",
+            "list": [
+              {
+                "name": "type",
+                "des": "参数类型",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "name",
+                "des": "参数名称",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "required",
+                "des": "是否必填",
+                "type": "boolean",
+                "list": null,
+                "canNull": false
+              }
+            ],
+            "canNull": false
+          },
+          {
+            "name": "returnArg",
+            "des": "返回值类型",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "view",
+            "des": "是否视图方法（调用此方法数据不上链）",
+            "type": "boolean",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "event",
+            "des": "是否是事件",
+            "type": "boolean",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "payable",
+            "des": "是否是可接受主链资产转账的方法",
+            "type": "boolean",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      },
+      {
+        "name": "isNrc20",
+        "des": "是否是NRC20合约",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "sc_delete",
+    "des": "delete contract",
+    "scope": "public",
+    "version": 1.0,
+    "md": "sc\\_delete\n==========\n### scope:public\n### version:1.0\ndelete contract\n\n参数列表\n----\n| 参数名             |  参数类型  | 参数描述      | 是否非空 |\n| --------------- |:------:| --------- |:----:|\n| chainId         |  int   | 链id       |  是   |\n| sender          | string | 交易创建者账户地址 |  是   |\n| contractAddress | string | 合约地址      |  是   |\n| password        | string | 交易账户密码    |  是   |\n| remark          | string | 交易备注      |  是   |\n\n返回值\n---\n| 字段名    |  字段类型  | 参数描述        |\n| ------ |:------:| ----------- |\n| txHash | string | 删除合约的交易hash |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "sender",
+        "des": "交易创建者账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractAddress",
+        "des": "合约地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "password",
+        "des": "交易账户密码",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "remark",
+        "des": "交易备注",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "txHash",
+        "des": "删除合约的交易hash",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "sc_create",
+    "des": "发布合约/create contract",
+    "scope": "public",
+    "version": 1.0,
+    "md": "sc\\_create\n==========\n### scope:public\n### version:1.0\n发布合约/create contract\n\n参数列表\n----\n| 参数名          |   参数类型   | 参数描述                 | 是否非空 |\n| ------------ |:--------:| -------------------- |:----:|\n| chainId      |   int    | 链id                  |  是   |\n| sender       |  string  | 交易创建者账户地址            |  是   |\n| password     |  string  | 账户密码                 |  是   |\n| alias        |  string  | 合约别名                 |  是   |\n| gasLimit     |   long   | GAS限制                |  是   |\n| price        |   long   | GAS单价                |  是   |\n| contractCode |  string  | 智能合约代码(字节码的Hex编码字符串) |  是   |\n| args         | object[] | 参数列表                 |  是   |\n| remark       |  string  | 交易备注                 |  是   |\n\n返回值\n---\n| 字段名             |  字段类型  | 参数描述        |\n| --------------- |:------:| ----------- |\n| txHash          | string | 发布合约的交易hash |\n| contractAddress | string | 生成的合约地址     |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "sender",
+        "des": "交易创建者账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "password",
+        "des": "账户密码",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "alias",
+        "des": "合约别名",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "gasLimit",
+        "des": "GAS限制",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "price",
+        "des": "GAS单价",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractCode",
+        "des": "智能合约代码(字节码的Hex编码字符串)",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "args",
+        "des": "参数列表",
+        "type": "object[]",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "remark",
+        "des": "交易备注",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "txHash",
+        "des": "发布合约的交易hash",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractAddress",
+        "des": "生成的合约地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "sc_transfer",
+    "des": "从账户地址向合约地址转账(主链资产)/transfer NULS from sender to contract address",
+    "scope": "public",
+    "version": 1.0,
+    "md": "sc\\_transfer\n============\n### scope:public\n### version:1.0\n从账户地址向合约地址转账(主链资产)/transfer NULS from sender to contract address\n\n参数列表\n----\n| 参数名       |    参数类型    | 参数描述      | 是否非空 |\n| --------- |:----------:| --------- |:----:|\n| chainId   |    int     | 链id       |  是   |\n| address   |   string   | 转出者账户地址   |  是   |\n| toAddress |   string   | 转入的合约地址   |  是   |\n| password  |   string   | 转出者账户密码   |  是   |\n| amount    | biginteger | 转出的主链资产金额 |  是   |\n| remark    |   string   | 交易备注      |  是   |\n\n返回值\n---\n| 字段名    |  字段类型  | 参数描述   |\n| ------ |:------:| ------ |\n| txHash | string | 交易hash |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "转出者账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "toAddress",
+        "des": "转入的合约地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "password",
+        "des": "转出者账户密码",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "amount",
+        "des": "转出的主链资产金额",
+        "type": "biginteger",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "remark",
+        "des": "交易备注",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "txHash",
+        "des": "交易hash",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "sc_validate_create",
+    "des": "验证发布合约/validate create contract",
+    "scope": "public",
+    "version": 1.0,
+    "md": "sc\\_validate\\_create\n====================\n### scope:public\n### version:1.0\n验证发布合约/validate create contract\n\n参数列表\n----\n| 参数名          |   参数类型   | 参数描述                 | 是否非空 |\n| ------------ |:--------:| -------------------- |:----:|\n| chainId      |   int    | 链id                  |  是   |\n| sender       |  string  | 交易创建者账户地址            |  是   |\n| gasLimit     |   long   | GAS限制                |  是   |\n| price        |   long   | GAS单价                |  是   |\n| contractCode |  string  | 智能合约代码(字节码的Hex编码字符串) |  是   |\n| args         | object[] | 参数列表                 |  是   |\n\n返回值\n---\n| 字段名 | 字段类型 | 参数描述             |\n| --- |:----:| ---------------- |\n| N/A | void | 无特定返回值，没有错误即验证成功 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "sender",
+        "des": "交易创建者账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "gasLimit",
+        "des": "GAS限制",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "price",
+        "des": "GAS单价",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractCode",
+        "des": "智能合约代码(字节码的Hex编码字符串)",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "args",
+        "des": "参数列表",
+        "type": "object[]",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "N/A",
+        "des": "无特定返回值，没有错误即验证成功",
+        "type": "void",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "sc_validate_call",
+    "des": "validate call contract",
+    "scope": "public",
+    "version": 1.0,
+    "md": "sc\\_validate\\_call\n==================\n### scope:public\n### version:1.0\nvalidate call contract\n\n参数列表\n----\n| 参数名             |    参数类型    | 参数描述                                     | 是否非空 |\n| --------------- |:----------:| ---------------------------------------- |:----:|\n| chainId         |    int     | 链id                                      |  是   |\n| sender          |   string   | 交易创建者账户地址                                |  是   |\n| value           | biginteger | 调用者向合约地址转入的主网资产金额，没有此业务时填BigInteger.ZERO |  是   |\n| gasLimit        |    long    | GAS限制                                    |  是   |\n| price           |    long    | GAS单价                                    |  是   |\n| contractAddress |   string   | 合约地址                                     |  是   |\n| methodName      |   string   | 合约方法                                     |  是   |\n| methodDesc      |   string   | 合约方法描述，若合约内方法没有重载，则此参数可以为空               |  是   |\n| args            |  object[]  | 参数列表                                     |  是   |\n\n返回值\n---\n| 字段名 | 字段类型 | 参数描述             |\n| --- |:----:| ---------------- |\n| N/A | void | 无特定返回值，没有错误即验证成功 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "sender",
+        "des": "交易创建者账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "value",
+        "des": "调用者向合约地址转入的主网资产金额，没有此业务时填BigInteger.ZERO",
+        "type": "biginteger",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "gasLimit",
+        "des": "GAS限制",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "price",
+        "des": "GAS单价",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractAddress",
+        "des": "合约地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "methodName",
+        "des": "合约方法",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "methodDesc",
+        "des": "合约方法描述，若合约内方法没有重载，则此参数可以为空",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "args",
+        "des": "参数列表",
+        "type": "object[]",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "N/A",
+        "des": "无特定返回值，没有错误即验证成功",
+        "type": "void",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "sc_validate_delete",
+    "des": "validate delete contract",
+    "scope": "public",
+    "version": 1.0,
+    "md": "sc\\_validate\\_delete\n====================\n### scope:public\n### version:1.0\nvalidate delete contract\n\n参数列表\n----\n| 参数名             |  参数类型  | 参数描述      | 是否非空 |\n| --------------- |:------:| --------- |:----:|\n| chainId         |  int   | 链id       |  是   |\n| sender          | string | 交易创建者账户地址 |  是   |\n| contractAddress | string | 合约地址      |  是   |\n\n返回值\n---\n| 字段名 | 字段类型 | 参数描述             |\n| --- |:----:| ---------------- |\n| N/A | void | 无特定返回值，没有错误即验证成功 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "sender",
+        "des": "交易创建者账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractAddress",
+        "des": "合约地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "N/A",
+        "des": "无特定返回值，没有错误即验证成功",
+        "type": "void",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "sc_contract_result",
+    "des": "contract result",
+    "scope": "public",
+    "version": 1.0,
+    "md": "sc\\_contract\\_result\n====================\n### scope:public\n### version:1.0\ncontract result\n\n参数列表\n----\n| 参数名     |  参数类型  | 参数描述   | 是否非空 |\n| ------- |:------:| ------ |:----:|\n| chainId |  int   | 链id    |  是   |\n| hash    | string | 交易hash |  是   |\n\n返回值\n---\n| 字段名                                                                                                   |      字段类型       | 参数描述                                        |\n| ----------------------------------------------------------------------------------------------------- |:---------------:| ------------------------------------------- |\n| success                                                                                               |     boolean     | 合约执行是否成功                                    |\n| errorMessage                                                                                          |     string      | 执行失败信息                                      |\n| contractAddress                                                                                       |     string      | 合约地址                                        |\n| result                                                                                                |     string      | 合约执行结果                                      |\n| gasLimit                                                                                              |      long       | GAS限制                                       |\n| gasUsed                                                                                               |      long       | 已使用GAS                                      |\n| price                                                                                                 |      long       | GAS单价                                       |\n| totalFee                                                                                              |     string      | 交易总手续费                                      |\n| txSizeFee                                                                                             |     string      | 交易大小手续费                                     |\n| actualContractFee                                                                                     |     string      | 实际执行合约手续费                                   |\n| refundFee                                                                                             |     string      | 合约返回的手续费                                    |\n| value                                                                                                 |     string      | 调用者向合约地址转入的主网资产金额，没有此业务时则为0                 |\n| stackTrace                                                                                            |     string      | 异常堆栈踪迹                                      |\n| transfers                                                                                             | list&lt;object> | 合约转账列表（从合约转出）                               |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;txHash                                                |     string      | 合约生成交易：合约转账交易hash                           |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from                                                  |     string      | 转出的合约地址                                     |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value                                                 |     string      | 转账金额                                        |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;outputs                                               | list&lt;object> | 转入的地址列表                                     |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to    |     string      | 转入地址                                        |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value |     string      | 转入金额                                        |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;orginTxHash                                           |     string      | 调用合约交易hash（源交易hash，合约交易由调用合约交易派生而来）         |\n| events                                                                                                | list&lt;string> | 合约事件列表                                      |\n| tokenTransfers                                                                                        | list&lt;object> | 合约token转账列表                                 |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contractAddress                                       |     string      | 合约地址                                        |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from                                                  |     string      | 付款方                                         |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to                                                    |     string      | 收款方                                         |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value                                                 |     string      | 转账金额                                        |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name                                                  |     string      | token名称                                     |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;symbol                                                |     string      | token符号                                     |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;decimals                                              |      long       | token支持的小数位数                                |\n| invokeRegisterCmds                                                                                    | list&lt;object> | 合约调用外部命令的调用记录列表                             |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cmdName                                               |     string      | 命令名称                                        |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;args                                                  |       map       | 命令参数，参数不固定，依据不同的命令而来，故此处不作描述，结构为 {参数名称=参数值} |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cmdRegisterMode                                       |     string      | 注册的命令模式（QUERY\\_DATA or NEW\\_TX）             |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;newTxHash                                             |     string      | 生成的交易hash（当调用的命令模式是 NEW\\_TX 时，会生成交易）        |\n| contractTxList                                                                                        | list&lt;string> | 合约生成交易的序列化字符串列表                             |\n| remark                                                                                                |     string      | 备注                                          |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "hash",
+        "des": "交易hash",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "success",
+        "des": "合约执行是否成功",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "errorMessage",
+        "des": "执行失败信息",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractAddress",
+        "des": "合约地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "result",
+        "des": "合约执行结果",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "gasLimit",
+        "des": "GAS限制",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "gasUsed",
+        "des": "已使用GAS",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "price",
+        "des": "GAS单价",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "totalFee",
+        "des": "交易总手续费",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "txSizeFee",
+        "des": "交易大小手续费",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "actualContractFee",
+        "des": "实际执行合约手续费",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "refundFee",
+        "des": "合约返回的手续费",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "value",
+        "des": "调用者向合约地址转入的主网资产金额，没有此业务时则为0",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "stackTrace",
+        "des": "异常堆栈踪迹",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "transfers",
+        "des": "合约转账列表（从合约转出）",
+        "type": "list&lt;object>",
+        "list": [
+          {
+            "name": "txHash",
+            "des": "合约生成交易：合约转账交易hash",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "from",
+            "des": "转出的合约地址",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "value",
+            "des": "转账金额",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "outputs",
+            "des": "转入的地址列表",
+            "type": "list&lt;object>",
+            "list": [
+              {
+                "name": "to",
+                "des": "转入地址",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "value",
+                "des": "转入金额",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              }
+            ],
+            "canNull": false
+          },
+          {
+            "name": "orginTxHash",
+            "des": "调用合约交易hash（源交易hash，合约交易由调用合约交易派生而来）",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      },
+      {
+        "name": "events",
+        "des": "合约事件列表",
+        "type": "list&lt;String>",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "tokenTransfers",
+        "des": "合约token转账列表",
+        "type": "list&lt;object>",
+        "list": [
+          {
+            "name": "contractAddress",
+            "des": "合约地址",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "from",
+            "des": "付款方",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "to",
+            "des": "收款方",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "value",
+            "des": "转账金额",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "name",
+            "des": "token名称",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "symbol",
+            "des": "token符号",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "decimals",
+            "des": "token支持的小数位数",
+            "type": "long",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      },
+      {
+        "name": "invokeRegisterCmds",
+        "des": "合约调用外部命令的调用记录列表",
+        "type": "list&lt;object>",
+        "list": [
+          {
+            "name": "cmdName",
+            "des": "命令名称",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "args",
+            "des": "命令参数，参数不固定，依据不同的命令而来，故此处不作描述，结构为 {参数名称=参数值}",
+            "type": "map",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "cmdRegisterMode",
+            "des": "注册的命令模式（QUERY\\_DATA or NEW\\_TX）",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "newTxHash",
+            "des": "生成的交易hash（当调用的命令模式是 NEW\\_TX 时，会生成交易）",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      },
+      {
+        "name": "contractTxList",
+        "des": "合约生成交易的序列化字符串列表",
+        "type": "list&lt;String>",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "remark",
+        "des": "备注",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "sc_contract_result_list",
+    "des": "contract result list",
+    "scope": "public",
+    "version": 1.0,
+    "md": "sc\\_contract\\_result\\_list\n==========================\n### scope:public\n### version:1.0\ncontract result list\n\n参数列表\n----\n| 参数名                                                      |      参数类型       | 参数描述     | 是否非空 |\n| -------------------------------------------------------- |:---------------:| -------- |:----:|\n| chainId                                                  |       int       | 链id      |  是   |\n| hashList                                                 |      list       | 交易hash列表 |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hashList | list&lt;string> | 交易hash列表 |  是   |\n\n返回值\n---\n| 字段名                                                                                                                                                   |      字段类型       | 参数描述                                        |\n| ----------------------------------------------------------------------------------------------------------------------------------------------------- |:---------------:| ------------------------------------------- |\n| hash1 or hash2 or hash3...                                                                                                                            |     object      | 以交易hash列表中的hash值作为key，这里的key name是动态的       |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;success                                                                                               |     boolean     | 合约执行是否成功                                    |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;errorMessage                                                                                          |     string      | 执行失败信息                                      |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contractAddress                                                                                       |     string      | 合约地址                                        |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result                                                                                                |     string      | 合约执行结果                                      |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gasLimit                                                                                              |      long       | GAS限制                                       |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gasUsed                                                                                               |      long       | 已使用GAS                                      |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;price                                                                                                 |      long       | GAS单价                                       |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;totalFee                                                                                              |     string      | 交易总手续费                                      |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;txSizeFee                                                                                             |     string      | 交易大小手续费                                     |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;actualContractFee                                                                                     |     string      | 实际执行合约手续费                                   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;refundFee                                                                                             |     string      | 合约返回的手续费                                    |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value                                                                                                 |     string      | 调用者向合约地址转入的主网资产金额，没有此业务时则为0                 |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stackTrace                                                                                            |     string      | 异常堆栈踪迹                                      |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;transfers                                                                                             | list&lt;object> | 合约转账列表（从合约转出）                               |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;txHash                                                |     string      | 合约生成交易：合约转账交易hash                           |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from                                                  |     string      | 转出的合约地址                                     |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value                                                 |     string      | 转账金额                                        |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;outputs                                               | list&lt;object> | 转入的地址列表                                     |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to    |     string      | 转入地址                                        |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value |     string      | 转入金额                                        |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;orginTxHash                                           |     string      | 调用合约交易hash（源交易hash，合约交易由调用合约交易派生而来）         |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;events                                                                                                | list&lt;string> | 合约事件列表                                      |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tokenTransfers                                                                                        | list&lt;object> | 合约token转账列表                                 |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contractAddress                                       |     string      | 合约地址                                        |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from                                                  |     string      | 付款方                                         |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to                                                    |     string      | 收款方                                         |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value                                                 |     string      | 转账金额                                        |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name                                                  |     string      | token名称                                     |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;symbol                                                |     string      | token符号                                     |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;decimals                                              |      long       | token支持的小数位数                                |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;invokeRegisterCmds                                                                                    | list&lt;object> | 合约调用外部命令的调用记录列表                             |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cmdName                                               |     string      | 命令名称                                        |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;args                                                  |       map       | 命令参数，参数不固定，依据不同的命令而来，故此处不作描述，结构为 {参数名称=参数值} |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cmdRegisterMode                                       |     string      | 注册的命令模式（QUERY\\_DATA or NEW\\_TX）             |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;newTxHash                                             |     string      | 生成的交易hash（当调用的命令模式是 NEW\\_TX 时，会生成交易）        |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contractTxList                                                                                        | list&lt;string> | 合约生成交易的序列化字符串列表                             |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;remark                                                                                                |     string      | 备注                                          |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "hashList",
+        "des": "交易hash列表",
+        "type": "list",
+        "list": [
+          {
+            "name": "hashList",
+            "des": "交易hash列表",
+            "type": "list&lt;String>",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "hash1 or hash2 or hash3...",
+        "des": "以交易hash列表中的hash值作为key，这里的key name是动态的",
+        "type": "object",
+        "list": [
+          {
+            "name": "success",
+            "des": "合约执行是否成功",
+            "type": "boolean",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "errorMessage",
+            "des": "执行失败信息",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "contractAddress",
+            "des": "合约地址",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "result",
+            "des": "合约执行结果",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "gasLimit",
+            "des": "GAS限制",
+            "type": "long",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "gasUsed",
+            "des": "已使用GAS",
+            "type": "long",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "price",
+            "des": "GAS单价",
+            "type": "long",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "totalFee",
+            "des": "交易总手续费",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "txSizeFee",
+            "des": "交易大小手续费",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "actualContractFee",
+            "des": "实际执行合约手续费",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "refundFee",
+            "des": "合约返回的手续费",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "value",
+            "des": "调用者向合约地址转入的主网资产金额，没有此业务时则为0",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "stackTrace",
+            "des": "异常堆栈踪迹",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "transfers",
+            "des": "合约转账列表（从合约转出）",
+            "type": "list&lt;object>",
+            "list": [
+              {
+                "name": "txHash",
+                "des": "合约生成交易：合约转账交易hash",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "from",
+                "des": "转出的合约地址",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "value",
+                "des": "转账金额",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "outputs",
+                "des": "转入的地址列表",
+                "type": "list&lt;object>",
+                "list": [
+                  {
+                    "name": "to",
+                    "des": "转入地址",
+                    "type": "string",
+                    "list": null,
+                    "canNull": false
+                  },
+                  {
+                    "name": "value",
+                    "des": "转入金额",
+                    "type": "string",
+                    "list": null,
+                    "canNull": false
+                  }
+                ],
+                "canNull": false
+              },
+              {
+                "name": "orginTxHash",
+                "des": "调用合约交易hash（源交易hash，合约交易由调用合约交易派生而来）",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              }
+            ],
+            "canNull": false
+          },
+          {
+            "name": "events",
+            "des": "合约事件列表",
+            "type": "list&lt;String>",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "tokenTransfers",
+            "des": "合约token转账列表",
+            "type": "list&lt;object>",
+            "list": [
+              {
+                "name": "contractAddress",
+                "des": "合约地址",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "from",
+                "des": "付款方",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "to",
+                "des": "收款方",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "value",
+                "des": "转账金额",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "name",
+                "des": "token名称",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "symbol",
+                "des": "token符号",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "decimals",
+                "des": "token支持的小数位数",
+                "type": "long",
+                "list": null,
+                "canNull": false
+              }
+            ],
+            "canNull": false
+          },
+          {
+            "name": "invokeRegisterCmds",
+            "des": "合约调用外部命令的调用记录列表",
+            "type": "list&lt;object>",
+            "list": [
+              {
+                "name": "cmdName",
+                "des": "命令名称",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "args",
+                "des": "命令参数，参数不固定，依据不同的命令而来，故此处不作描述，结构为 {参数名称=参数值}",
+                "type": "map",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "cmdRegisterMode",
+                "des": "注册的命令模式（QUERY\\_DATA or NEW\\_TX）",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "newTxHash",
+                "des": "生成的交易hash（当调用的命令模式是 NEW\\_TX 时，会生成交易）",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              }
+            ],
+            "canNull": false
+          },
+          {
+            "name": "contractTxList",
+            "des": "合约生成交易的序列化字符串列表",
+            "type": "list&lt;String>",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "remark",
+            "des": "备注",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "sc_imputed_create_gas",
+    "des": "预估发布合约消耗的GAS/imputed create gas",
+    "scope": "public",
+    "version": 1.0,
+    "md": "sc\\_imputed\\_create\\_gas\n========================\n### scope:public\n### version:1.0\n预估发布合约消耗的GAS/imputed create gas\n\n参数列表\n----\n| 参数名          |   参数类型   | 参数描述                 | 是否非空 |\n| ------------ |:--------:| -------------------- |:----:|\n| chainId      |   int    | 链id                  |  是   |\n| sender       |  string  | 交易创建者账户地址            |  是   |\n| contractCode |  string  | 智能合约代码(字节码的Hex编码字符串) |  是   |\n| args         | object[] | 参数列表                 |  是   |\n\n返回值\n---\n| 字段名      | 字段类型 | 参数描述              |\n| -------- |:----:| ----------------- |\n| gasLimit | long | 消耗的gas值，执行失败返回数值1 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "sender",
+        "des": "交易创建者账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractCode",
+        "des": "智能合约代码(字节码的Hex编码字符串)",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "args",
+        "des": "参数列表",
+        "type": "object[]",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "gasLimit",
+        "des": "消耗的gas值，执行失败返回数值1",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "sc_imputed_call_gas",
+    "des": "imputed call gas",
+    "scope": "public",
+    "version": 1.0,
+    "md": "sc\\_imputed\\_call\\_gas\n======================\n### scope:public\n### version:1.0\nimputed call gas\n\n参数列表\n----\n| 参数名             |    参数类型    | 参数描述                                     | 是否非空 |\n| --------------- |:----------:| ---------------------------------------- |:----:|\n| chainId         |    int     | 链id                                      |  是   |\n| sender          |   string   | 交易创建者账户地址                                |  是   |\n| value           | biginteger | 调用者向合约地址转入的主网资产金额，没有此业务时填BigInteger.ZERO |  是   |\n| contractAddress |   string   | 合约地址                                     |  是   |\n| methodName      |   string   | 合约方法                                     |  是   |\n| methodDesc      |   string   | 合约方法描述，若合约内方法没有重载，则此参数可以为空               |  是   |\n| args            |  object[]  | 参数列表                                     |  是   |\n\n返回值\n---\n| 字段名      | 字段类型 | 参数描述              |\n| -------- |:----:| ----------------- |\n| gasLimit | long | 消耗的gas值，执行失败返回数值1 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "sender",
+        "des": "交易创建者账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "value",
+        "des": "调用者向合约地址转入的主网资产金额，没有此业务时填BigInteger.ZERO",
+        "type": "biginteger",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractAddress",
+        "des": "合约地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "methodName",
+        "des": "合约方法",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "methodDesc",
+        "des": "合约方法描述，若合约内方法没有重载，则此参数可以为空",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "args",
+        "des": "参数列表",
+        "type": "object[]",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "gasLimit",
+        "des": "消耗的gas值，执行失败返回数值1",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "sc_token_transfer",
+    "des": "NRC20-token转账/transfer NRC20-token from address to toAddress",
+    "scope": "public",
+    "version": 1.0,
+    "md": "sc\\_token\\_transfer\n===================\n### scope:public\n### version:1.0\nNRC20-token转账/transfer NRC20-token from address to toAddress\n\n参数列表\n----\n| 参数名             |    参数类型    | 参数描述         | 是否非空 |\n| --------------- |:----------:| ------------ |:----:|\n| chainId         |    int     | 链id          |  是   |\n| address         |   string   | 转出者账户地址      |  是   |\n| toAddress       |   string   | 转入地址         |  是   |\n| contractAddress |   string   | token合约地址    |  是   |\n| password        |   string   | 转出者账户密码      |  是   |\n| amount          | biginteger | 转出的token资产金额 |  是   |\n| remark          |   string   | 交易备注         |  是   |\n\n返回值\n---\n| 字段名    |  字段类型  | 参数描述   |\n| ------ |:------:| ------ |\n| txHash | string | 交易hash |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "转出者账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "toAddress",
+        "des": "转入地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractAddress",
+        "des": "token合约地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "password",
+        "des": "转出者账户密码",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "amount",
+        "des": "转出的token资产金额",
+        "type": "biginteger",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "remark",
+        "des": "交易备注",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "txHash",
+        "des": "交易hash",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "sc_token_balance",
+    "des": "NRC20代币余额详情/NRC20-token balance",
+    "scope": "public",
+    "version": 1.0,
+    "md": "sc\\_token\\_balance\n==================\n### scope:public\n### version:1.0\nNRC20代币余额详情/NRC20-token balance\n\n参数列表\n----\n| 参数名             |  参数类型  | 参数描述 | 是否非空 |\n| --------------- |:------:| ---- |:----:|\n| chainId         |  int   | 链ID  |  是   |\n| contractAddress | string | 合约地址 |  是   |\n| address         | string | 账户地址 |  是   |\n\n返回值\n---\n| 字段名             |  字段类型  | 参数描述                    |\n| --------------- |:------:| ----------------------- |\n| contractAddress | string | 合约地址                    |\n| name            | string | token名称                 |\n| symbol          | string | token符号                 |\n| amount          | string | token数量                 |\n| decimals        |  long  | token支持的小数位数            |\n| blockHeight     |  long  | 合约创建时的区块高度              |\n| status          |  int   | 合约状态(0-不存在, 1-正常, 2-终止) |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链ID",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractAddress",
+        "des": "合约地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "contractAddress",
+        "des": "合约地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "name",
+        "des": "token名称",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "symbol",
+        "des": "token符号",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "amount",
+        "des": "token数量",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "decimals",
+        "des": "token支持的小数位数",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "blockHeight",
+        "des": "合约创建时的区块高度",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "status",
+        "des": "合约状态(0-不存在, 1-正常, 2-终止)",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "sc_invoke_view",
+    "des": "invoke view contract",
+    "scope": "public",
+    "version": 1.0,
+    "md": "sc\\_invoke\\_view\n================\n### scope:public\n### version:1.0\ninvoke view contract\n\n参数列表\n----\n| 参数名             |   参数类型   | 参数描述                       | 是否非空 |\n| --------------- |:--------:| -------------------------- |:----:|\n| chainId         |   int    | 链id                        |  是   |\n| contractAddress |  string  | 合约地址                       |  是   |\n| methodName      |  string  | 合约方法                       |  是   |\n| methodDesc      |  string  | 合约方法描述，若合约内方法没有重载，则此参数可以为空 |  是   |\n| args            | object[] | 参数列表                       |  是   |\n\n返回值\n---\n| 字段名    |  字段类型  | 参数描述      |\n| ------ |:------:| --------- |\n| result | string | 视图方法的调用结果 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractAddress",
+        "des": "合约地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "methodName",
+        "des": "合约方法",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "methodDesc",
+        "des": "合约方法描述，若合约内方法没有重载，则此参数可以为空",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "args",
+        "des": "参数列表",
+        "type": "object[]",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "result",
+        "des": "视图方法的调用结果",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "sc_contract_info",
+    "des": "合约信息详情/contract info",
+    "scope": "public",
+    "version": 1.0,
+    "md": "sc\\_contract\\_info\n==================\n### scope:public\n### version:1.0\n合约信息详情/contract info\n\n参数列表\n----\n| 参数名             |  参数类型  | 参数描述 | 是否非空 |\n| --------------- |:------:| ---- |:----:|\n| chainId         |  int   | 链ID  |  是   |\n| contractAddress | string | 合约地址 |  是   |\n\n返回值\n---\n| 字段名              |  字段类型   | 参数描述                          |\n| ---------------- |:-------:| ----------------------------- |\n| createTxHash     | string  | 发布合约的交易hash                   |\n| address          | string  | 合约地址                          |\n| creater          | string  | 合约创建者地址                       |\n| alias            | string  | 合约别名                          |\n| createTime       |  long   | 合约创建时间（单位：秒）                  |\n| blockHeight      |  long   | 合约创建时的区块高度                    |\n| isDirectPayable  | boolean | 是否接受直接转账                      |\n| isNrc20          | boolean | 是否是NRC20合约                    |\n| nrc20TokenName   | string  | NRC20-token名称                 |\n| nrc20TokenSymbol | string  | NRC20-token符号                 |\n| decimals         |  long   | NRC20-token支持的小数位数            |\n| totalSupply      | string  | NRC20-token发行总量               |\n| status           | string  | 合约状态（not_found, normal, stop） |\n| method           |  list   | 合约方法列表                        |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链ID",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractAddress",
+        "des": "合约地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "createTxHash",
+        "des": "发布合约的交易hash",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "合约地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "creater",
+        "des": "合约创建者地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "alias",
+        "des": "合约别名",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "createTime",
+        "des": "合约创建时间（单位：秒）",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "blockHeight",
+        "des": "合约创建时的区块高度",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "isDirectPayable",
+        "des": "是否接受直接转账",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "isNrc20",
+        "des": "是否是NRC20合约",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "nrc20TokenName",
+        "des": "NRC20-token名称",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "nrc20TokenSymbol",
+        "des": "NRC20-token符号",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "decimals",
+        "des": "NRC20-token支持的小数位数",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "totalSupply",
+        "des": "NRC20-token发行总量",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "status",
+        "des": "合约状态（not_found, normal, stop）",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "method",
+        "des": "合约方法列表",
+        "type": "list",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "sc_contract_tx",
+    "des": "合约交易/contract tx",
+    "scope": "public",
+    "version": 1.0,
+    "md": "sc\\_contract\\_tx\n================\n### scope:public\n### version:1.0\n合约交易/contract tx\n\n参数列表\n----\n| 参数名     |  参数类型  | 参数描述   | 是否非空 |\n| ------- |:------:| ------ |:----:|\n| chainId |  int   | 链id    |  是   |\n| hash    | string | 交易hash |  是   |\n\n返回值\n---\n| 字段名                                                                                                                                                             |      字段类型       | 参数描述                                                    |\n| --------------------------------------------------------------------------------------------------------------------------------------------------------------- |:---------------:| ------------------------------------------------------- |\n| hash                                                                                                                                                            |     string      | 交易hash                                                  |\n| type                                                                                                                                                            |     integer     | 交易类型                                                    |\n| time                                                                                                                                                            |      long       | 交易时间                                                    |\n| blockHeight                                                                                                                                                     |      long       | 区块高度                                                    |\n| fee                                                                                                                                                             |     string      | 交易手续费                                                   |\n| value                                                                                                                                                           |     string      | 交易金额                                                    |\n| remark                                                                                                                                                          |     string      | 备注                                                      |\n| scriptSig                                                                                                                                                       |     string      | 签名信息                                                    |\n| status                                                                                                                                                          |     integer     | 交易状态（0 - 确认中，1 - 已确认）                                   |\n| confirmCount                                                                                                                                                    |      long       | 交易确认次数                                                  |\n| size                                                                                                                                                            |       int       | 交易大小                                                    |\n| inputs                                                                                                                                                          | list&lt;object> | 交易输入集合                                                  |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address                                                                                                         |     string      | 输入地址                                                    |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assetsChainId                                                                                                   |       int       | 资产链ID                                                   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assetsId                                                                                                        |       int       | 资产ID                                                    |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;amount                                                                                                          |     string      | 花费金额                                                    |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nonce                                                                                                           |     string      | 地址的账本nonce值                                             |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;locked                                                                                                          |      byte       | 解锁交易的标签（0 - 非解锁交易，1 - 解锁交易）                             |\n| outputs                                                                                                                                                         | list&lt;object> | 交易输出集合                                                  |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address                                                                                                         |     string      | 输出地址                                                    |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assetsChainId                                                                                                   |       int       | 资产链ID                                                   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assetsId                                                                                                        |       int       | 资产ID                                                    |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;amount                                                                                                          |     string      | 输出金额                                                    |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lockTime                                                                                                        |      long       | 锁定时间                                                    |\n| txData                                                                                                                                                          |       map       | 合约交易业务数据                                                |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data                                                                                                            |     object      | 根据合约交易类型反映不同的业务数据（这里为了描述四种情况，四种业务放在一起描述，实际上不同时存在，只存在一个） |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;create                                                          |     object      | 发布合约交易的业务数据                                             |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sender          |     string      | 交易创建者地址                                                 |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contractAddress |     string      | 创建的合约地址                                                 |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alias           |     string      | 合约别名                                                    |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hexCode         |     string      | 智能合约代码(字节码的Hex编码字符串)                                    |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gasLimit        |      long       | GAS限制                                                   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;price           |      long       | GAS单价                                                   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;args            |   string[][]    | 参数列表                                                    |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;call                                                            |     object      | 调用合约交易的业务数据                                             |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sender          |     string      | 交易创建者地址                                                 |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contractAddress |     string      | 合约地址                                                    |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value           |     string      | 调用者向合约地址转入的主网资产金额，没有此业务时填BigInteger.ZERO                |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gasLimit        |      long       | GAS限制                                                   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;price           |      long       | GAS单价                                                   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;methodName      |     string      | 合约方法                                                    |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;methodDesc      |     string      | 合约方法描述，若合约内方法没有重载，则此参数可以为空                              |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;args            |   string[][]    | 参数列表                                                    |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delete                                                          |     object      | 删除合约交易的业务数据                                             |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sender          |     string      | 交易创建者地址                                                 |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contractAddress |     string      | 合约地址                                                    |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;transfer                                                        |     object      | 合约转账交易的业务数据                                             |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;orginTxHash     |     string      | 调用合约交易hash（源交易hash，合约交易由调用合约交易派生而来）                     |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contractAddress |     string      | 合约地址                                                    |\n| contractResult                                                                                                                                                  |     object      | 合约执行结果                                                  |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;success                                                                                                         |     boolean     | 合约执行是否成功                                                |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;errorMessage                                                                                                    |     string      | 执行失败信息                                                  |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contractAddress                                                                                                 |     string      | 合约地址                                                    |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result                                                                                                          |     string      | 合约执行结果                                                  |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gasLimit                                                                                                        |      long       | GAS限制                                                   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gasUsed                                                                                                         |      long       | 已使用GAS                                                  |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;price                                                                                                           |      long       | GAS单价                                                   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;totalFee                                                                                                        |     string      | 交易总手续费                                                  |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;txSizeFee                                                                                                       |     string      | 交易大小手续费                                                 |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;actualContractFee                                                                                               |     string      | 实际执行合约手续费                                               |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;refundFee                                                                                                       |     string      | 合约返回的手续费                                                |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value                                                                                                           |     string      | 调用者向合约地址转入的主网资产金额，没有此业务时则为0                             |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stackTrace                                                                                                      |     string      | 异常堆栈踪迹                                                  |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;transfers                                                                                                       | list&lt;object> | 合约转账列表（从合约转出）                                           |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;txHash                                                          |     string      | 合约生成交易：合约转账交易hash                                       |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from                                                            |     string      | 转出的合约地址                                                 |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value                                                           |     string      | 转账金额                                                    |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;outputs                                                         | list&lt;object> | 转入的地址列表                                                 |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to              |     string      | 转入地址                                                    |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value           |     string      | 转入金额                                                    |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;orginTxHash                                                     |     string      | 调用合约交易hash（源交易hash，合约交易由调用合约交易派生而来）                     |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;events                                                                                                          | list&lt;string> | 合约事件列表                                                  |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tokenTransfers                                                                                                  | list&lt;object> | 合约token转账列表                                             |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contractAddress                                                 |     string      | 合约地址                                                    |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from                                                            |     string      | 付款方                                                     |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to                                                              |     string      | 收款方                                                     |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value                                                           |     string      | 转账金额                                                    |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name                                                            |     string      | token名称                                                 |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;symbol                                                          |     string      | token符号                                                 |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;decimals                                                        |      long       | token支持的小数位数                                            |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;invokeRegisterCmds                                                                                              | list&lt;object> | 合约调用外部命令的调用记录列表                                         |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cmdName                                                         |     string      | 命令名称                                                    |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;args                                                            |       map       | 命令参数，参数不固定，依据不同的命令而来，故此处不作描述，结构为 {参数名称=参数值}             |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cmdRegisterMode                                                 |     string      | 注册的命令模式（QUERY\\_DATA or NEW\\_TX）                         |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;newTxHash                                                       |     string      | 生成的交易hash（当调用的命令模式是 NEW\\_TX 时，会生成交易）                    |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contractTxList                                                                                                  | list&lt;string> | 合约生成交易的序列化字符串列表                                         |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;remark                                                                                                          |     string      | 备注                                                      |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "hash",
+        "des": "交易hash",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "hash",
+        "des": "交易hash",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "type",
+        "des": "交易类型",
+        "type": "integer",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "time",
+        "des": "交易时间",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "blockHeight",
+        "des": "区块高度",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "fee",
+        "des": "交易手续费",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "value",
+        "des": "交易金额",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "remark",
+        "des": "备注",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "scriptSig",
+        "des": "签名信息",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "status",
+        "des": "交易状态（0 - 确认中，1 - 已确认）",
+        "type": "integer",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "confirmCount",
+        "des": "交易确认次数",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "size",
+        "des": "交易大小",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "inputs",
+        "des": "交易输入集合",
+        "type": "list&lt;object>",
+        "list": [
+          {
+            "name": "address",
+            "des": "输入地址",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "assetsChainId",
+            "des": "资产链ID",
+            "type": "int",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "assetsId",
+            "des": "资产ID",
+            "type": "int",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "amount",
+            "des": "花费金额",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "nonce",
+            "des": "地址的账本nonce值",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "locked",
+            "des": "解锁交易的标签（0 - 非解锁交易，1 - 解锁交易）",
+            "type": "byte",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      },
+      {
+        "name": "outputs",
+        "des": "交易输出集合",
+        "type": "list&lt;object>",
+        "list": [
+          {
+            "name": "address",
+            "des": "输出地址",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "assetsChainId",
+            "des": "资产链ID",
+            "type": "int",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "assetsId",
+            "des": "资产ID",
+            "type": "int",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "amount",
+            "des": "输出金额",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "lockTime",
+            "des": "锁定时间",
+            "type": "long",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      },
+      {
+        "name": "txData",
+        "des": "合约交易业务数据",
+        "type": "map",
+        "list": [
+          {
+            "name": "data",
+            "des": "根据合约交易类型反映不同的业务数据（这里为了描述四种情况，四种业务放在一起描述，实际上不同时存在，只存在一个）",
+            "type": "object",
+            "list": [
+              {
+                "name": "create",
+                "des": "发布合约交易的业务数据",
+                "type": "object",
+                "list": [
+                  {
+                    "name": "sender",
+                    "des": "交易创建者地址",
+                    "type": "string",
+                    "list": null,
+                    "canNull": false
+                  },
+                  {
+                    "name": "contractAddress",
+                    "des": "创建的合约地址",
+                    "type": "string",
+                    "list": null,
+                    "canNull": false
+                  },
+                  {
+                    "name": "alias",
+                    "des": "合约别名",
+                    "type": "string",
+                    "list": null,
+                    "canNull": false
+                  },
+                  {
+                    "name": "hexCode",
+                    "des": "智能合约代码(字节码的Hex编码字符串)",
+                    "type": "string",
+                    "list": null,
+                    "canNull": false
+                  },
+                  {
+                    "name": "gasLimit",
+                    "des": "GAS限制",
+                    "type": "long",
+                    "list": null,
+                    "canNull": false
+                  },
+                  {
+                    "name": "price",
+                    "des": "GAS单价",
+                    "type": "long",
+                    "list": null,
+                    "canNull": false
+                  },
+                  {
+                    "name": "args",
+                    "des": "参数列表",
+                    "type": "string[][]",
+                    "list": null,
+                    "canNull": false
+                  }
+                ],
+                "canNull": false
+              },
+              {
+                "name": "call",
+                "des": "调用合约交易的业务数据",
+                "type": "object",
+                "list": [
+                  {
+                    "name": "sender",
+                    "des": "交易创建者地址",
+                    "type": "string",
+                    "list": null,
+                    "canNull": false
+                  },
+                  {
+                    "name": "contractAddress",
+                    "des": "合约地址",
+                    "type": "string",
+                    "list": null,
+                    "canNull": false
+                  },
+                  {
+                    "name": "value",
+                    "des": "调用者向合约地址转入的主网资产金额，没有此业务时填BigInteger.ZERO",
+                    "type": "string",
+                    "list": null,
+                    "canNull": false
+                  },
+                  {
+                    "name": "gasLimit",
+                    "des": "GAS限制",
+                    "type": "long",
+                    "list": null,
+                    "canNull": false
+                  },
+                  {
+                    "name": "price",
+                    "des": "GAS单价",
+                    "type": "long",
+                    "list": null,
+                    "canNull": false
+                  },
+                  {
+                    "name": "methodName",
+                    "des": "合约方法",
+                    "type": "string",
+                    "list": null,
+                    "canNull": false
+                  },
+                  {
+                    "name": "methodDesc",
+                    "des": "合约方法描述，若合约内方法没有重载，则此参数可以为空",
+                    "type": "string",
+                    "list": null,
+                    "canNull": false
+                  },
+                  {
+                    "name": "args",
+                    "des": "参数列表",
+                    "type": "string[][]",
+                    "list": null,
+                    "canNull": false
+                  }
+                ],
+                "canNull": false
+              },
+              {
+                "name": "delete",
+                "des": "删除合约交易的业务数据",
+                "type": "object",
+                "list": [
+                  {
+                    "name": "sender",
+                    "des": "交易创建者地址",
+                    "type": "string",
+                    "list": null,
+                    "canNull": false
+                  },
+                  {
+                    "name": "contractAddress",
+                    "des": "合约地址",
+                    "type": "string",
+                    "list": null,
+                    "canNull": false
+                  }
+                ],
+                "canNull": false
+              },
+              {
+                "name": "transfer",
+                "des": "合约转账交易的业务数据",
+                "type": "object",
+                "list": [
+                  {
+                    "name": "orginTxHash",
+                    "des": "调用合约交易hash（源交易hash，合约交易由调用合约交易派生而来）",
+                    "type": "string",
+                    "list": null,
+                    "canNull": false
+                  },
+                  {
+                    "name": "contractAddress",
+                    "des": "合约地址",
+                    "type": "string",
+                    "list": null,
+                    "canNull": false
+                  }
+                ],
+                "canNull": false
+              }
+            ],
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      },
+      {
+        "name": "contractResult",
+        "des": "合约执行结果",
+        "type": "object",
+        "list": [
+          {
+            "name": "success",
+            "des": "合约执行是否成功",
+            "type": "boolean",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "errorMessage",
+            "des": "执行失败信息",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "contractAddress",
+            "des": "合约地址",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "result",
+            "des": "合约执行结果",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "gasLimit",
+            "des": "GAS限制",
+            "type": "long",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "gasUsed",
+            "des": "已使用GAS",
+            "type": "long",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "price",
+            "des": "GAS单价",
+            "type": "long",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "totalFee",
+            "des": "交易总手续费",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "txSizeFee",
+            "des": "交易大小手续费",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "actualContractFee",
+            "des": "实际执行合约手续费",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "refundFee",
+            "des": "合约返回的手续费",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "value",
+            "des": "调用者向合约地址转入的主网资产金额，没有此业务时则为0",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "stackTrace",
+            "des": "异常堆栈踪迹",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "transfers",
+            "des": "合约转账列表（从合约转出）",
+            "type": "list&lt;object>",
+            "list": [
+              {
+                "name": "txHash",
+                "des": "合约生成交易：合约转账交易hash",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "from",
+                "des": "转出的合约地址",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "value",
+                "des": "转账金额",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "outputs",
+                "des": "转入的地址列表",
+                "type": "list&lt;object>",
+                "list": [
+                  {
+                    "name": "to",
+                    "des": "转入地址",
+                    "type": "string",
+                    "list": null,
+                    "canNull": false
+                  },
+                  {
+                    "name": "value",
+                    "des": "转入金额",
+                    "type": "string",
+                    "list": null,
+                    "canNull": false
+                  }
+                ],
+                "canNull": false
+              },
+              {
+                "name": "orginTxHash",
+                "des": "调用合约交易hash（源交易hash，合约交易由调用合约交易派生而来）",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              }
+            ],
+            "canNull": false
+          },
+          {
+            "name": "events",
+            "des": "合约事件列表",
+            "type": "list&lt;String>",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "tokenTransfers",
+            "des": "合约token转账列表",
+            "type": "list&lt;object>",
+            "list": [
+              {
+                "name": "contractAddress",
+                "des": "合约地址",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "from",
+                "des": "付款方",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "to",
+                "des": "收款方",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "value",
+                "des": "转账金额",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "name",
+                "des": "token名称",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "symbol",
+                "des": "token符号",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "decimals",
+                "des": "token支持的小数位数",
+                "type": "long",
+                "list": null,
+                "canNull": false
+              }
+            ],
+            "canNull": false
+          },
+          {
+            "name": "invokeRegisterCmds",
+            "des": "合约调用外部命令的调用记录列表",
+            "type": "list&lt;object>",
+            "list": [
+              {
+                "name": "cmdName",
+                "des": "命令名称",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "args",
+                "des": "命令参数，参数不固定，依据不同的命令而来，故此处不作描述，结构为 {参数名称=参数值}",
+                "type": "map",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "cmdRegisterMode",
+                "des": "注册的命令模式（QUERY\\_DATA or NEW\\_TX）",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "newTxHash",
+                "des": "生成的交易hash（当调用的命令模式是 NEW\\_TX 时，会生成交易）",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              }
+            ],
+            "canNull": false
+          },
+          {
+            "name": "contractTxList",
+            "des": "合约生成交易的序列化字符串列表",
+            "type": "list&lt;String>",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "remark",
+            "des": "备注",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "sc_token_assets_list",
+    "des": "token资产集合/token assets list",
+    "scope": "public",
+    "version": 1.0,
+    "md": "sc\\_token\\_assets\\_list\n=======================\n### scope:public\n### version:1.0\ntoken资产集合/token assets list\n\n参数列表\n----\n| 参数名        |  参数类型  | 参数描述 | 是否非空 |\n| ---------- |:------:| ---- |:----:|\n| chainId    |  int   | 链ID  |  是   |\n| address    | string | 账户地址 |  是   |\n| pageNumber |  int   | 页码   |  是   |\n| pageSize   |  int   | 每页大小 |  是   |\n\n返回值\n---\n| 字段名             |  字段类型  | 参数描述                    |\n| --------------- |:------:| ----------------------- |\n| contractAddress | string | 合约地址                    |\n| name            | string | token名称                 |\n| symbol          | string | token符号                 |\n| amount          | string | token数量                 |\n| decimals        |  long  | token支持的小数位数            |\n| blockHeight     |  long  | 合约创建时的区块高度              |\n| status          |  int   | 合约状态(0-不存在, 1-正常, 2-终止) |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链ID",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "pageNumber",
+        "des": "页码",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "pageSize",
+        "des": "每页大小",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "contractAddress",
+        "des": "合约地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "name",
+        "des": "token名称",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "symbol",
+        "des": "token符号",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "amount",
+        "des": "token数量",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "decimals",
+        "des": "token支持的小数位数",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "blockHeight",
+        "des": "合约创建时的区块高度",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "status",
+        "des": "合约状态(0-不存在, 1-正常, 2-终止)",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "sc_token_transfer_list",
+    "des": "token转账交易列表/token transfer list",
+    "scope": "public",
+    "version": 1.0,
+    "md": "sc\\_token\\_transfer\\_list\n=========================\n### scope:public\n### version:1.0\ntoken转账交易列表/token transfer list\n\n参数列表\n----\n| 参数名        |  参数类型  | 参数描述 | 是否非空 |\n| ---------- |:------:| ---- |:----:|\n| chainId    |  int   | 链ID  |  是   |\n| address    | string | 账户地址 |  是   |\n| pageNumber |  int   | 页码   |  是   |\n| pageSize   |  int   | 每页大小 |  是   |\n\n返回值\n---\n| 字段名             |  字段类型  | 参数描述                           |\n| --------------- |:------:| ------------------------------ |\n| contractAddress | string | 合约地址                           |\n| from            | string | 付款方                            |\n| to              | string | 收款方                            |\n| value           | string | 转账金额                           |\n| time            |  long  | 交易时间                           |\n| status          |  byte  | 交易状态（0 - 确认中， 1 - 已确认， 2 - 失败） |\n| txHash          | string | 交易hash                         |\n| blockHeight     |  long  | 区块高度                           |\n| name            | string | token名称                        |\n| symbol          | string | token符号                        |\n| decimals        |  long  | token支持的小数位数                   |\n| info            | string | token资产变动信息                    |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链ID",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "pageNumber",
+        "des": "页码",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "pageSize",
+        "des": "每页大小",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "contractAddress",
+        "des": "合约地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "from",
+        "des": "付款方",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "to",
+        "des": "收款方",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "value",
+        "des": "转账金额",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "time",
+        "des": "交易时间",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "status",
+        "des": "交易状态（0 - 确认中， 1 - 已确认， 2 - 失败）",
+        "type": "byte",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "txHash",
+        "des": "交易hash",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "blockHeight",
+        "des": "区块高度",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "name",
+        "des": "token名称",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "symbol",
+        "des": "token符号",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "decimals",
+        "des": "token支持的小数位数",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "info",
+        "des": "token资产变动信息",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "sc_account_contracts",
+    "des": "账户的合约地址列表/account contract list",
+    "scope": "public",
+    "version": 1.0,
+    "md": "sc\\_account\\_contracts\n======================\n### scope:public\n### version:1.0\n账户的合约地址列表/account contract list\n\n参数列表\n----\n| 参数名        |  参数类型  | 参数描述 | 是否非空 |\n| ---------- |:------:| ---- |:----:|\n| chainId    |  int   | 链ID  |  是   |\n| address    | string | 账户地址 |  是   |\n| pageNumber |  int   | 页码   |  是   |\n| pageSize   |  int   | 每页大小 |  是   |\n\n返回值\n---\n| 字段名             |  字段类型  | 参数描述                                                   |\n| --------------- |:------:| ------------------------------------------------------ |\n| contractAddress | string | 合约地址                                                   |\n| createTime      |  long  | 合约创建时间                                                 |\n| height          |  long  | 合约创建时区块高度                                              |\n| confirmCount    |  long  | 合约创建确认次数                                               |\n| alias           | string | 合约别名                                                   |\n| status          |  int   | 合约状态（0 - 不存在或者创建中, 1 - 正常, 2 - 已删除, 3 - 创建失败, 4 - 锁定中） |\n| msg             | string | 合约创建失败的错误信息                                            |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链ID",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "pageNumber",
+        "des": "页码",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "pageSize",
+        "des": "每页大小",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "contractAddress",
+        "des": "合约地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "createTime",
+        "des": "合约创建时间",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "height",
+        "des": "合约创建时区块高度",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "confirmCount",
+        "des": "合约创建确认次数",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "alias",
+        "des": "合约别名",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "status",
+        "des": "合约状态（0 - 不存在或者创建中, 1 - 正常, 2 - 已删除, 3 - 创建失败, 4 - 锁定中）",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "msg",
+        "des": "合约创建失败的错误信息",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "sc_upload",
+    "des": "合约代码jar包上传/upload",
+    "scope": "public",
+    "version": 1.0,
+    "md": "sc\\_upload\n==========\n### scope:public\n### version:1.0\n合约代码jar包上传/upload\n\n参数列表\n----\n| 参数名         |  参数类型  | 参数描述                                         | 是否非空 |\n| ----------- |:------:| -------------------------------------------- |:----:|\n| chainId     |  int   | 链id                                          |  是   |\n| jarFileData | string | 文件描述和文件字节流转换Base64编码字符串（文件描述和Base64字符串以逗号隔开） |  是   |\n\n返回值\n---\n| 字段名                                                                                                      |      字段类型       | 参数描述                 |\n| -------------------------------------------------------------------------------------------------------- |:---------------:| -------------------- |\n| constructor                                                                                              |     object      | 合约构造函数详情             |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name                                                     |     string      | 方法名称                 |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;desc                                                     |     string      | 方法描述                 |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;args                                                     | list&lt;object> | 方法参数列表               |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type     |     string      | 参数类型                 |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name     |     string      | 参数名称                 |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;required |     boolean     | 是否必填                 |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;returnArg                                                |     string      | 返回值类型                |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;view                                                     |     boolean     | 是否视图方法（调用此方法数据不上链）   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;event                                                    |     boolean     | 是否是事件                |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;payable                                                  |     boolean     | 是否是可接受主链资产转账的方法      |\n| isNrc20                                                                                                  |     boolean     | 是否是NRC20合约           |\n| code                                                                                                     |     string      | 智能合约代码(字节码的Hex编码字符串) |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "jarFileData",
+        "des": "文件描述和文件字节流转换Base64编码字符串（文件描述和Base64字符串以逗号隔开）",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "constructor",
+        "des": "合约构造函数详情",
+        "type": "object",
+        "list": [
+          {
+            "name": "name",
+            "des": "方法名称",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "desc",
+            "des": "方法描述",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "args",
+            "des": "方法参数列表",
+            "type": "list&lt;object>",
+            "list": [
+              {
+                "name": "type",
+                "des": "参数类型",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "name",
+                "des": "参数名称",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "required",
+                "des": "是否必填",
+                "type": "boolean",
+                "list": null,
+                "canNull": false
+              }
+            ],
+            "canNull": false
+          },
+          {
+            "name": "returnArg",
+            "des": "返回值类型",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "view",
+            "des": "是否视图方法（调用此方法数据不上链）",
+            "type": "boolean",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "event",
+            "des": "是否是事件",
+            "type": "boolean",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "payable",
+            "des": "是否是可接受主链资产转账的方法",
+            "type": "boolean",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      },
+      {
+        "name": "isNrc20",
+        "des": "是否是NRC20合约",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "code",
+        "des": "智能合约代码(字节码的Hex编码字符串)",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "sc_call",
+    "des": "call contract",
+    "scope": "public",
+    "version": 1.0,
+    "md": "sc\\_call\n========\n### scope:public\n### version:1.0\ncall contract\n\n参数列表\n----\n| 参数名             |    参数类型    | 参数描述                                     | 是否非空 |\n| --------------- |:----------:| ---------------------------------------- |:----:|\n| chainId         |    int     | 链id                                      |  是   |\n| sender          |   string   | 交易创建者账户地址                                |  是   |\n| value           | biginteger | 调用者向合约地址转入的主网资产金额，没有此业务时填BigInteger.ZERO |  是   |\n| gasLimit        |    long    | GAS限制                                    |  是   |\n| price           |    long    | GAS单价                                    |  是   |\n| contractAddress |   string   | 合约地址                                     |  是   |\n| methodName      |   string   | 合约方法                                     |  是   |\n| methodDesc      |   string   | 合约方法描述，若合约内方法没有重载，则此参数可以为空               |  是   |\n| args            |  object[]  | 参数列表                                     |  是   |\n| password        |   string   | 调用者账户密码                                  |  是   |\n| remark          |   string   | 交易备注                                     |  是   |\n\n返回值\n---\n| 字段名    |  字段类型  | 参数描述        |\n| ------ |:------:| ----------- |\n| txHash | string | 调用合约的交易hash |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "sender",
+        "des": "交易创建者账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "value",
+        "des": "调用者向合约地址转入的主网资产金额，没有此业务时填BigInteger.ZERO",
+        "type": "biginteger",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "gasLimit",
+        "des": "GAS限制",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "price",
+        "des": "GAS单价",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractAddress",
+        "des": "合约地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "methodName",
+        "des": "合约方法",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "methodDesc",
+        "des": "合约方法描述，若合约内方法没有重载，则此参数可以为空",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "args",
+        "des": "参数列表",
+        "type": "object[]",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "password",
+        "des": "调用者账户密码",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "remark",
+        "des": "交易备注",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "txHash",
+        "des": "调用合约的交易hash",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  }
+]

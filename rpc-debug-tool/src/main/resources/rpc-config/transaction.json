@@ -1,0 +1,860 @@
+[
+  {
+    "cmdName": "tx_register",
+    "des": "注册模块交易/Register module transactions",
+    "scope": "public",
+    "version": 1.0,
+    "md": "tx\\_register\n============\n### scope:public\n### version:1.0\n注册模块交易/Register module transactions\n\n参数列表\n----\n| 参数名                                                             |       参数类型       | 参数描述        | 是否非空 |\n| --------------------------------------------------------------- |:----------------:| ----------- |:----:|\n| chainId                                                         |       int        | 链id         |  是   |\n| moduleCode                                                      |      string      | 注册交易的模块code |  是   |\n| list                                                            |       list       | 待注册交易的数据    |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;txType          |       int        | 交易类型        |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;systemTx        |     boolean      | 是否是系统交易     |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unlockTx        |     boolean      | 是否是解锁交易     |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;verifySignature |     boolean      | 交易是否需要签名    |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;verifyFee       |     boolean      | 交易是否需要验证手续费 |  是   |\n| delList                                                         |       list       | 待移除已注册交易数据  |  否   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delList         | list&lt;integer> | 待移除已注册交易数据  |  是   |\n\n返回值\n---\n| 字段名   |  字段类型   | 参数描述   |\n| ----- |:-------:| ------ |\n| value | boolean | 是否注册成功 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "moduleCode",
+        "des": "注册交易的模块code",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "list",
+        "des": "待注册交易的数据",
+        "type": "list",
+        "list": [
+          {
+            "name": "txType",
+            "des": "交易类型",
+            "type": "int",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "systemTx",
+            "des": "是否是系统交易",
+            "type": "boolean",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "unlockTx",
+            "des": "是否是解锁交易",
+            "type": "boolean",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "verifySignature",
+            "des": "交易是否需要签名",
+            "type": "boolean",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "verifyFee",
+            "des": "交易是否需要验证手续费",
+            "type": "boolean",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      },
+      {
+        "name": "delList",
+        "des": "待移除已注册交易数据",
+        "type": "list",
+        "list": [
+          {
+            "name": "delList",
+            "des": "待移除已注册交易数据",
+            "type": "list&lt;Integer>",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": true
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "是否注册成功",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "tx_rollback",
+    "des": "回滚区块的交易/transaction rollback",
+    "scope": "public",
+    "version": 1.0,
+    "md": "tx\\_rollback\n============\n### scope:public\n### version:1.0\n回滚区块的交易/transaction rollback\n\n参数列表\n----\n| 参数名                                                        |      参数类型       | 参数描述    | 是否非空 |\n| ---------------------------------------------------------- |:---------------:| ------- |:----:|\n| chainId                                                    |       int       | 链id     |  是   |\n| txHashList                                                 |      list       | 待回滚交易集合 |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;txHashList | list&lt;string> | 待回滚交易集合 |  是   |\n| blockHeader                                                |     string      | 区块头     |  是   |\n\n返回值\n---\n| 字段名   |  字段类型   | 参数描述 |\n| ----- |:-------:| ---- |\n| value | boolean | 是否成功 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "txHashList",
+        "des": "待回滚交易集合",
+        "type": "list",
+        "list": [
+          {
+            "name": "txHashList",
+            "des": "待回滚交易集合",
+            "type": "list&lt;String>",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      },
+      {
+        "name": "blockHeader",
+        "des": "区块头",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "是否成功",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "tx_getTx",
+    "des": "根据hash获取交易, 先查未确认, 查不到再查已确认/Get transaction by tx hash",
+    "scope": "public",
+    "version": 1.0,
+    "md": "tx\\_getTx\n=========\n### scope:public\n### version:1.0\n根据hash获取交易, 先查未确认, 查不到再查已确认/Get transaction by tx hash\n\n参数列表\n----\n| 参数名     |  参数类型  | 参数描述      | 是否非空 |\n| ------- |:------:| --------- |:----:|\n| chainId |  int   | 链id       |  是   |\n| txHash  | string | 待查询交易hash |  是   |\n\n返回值\n---\n| 字段名 |  字段类型  | 参数描述             |\n| --- |:------:| ---------------- |\n| tx  | string | 获取到的交易的序列化数据的字符串 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "txHash",
+        "des": "待查询交易hash",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "tx",
+        "des": "获取到的交易的序列化数据的字符串",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "tx_cs_state",
+    "des": "设置节点打包状态(由共识模块设置)/Set the node packaging state",
+    "scope": "public",
+    "version": 1.0,
+    "md": "tx\\_cs\\_state\n=============\n### scope:public\n### version:1.0\n设置节点打包状态(由共识模块设置)/Set the node packaging state\n\n参数列表\n----\n| 参数名       |  参数类型   | 参数描述   | 是否非空 |\n| --------- |:-------:| ------ |:----:|\n| chainId   |   int   | 链id    |  是   |\n| packaging | boolean | 是否正在打包 |  是   |\n\n返回值\n---\n| 字段名 | 字段类型 | 参数描述             |\n| --- |:----:| ---------------- |\n| N/A | void | 无特定返回值，没有错误即设置成功 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "packaging",
+        "des": "是否正在打包",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "N/A",
+        "des": "无特定返回值，没有错误即设置成功",
+        "type": "void",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "tx_packableTxs",
+    "des": "获取可打包的交易集/returns a list of packaged transactions",
+    "scope": "public",
+    "version": 1.0,
+    "md": "tx\\_packableTxs\n===============\n### scope:public\n### version:1.0\n获取可打包的交易集/returns a list of packaged transactions\n\n参数列表\n----\n| 参数名            |  参数类型  | 参数描述      | 是否非空 |\n| -------------- |:------:| --------- |:----:|\n| chainId        |  int   | 链id       |  是   |\n| endTimestamp   |  long  | 截止时间      |  是   |\n| maxTxDataSize  |  int   | 交易集最大容量   |  是   |\n| blockTime      |  long  | 本次出块区块时间  |  是   |\n| packingAddress | string | 当前出块地址    |  是   |\n| preStateRoot   | string | 前一个区块的状态根 |  是   |\n\n返回值\n---\n| 字段名           |      字段类型       | 参数描述      |\n| ------------- |:---------------:| --------- |\n| list          | list&lt;string> | 可打包交易集    |\n| stateRoot     |     string      | 当前出块的状态根  |\n| packageHeight |      long       | 本次打包区块的高度 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "endTimestamp",
+        "des": "截止时间",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "maxTxDataSize",
+        "des": "交易集最大容量",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "blockTime",
+        "des": "本次出块区块时间",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "packingAddress",
+        "des": "当前出块地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "preStateRoot",
+        "des": "前一个区块的状态根",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "list",
+        "des": "可打包交易集",
+        "type": "list&lt;String>",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "stateRoot",
+        "des": "当前出块的状态根",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "packageHeight",
+        "des": "本次打包区块的高度",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "tx_backPackableTxs",
+    "des": "共识模块把不能打包的交易还回来，重新加入待打包列表/back packaged transactions",
+    "scope": "public",
+    "version": 1.0,
+    "md": "tx\\_backPackableTxs\n===================\n### scope:public\n### version:1.0\n共识模块把不能打包的交易还回来，重新加入待打包列表/back packaged transactions\n\n参数列表\n----\n| 参数名                                                    |      参数类型       | 参数描述         | 是否非空 |\n| ------------------------------------------------------ |:---------------:| ------------ |:----:|\n| chainId                                                |       int       | 链id          |  是   |\n| txList                                                 |      list       | 交易序列化数据字符串集合 |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;txList | list&lt;string> | 交易序列化数据字符串集合 |  是   |\n\n返回值\n---\n| 字段名   |  字段类型   | 参数描述 |\n| ----- |:-------:| ---- |\n| value | boolean | 是否成功 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "txList",
+        "des": "交易序列化数据字符串集合",
+        "type": "list",
+        "list": [
+          {
+            "name": "txList",
+            "des": "交易序列化数据字符串集合",
+            "type": "list&lt;String>",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "是否成功",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "tx_save",
+    "des": "保存新区块的交易/Save the confirmed transaction",
+    "scope": "public",
+    "version": 1.0,
+    "md": "tx\\_save\n========\n### scope:public\n### version:1.0\n保存新区块的交易/Save the confirmed transaction\n\n参数列表\n----\n| 参数名                                                          |      参数类型       | 参数描述     | 是否非空 |\n| ------------------------------------------------------------ |:---------------:| -------- |:----:|\n| chainId                                                      |       int       | 链id      |  是   |\n| txList                                                       |      list       | 待保存的交易集合 |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;txList       | list&lt;string> | 待保存的交易集合 |  是   |\n| contractList                                                 |      list       | 智能合约交易   |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contractList | list&lt;string> | 智能合约交易   |  是   |\n| blockHeader                                                  |     string      | 区块头      |  是   |\n\n返回值\n---\n| 字段名   |  字段类型   | 参数描述 |\n| ----- |:-------:| ---- |\n| value | boolean | 是否成功 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "txList",
+        "des": "待保存的交易集合",
+        "type": "list",
+        "list": [
+          {
+            "name": "txList",
+            "des": "待保存的交易集合",
+            "type": "list&lt;String>",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      },
+      {
+        "name": "contractList",
+        "des": "智能合约交易",
+        "type": "list",
+        "list": [
+          {
+            "name": "contractList",
+            "des": "智能合约交易",
+            "type": "list&lt;String>",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      },
+      {
+        "name": "blockHeader",
+        "des": "区块头",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "是否成功",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "tx_gengsisSave",
+    "des": "保存创世块的交易/Save the transactions of the Genesis block ",
+    "scope": "public",
+    "version": 1.0,
+    "md": "tx\\_gengsisSave\n===============\n### scope:public\n### version:1.0\n保存创世块的交易/Save the transactions of the Genesis block \n\n参数列表\n----\n| 参数名                                                    |      参数类型       | 参数描述     | 是否非空 |\n| ------------------------------------------------------ |:---------------:| -------- |:----:|\n| chainId                                                |       int       | 链id      |  是   |\n| txList                                                 |      list       | 待保存的交易集合 |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;txList | list&lt;string> | 待保存的交易集合 |  是   |\n| blockHeader                                            |     string      | 区块头      |  是   |\n\n返回值\n---\n| 字段名   |  字段类型   | 参数描述 |\n| ----- |:-------:| ---- |\n| value | boolean | 是否成功 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "txList",
+        "des": "待保存的交易集合",
+        "type": "list",
+        "list": [
+          {
+            "name": "txList",
+            "des": "待保存的交易集合",
+            "type": "list&lt;String>",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      },
+      {
+        "name": "blockHeader",
+        "des": "区块头",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "是否成功",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "tx_getSystemTypes",
+    "des": "获取所有系统交易类型/Get system transaction types",
+    "scope": "public",
+    "version": 1.0,
+    "md": "tx\\_getSystemTypes\n==================\n### scope:public\n### version:1.0\n获取所有系统交易类型/Get system transaction types\n\n参数列表\n----\n| 参数名     | 参数类型 | 参数描述 | 是否非空 |\n| ------- |:----:| ---- |:----:|\n| chainId | int  | 链id  |  是   |\n\n返回值\n---\n| 字段名  |       字段类型       | 参数描述     |\n| ---- |:----------------:| -------- |\n| list | list&lt;integer> | 系统交易类型集合 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "list",
+        "des": "系统交易类型集合",
+        "type": "list&lt;Integer>",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "tx_getConfirmedTx",
+    "des": "根据hash获取已确认交易(只查已确认)/Get confirmed transaction by tx hash",
+    "scope": "public",
+    "version": 1.0,
+    "md": "tx\\_getConfirmedTx\n==================\n### scope:public\n### version:1.0\n根据hash获取已确认交易(只查已确认)/Get confirmed transaction by tx hash\n\n参数列表\n----\n| 参数名     |  参数类型  | 参数描述      | 是否非空 |\n| ------- |:------:| --------- |:----:|\n| chainId |  int   | 链id       |  是   |\n| txHash  | string | 待查询交易hash |  是   |\n\n返回值\n---\n| 字段名 |  字段类型  | 参数描述             |\n| --- |:------:| ---------------- |\n| tx  | string | 获取到的交易的序列化数据的字符串 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "txHash",
+        "des": "待查询交易hash",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "tx",
+        "des": "获取到的交易的序列化数据的字符串",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "tx_getBlockTxs",
+    "des": "获取区块的完整交易，如果没有查询到，或者查询到的不是区块完整的交易数据，则返回空集合/Get block transactions",
+    "scope": "public",
+    "version": 1.0,
+    "md": "tx\\_getBlockTxs\n===============\n### scope:public\n### version:1.0\n获取区块的完整交易，如果没有查询到，或者查询到的不是区块完整的交易数据，则返回空集合/Get block transactions\n\n参数列表\n----\n| 参数名                                                        |      参数类型       | 参数描述        | 是否非空 |\n| ---------------------------------------------------------- |:---------------:| ----------- |:----:|\n| chainId                                                    |       int       | 链id         |  是   |\n| txHashList                                                 |      list       | 待查询交易hash集合 |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;txHashList | list&lt;string> | 待查询交易hash集合 |  是   |\n\n返回值\n---\n| 字段名    |      字段类型       | 参数描述           |\n| ------ |:---------------:| -------------- |\n| txList | list&lt;string> | 返回交易序列化数据字符串集合 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "txHashList",
+        "des": "待查询交易hash集合",
+        "type": "list",
+        "list": [
+          {
+            "name": "txHashList",
+            "des": "待查询交易hash集合",
+            "type": "list&lt;String>",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "txList",
+        "des": "返回交易序列化数据字符串集合",
+        "type": "list&lt;String>",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "tx_getBlockTxsExtend",
+    "des": "根据hash列表，获取交易，先查未确认，再查已确认/Get transactions by hashs",
+    "scope": "public",
+    "version": 1.0,
+    "md": "tx\\_getBlockTxsExtend\n=====================\n### scope:public\n### version:1.0\n根据hash列表，获取交易，先查未确认，再查已确认/Get transactions by hashs\n\n参数列表\n----\n| 参数名                                                        |      参数类型       | 参数描述                                       | 是否非空 |\n| ---------------------------------------------------------- |:---------------:| ------------------------------------------ |:----:|\n| chainId                                                    |       int       | 链id                                        |  是   |\n| txHashList                                                 |      list       | 待查询交易hash集合                                |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;txHashList | list&lt;string> | 待查询交易hash集合                                |  是   |\n| allHits                                                    |     boolean     | true：必须全部查到才返回数据，否则返回空list； false：查到几个返回几个 |  是   |\n\n返回值\n---\n| 字段名    |      字段类型       | 参数描述           |\n| ------ |:---------------:| -------------- |\n| txList | list&lt;string> | 返回交易序列化数据字符串集合 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "txHashList",
+        "des": "待查询交易hash集合",
+        "type": "list",
+        "list": [
+          {
+            "name": "txHashList",
+            "des": "待查询交易hash集合",
+            "type": "list&lt;String>",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      },
+      {
+        "name": "allHits",
+        "des": "true：必须全部查到才返回数据，否则返回空list； false：查到几个返回几个",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "txList",
+        "des": "返回交易序列化数据字符串集合",
+        "type": "list&lt;String>",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "tx_bl_state",
+    "des": "设置节点区块同步状态(由区块模块设置)/Set the node block state",
+    "scope": "public",
+    "version": 1.0,
+    "md": "tx\\_bl\\_state\n=============\n### scope:public\n### version:1.0\n设置节点区块同步状态(由区块模块设置)/Set the node block state\n\n参数列表\n----\n| 参数名     | 参数类型 | 参数描述          | 是否非空 |\n| ------- |:----:| ------------- |:----:|\n| chainId | int  | 链id           |  是   |\n| status  | int  | 是否进入等待, 不处理交易 |  是   |\n\n返回值\n---\n| 字段名 | 字段类型 | 参数描述             |\n| --- |:----:| ---------------- |\n| N/A | void | 无特定返回值，没有错误即设置成功 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "status",
+        "des": "是否进入等待, 不处理交易",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "N/A",
+        "des": "无特定返回值，没有错误即设置成功",
+        "type": "void",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "tx_blockHeight",
+    "des": "接收最新区块高度/Receive the latest block height",
+    "scope": "public",
+    "version": 1.0,
+    "md": "tx\\_blockHeight\n===============\n### scope:public\n### version:1.0\n接收最新区块高度/Receive the latest block height\n\n参数列表\n----\n| 参数名     | 参数类型 | 参数描述 | 是否非空 |\n| ------- |:----:| ---- |:----:|\n| chainId | int  | 链id  |  是   |\n| height  | long | 区块高度 |  是   |\n\n返回值\n---\n| 字段名   |  字段类型   | 参数描述 |\n| ----- |:-------:| ---- |\n| value | boolean | 是否成功 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "height",
+        "des": "区块高度",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "是否成功",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "tx_newTx",
+    "des": "接收本地新交易/receive a new transaction",
+    "scope": "public",
+    "version": 1.0,
+    "md": "tx\\_newTx\n=========\n### scope:public\n### version:1.0\n接收本地新交易/receive a new transaction\n\n参数列表\n----\n| 参数名     |  参数类型  | 参数描述       | 是否非空 |\n| ------- |:------:| ---------- |:----:|\n| chainId |  int   | 链id        |  是   |\n| tx      | string | 交易序列化数据字符串 |  是   |\n\n返回值\n---\n| 字段名   |  字段类型   | 参数描述 |\n| ----- |:-------:| ---- |\n| value | boolean | 是否成功 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "tx",
+        "des": "交易序列化数据字符串",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "是否成功",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "tx_batchVerify",
+    "des": "验证区块所有交易/Verify all transactions in the block",
+    "scope": "public",
+    "version": 1.0,
+    "md": "tx\\_batchVerify\n===============\n### scope:public\n### version:1.0\n验证区块所有交易/Verify all transactions in the block\n\n参数列表\n----\n| 参数名                                                    |      参数类型       | 参数描述            | 是否非空 |\n| ------------------------------------------------------ |:---------------:| --------------- |:----:|\n| chainId                                                |       int       | 链id             |  是   |\n| txList                                                 |      list       | 待验证交易序列化数据字符串集合 |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;txList | list&lt;string> | 待验证交易序列化数据字符串集合 |  是   |\n| blockHeader                                            |     string      | 对应的区块头          |  是   |\n| preStateRoot                                           |     string      | 前一个区块状态根        |  是   |\n\n返回值\n---\n| 字段名          |      字段类型       | 参数描述       |\n| ------------ |:---------------:| ---------- |\n| value        |     boolean     | 是否验证成功     |\n| contractList | list&lt;string> | 智能合约新产生的交易 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "txList",
+        "des": "待验证交易序列化数据字符串集合",
+        "type": "list",
+        "list": [
+          {
+            "name": "txList",
+            "des": "待验证交易序列化数据字符串集合",
+            "type": "list&lt;String>",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      },
+      {
+        "name": "blockHeader",
+        "des": "对应的区块头",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "preStateRoot",
+        "des": "前一个区块状态根",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "是否验证成功",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractList",
+        "des": "智能合约新产生的交易",
+        "type": "list&lt;String>",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "tx_getTxClient",
+    "des": "根据hash获取交易，先查未确认，查不到再查已确认/Get transaction by tx hash",
+    "scope": "public",
+    "version": 1.0,
+    "md": "tx\\_getTxClient\n===============\n### scope:public\n### version:1.0\n根据hash获取交易，先查未确认，查不到再查已确认/Get transaction by tx hash\n\n参数列表\n----\n| 参数名     |  参数类型  | 参数描述      | 是否非空 |\n| ------- |:------:| --------- |:----:|\n| chainId |  int   | 链id       |  是   |\n| txHash  | string | 待查询交易hash |  是   |\n\n返回值\n---\n| 字段名    |  字段类型  | 参数描述                   |\n| ------ |:------:| ---------------------- |\n| tx     | string | 获取到的交易的序列化数据的字符串       |\n| height | string | 获取到的交易的确认高度，未确认交易高度为-1 |\n| status | string | 获取到的交易是否确认的状态          |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "txHash",
+        "des": "待查询交易hash",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "tx",
+        "des": "获取到的交易的序列化数据的字符串",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "height",
+        "des": "获取到的交易的确认高度，未确认交易高度为-1",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "status",
+        "des": "获取到的交易是否确认的状态",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "tx_getConfirmedTxClient",
+    "des": "根据hash获取已确认交易(只查已确认)/Get confirmed transaction by tx hash",
+    "scope": "public",
+    "version": 1.0,
+    "md": "tx\\_getConfirmedTxClient\n========================\n### scope:public\n### version:1.0\n根据hash获取已确认交易(只查已确认)/Get confirmed transaction by tx hash\n\n参数列表\n----\n| 参数名     |  参数类型  | 参数描述      | 是否非空 |\n| ------- |:------:| --------- |:----:|\n| chainId |  int   | 链id       |  是   |\n| txHash  | string | 待查询交易hash |  是   |\n\n返回值\n---\n| 字段名    |  字段类型  | 参数描述             |\n| ------ |:------:| ---------------- |\n| tx     | string | 获取到的交易的序列化数据的字符串 |\n| height | string | 获取到的交易的确认高度      |\n| status | string | 获取到的交易是否确认的状态    |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "txHash",
+        "des": "待查询交易hash",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "tx",
+        "des": "获取到的交易的序列化数据的字符串",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "height",
+        "des": "获取到的交易的确认高度",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "status",
+        "des": "获取到的交易是否确认的状态",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "tx_verifyTx",
+    "des": "验证交易接口，包括含基础验证、验证器、账本验证/Verify transation",
+    "scope": "public",
+    "version": 1.0,
+    "md": "tx\\_verifyTx\n============\n### scope:public\n### version:1.0\n验证交易接口，包括含基础验证、验证器、账本验证/Verify transation\n\n参数列表\n----\n| 参数名     |  参数类型  | 参数描述       | 是否非空 |\n| ------- |:------:| ---------- |:----:|\n| chainId |  int   | 链id        |  是   |\n| tx      | string | 待验证交易完整字符串 |  是   |\n\n返回值\n---\n| 字段名   |  字段类型  | 参数描述   |\n| ----- |:------:| ------ |\n| value | string | 交易hash |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "tx",
+        "des": "待验证交易完整字符串",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "交易hash",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "transferCMDTest",
+    "des": "",
+    "scope": "public",
+    "version": 1.0,
+    "md": "transferCMDTest\n===============\n### scope:public\n### version:1.0\n\n\n参数列表\n----\n无参数\n\n返回值\n---\n无返回值\n\n",
+    "parameters": [],
+    "result": null
+  }
+]

@@ -1,0 +1,1732 @@
+[
+  {
+    "cmdName": "ac_setPassword",
+    "des": "设置账户密码/Set account password",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_setPassword\n===============\n### scope:public\n### version:1.0\n设置账户密码/Set account password\n\n参数列表\n----\n| 参数名      |  参数类型  | 参数描述  | 是否非空 |\n| -------- |:------:| ----- |:----:|\n| chainId  |  int   | 链id   |  是   |\n| address  | string | 账户地址  |  是   |\n| password | string | 账户新密码 |  是   |\n\n返回值\n---\n| 字段名   |  字段类型   | 参数描述   |\n| ----- |:-------:| ------ |\n| value | boolean | 是否设置成功 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "password",
+        "des": "账户新密码",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "是否设置成功",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_isEncrypted",
+    "des": "根据账户地址获取账户是否加密/Whether the account is encrypted by the account address",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_isEncrypted\n===============\n### scope:public\n### version:1.0\n根据账户地址获取账户是否加密/Whether the account is encrypted by the account address\n\n参数列表\n----\n| 参数名     |  参数类型  | 参数描述 | 是否非空 |\n| ------- |:------:| ---- |:----:|\n| chainId |  int   | 链id  |  是   |\n| address | string | 账户地址 |  是   |\n\n返回值\n---\n| 字段名   |  字段类型   | 参数描述 |\n| ----- |:-------:| ---- |\n| value | boolean | 是否加密 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "是否加密",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_setRemark",
+    "des": "为账户设置备注/Set remark for accounts",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_setRemark\n=============\n### scope:public\n### version:1.0\n为账户设置备注/Set remark for accounts\n\n参数列表\n----\n| 参数名     |  参数类型  | 参数描述 | 是否非空 |\n| ------- |:------:| ---- |:----:|\n| chainId |  int   | 链id  |  是   |\n| address | string | 账户地址 |  是   |\n| remark  | string | 备注   |  是   |\n\n返回值\n---\n| 字段名   |  字段类型   | 参数描述 |\n| ----- |:-------:| ---- |\n| value | boolean | 是否成功 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "remark",
+        "des": "备注",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "是否成功",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_signDigest",
+    "des": "数据摘要签名/Data digest signature",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_signDigest\n==============\n### scope:public\n### version:1.0\n数据摘要签名/Data digest signature\n\n参数列表\n----\n| 参数名      |  参数类型  | 参数描述  | 是否非空 |\n| -------- |:------:| ----- |:----:|\n| chainId  |  int   | 链id   |  是   |\n| address  | string | 账户地址  |  是   |\n| password | string | 账户密码  |  是   |\n| data     | string | 待签名数据 |  是   |\n\n返回值\n---\n| 字段名       |  字段类型  | 参数描述  |\n| --------- |:------:| ----- |\n| signature | string | 签名后数据 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "password",
+        "des": "账户密码",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "data",
+        "des": "待签名数据",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "signature",
+        "des": "签名后数据",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_getAccountByAddress",
+    "des": "根据地址获取账户/get account according to address",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_getAccountByAddress\n=======================\n### scope:public\n### version:1.0\n根据地址获取账户/get account according to address\n\n参数列表\n----\n| 参数名     |  参数类型  | 参数描述 | 是否非空 |\n| ------- |:------:| ---- |:----:|\n| chainId |  int   | 链id  |  是   |\n| address | string | 账户地址 |  是   |\n\n返回值\n---\n| 字段名                |  字段类型  | 参数描述  |\n| ------------------ |:------:| ----- |\n| address            | string | 账户地址  |\n| alias              | string | 别名    |\n| pubkeyHex          | string | 公钥    |\n| encryptedPrikeyHex | string | 已加密私钥 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "address",
+        "des": "账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "alias",
+        "des": "别名",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "pubkeyHex",
+        "des": "公钥",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "encryptedPrikeyHex",
+        "des": "已加密私钥",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_setOfflineAccountPassword",
+    "des": "设置离线账户密码/Set offline account password",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_setOfflineAccountPassword\n=============================\n### scope:public\n### version:1.0\n设置离线账户密码/Set offline account password\n\n参数列表\n----\n| 参数名      |  参数类型  | 参数描述  | 是否非空 |\n| -------- |:------:| ----- |:----:|\n| chainId  |  int   | 链id   |  是   |\n| address  | string | 账户地址  |  是   |\n| password | string | 账户新密码 |  是   |\n| priKey   | string | 账户私钥  |  是   |\n\n返回值\n---\n| 字段名             |  字段类型  | 参数描述     |\n| --------------- |:------:| -------- |\n| encryptedPriKey | string | 返回加密后的私钥 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "password",
+        "des": "账户新密码",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "priKey",
+        "des": "账户私钥",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "encryptedPriKey",
+        "des": "返回加密后的私钥",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_signBlockDigest",
+    "des": "区块数据摘要签名/Block data digest signature",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_signBlockDigest\n===================\n### scope:public\n### version:1.0\n区块数据摘要签名/Block data digest signature\n\n参数列表\n----\n| 参数名      |  参数类型  | 参数描述  | 是否非空 |\n| -------- |:------:| ----- |:----:|\n| chainId  |  int   | 链id   |  是   |\n| address  | string | 账户地址  |  是   |\n| password | string | 账户密码  |  是   |\n| data     | string | 待签名数据 |  是   |\n\n返回值\n---\n| 字段名       |  字段类型  | 参数描述  |\n| --------- |:------:| ----- |\n| signature | string | 签名后数据 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "password",
+        "des": "账户密码",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "data",
+        "des": "待签名数据",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "signature",
+        "des": "签名后数据",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_createAccount",
+    "des": "创建指定个数的账户/create a specified number of accounts",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_createAccount\n=================\n### scope:public\n### version:1.0\n创建指定个数的账户/create a specified number of accounts\n\n参数列表\n----\n| 参数名      |  参数类型  | 参数描述      | 是否非空 |\n| -------- |:------:| --------- |:----:|\n| chainId  |  int   | 链id       |  是   |\n| count    |  int   | 需要创建账户的数量 |  是   |\n| password | string | 账户密码      |  是   |\n\n返回值\n---\n| 字段名  |      字段类型       | 参数描述      |\n| ---- |:---------------:| --------- |\n| list | list&lt;string> | 创建的账户地址集合 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "count",
+        "des": "需要创建账户的数量",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "password",
+        "des": "账户密码",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "list",
+        "des": "创建的账户地址集合",
+        "type": "list&lt;String>",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_createOfflineAccount",
+    "des": "创建离线账户, 该账户不保存到数据库, 并将直接返回账户的所有信息/create an offline account, which is not saved to the database and will directly return all information to the account.",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_createOfflineAccount\n========================\n### scope:public\n### version:1.0\n创建离线账户, 该账户不保存到数据库, 并将直接返回账户的所有信息/create an offline account, which is not saved to the database and will directly return all information to the account.\n\n参数列表\n----\n| 参数名      |  参数类型  | 参数描述      | 是否非空 |\n| -------- |:------:| --------- |:----:|\n| chainId  |  int   | 链id       |  是   |\n| count    |  int   | 需要创建账户的数量 |  是   |\n| password | string | 账户密码      |  是   |\n\n返回值\n---\n| 字段名                                                             |      字段类型       | 参数描述   |\n| --------------------------------------------------------------- |:---------------:| ------ |\n| list                                                            | list&lt;object> | 离线账户集合 |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address         |     string      | 账户地址   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pubKey          |     string      | 公钥     |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;priKey          |     string      | 私钥     |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;encryptedPriKey |     string      | 加密后的私钥 |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extend          |     string      | 其他信息   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;createTime      |      long       | 创建时间   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;encrypted       |     boolean     | 账户是否加密 |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;remark          |     string      | 账户备注   |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "count",
+        "des": "需要创建账户的数量",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "password",
+        "des": "账户密码",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "list",
+        "des": "离线账户集合",
+        "type": "list&lt;object>",
+        "list": [
+          {
+            "name": "address",
+            "des": "账户地址",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "pubKey",
+            "des": "公钥",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "priKey",
+            "des": "私钥",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "encryptedPriKey",
+            "des": "加密后的私钥",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "extend",
+            "des": "其他信息",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "createTime",
+            "des": "创建时间",
+            "type": "long",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "encrypted",
+            "des": "账户是否加密",
+            "type": "boolean",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "remark",
+            "des": "账户备注",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_createContractAccount",
+    "des": "创建智能合约账户/create smart contract account",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_createContractAccount\n=========================\n### scope:public\n### version:1.0\n创建智能合约账户/create smart contract account\n\n参数列表\n----\n| 参数名     | 参数类型 | 参数描述 | 是否非空 |\n| ------- |:----:| ---- |:----:|\n| chainId | int  | 链id  |  是   |\n\n返回值\n---\n| 字段名     |  字段类型  | 参数描述   |\n| ------- |:------:| ------ |\n| address | string | 智能合约地址 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "address",
+        "des": "智能合约地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_getUnencryptedAddressList",
+    "des": "获取本地未加密账户列表/Get a list of local unencrypted accounts",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_getUnencryptedAddressList\n=============================\n### scope:public\n### version:1.0\n获取本地未加密账户列表/Get a list of local unencrypted accounts\n\n参数列表\n----\n| 参数名     | 参数类型 | 参数描述 | 是否非空 |\n| ------- |:----:| ---- |:----:|\n| chainId | int  | 链id  |  是   |\n\n返回值\n---\n| 字段名  |      字段类型       | 参数描述     |\n| ---- |:---------------:| -------- |\n| list | list&lt;string> | 返回账户地址集合 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "list",
+        "des": "返回账户地址集合",
+        "type": "list&lt;String>",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_getEncryptedAddressList",
+    "des": "获取本地加密账户列表/Get a list of locally encrypted accounts",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_getEncryptedAddressList\n===========================\n### scope:public\n### version:1.0\n获取本地加密账户列表/Get a list of locally encrypted accounts\n\n参数列表\n----\n| 参数名     | 参数类型 | 参数描述 | 是否非空 |\n| ------- |:----:| ---- |:----:|\n| chainId | int  | 链id  |  是   |\n\n返回值\n---\n| 字段名  |      字段类型       | 参数描述     |\n| ---- |:---------------:| -------- |\n| list | list&lt;string> | 返回账户地址集合 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "list",
+        "des": "返回账户地址集合",
+        "type": "list&lt;String>",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_getAddressList",
+    "des": "分页查询账户地址列表/Paging query account address list",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_getAddressList\n==================\n### scope:public\n### version:1.0\n分页查询账户地址列表/Paging query account address list\n\n参数列表\n----\n| 参数名        | 参数类型 | 参数描述   | 是否非空 |\n| ---------- |:----:| ------ |:----:|\n| chainId    | int  | 链id    |  是   |\n| pageNumber | int  | 页码     |  是   |\n| pageSize   | int  | 每一页记录数 |  是   |\n\n返回值\n---\n| 字段名 |      字段类型       | 参数描述            |\n| --- |:---------------:| --------------- |\n| 返回值 | list&lt;string> | 返回一个Page对象，账户集合 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "pageNumber",
+        "des": "页码",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "pageSize",
+        "des": "每一页记录数",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "返回值",
+        "des": "返回一个Page对象，账户集合",
+        "type": "list&lt;String>",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_getPriKeyByAddress",
+    "des": "根据地址查询账户私匙,只返回加密账户私钥，未加密账户不返回/Inquire the account's private key according to the address",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_getPriKeyByAddress\n======================\n### scope:public\n### version:1.0\n根据地址查询账户私匙,只返回加密账户私钥，未加密账户不返回/Inquire the account's private key according to the address\n\n参数列表\n----\n| 参数名      |  参数类型  | 参数描述 | 是否非空 |\n| -------- |:------:| ---- |:----:|\n| chainId  |  int   | 链id  |  是   |\n| address  | string | 账户地址 |  是   |\n| password | string | 账户密码 |  是   |\n\n返回值\n---\n| 字段名    |  字段类型   | 参数描述   |\n| ------ |:-------:| ------ |\n| priKey | boolean | 私钥     |\n| valid  | boolean | 账户是否存在 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "password",
+        "des": "账户密码",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "priKey",
+        "des": "私钥",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "valid",
+        "des": "账户是否存在",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_getAllPriKey",
+    "des": "获取所有本地账户账户私钥，必须保证所有账户密码一致，如果本地账户中的密码不一致，将返回错误信息/Get the all local private keys. if the password in the local account is different, the error message will be returned.",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_getAllPriKey\n================\n### scope:public\n### version:1.0\n获取所有本地账户账户私钥，必须保证所有账户密码一致，如果本地账户中的密码不一致，将返回错误信息/Get the all local private keys. if the password in the local account is different, the error message will be returned.\n\n参数列表\n----\n| 参数名      |  参数类型  | 参数描述 | 是否非空 |\n| -------- |:------:| ---- |:----:|\n| chainId  |  int   | 链id  |  是   |\n| password | string | 账户密码 |  是   |\n\n返回值\n---\n| 字段名  |      字段类型       | 参数描述 |\n| ---- |:---------------:| ---- |\n| list | list&lt;string> | 私钥集合 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "password",
+        "des": "账户密码",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "list",
+        "des": "私钥集合",
+        "type": "list&lt;String>",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_importAccountByPriKey",
+    "des": "根据私钥导入账户/Import accounts by private key",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_importAccountByPriKey\n=========================\n### scope:public\n### version:1.0\n根据私钥导入账户/Import accounts by private key\n\n参数列表\n----\n| 参数名       |  参数类型   | 参数描述         | 是否非空 |\n| --------- |:-------:| ------------ |:----:|\n| chainId   |   int   | 链id          |  是   |\n| password  | string  | 设置新密码        |  是   |\n| priKey    | string  | 账户私钥         |  是   |\n| overwrite | boolean | 如果账户已存在,是否覆盖 |  是   |\n\n返回值\n---\n| 字段名     |  字段类型  | 参数描述    |\n| ------- |:------:| ------- |\n| address | string | 导入的账户地址 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "password",
+        "des": "设置新密码",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "priKey",
+        "des": "账户私钥",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "overwrite",
+        "des": "如果账户已存在,是否覆盖",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "address",
+        "des": "导入的账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_importAccountByKeystore",
+    "des": "根据AccountKeyStore导入账户/Import accounts by AccountKeyStore",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_importAccountByKeystore\n===========================\n### scope:public\n### version:1.0\n根据AccountKeyStore导入账户/Import accounts by AccountKeyStore\n\n参数列表\n----\n| 参数名       |  参数类型   | 参数描述         | 是否非空 |\n| --------- |:-------:| ------------ |:----:|\n| chainId   |   int   | 链id          |  是   |\n| password  | string  | 设置新密码        |  是   |\n| keyStore  | string  | keyStore字符串  |  是   |\n| overwrite | boolean | 如果账户已存在,是否覆盖 |  是   |\n\n返回值\n---\n| 字段名     |  字段类型  | 参数描述    |\n| ------- |:------:| ------- |\n| address | string | 导入的账户地址 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "password",
+        "des": "设置新密码",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "keyStore",
+        "des": "keyStore字符串",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "overwrite",
+        "des": "如果账户已存在,是否覆盖",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "address",
+        "des": "导入的账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_exportAccountKeyStore",
+    "des": "账户备份，导出AccountKeyStore字符串/export account KeyStore",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_exportAccountKeyStore\n=========================\n### scope:public\n### version:1.0\n账户备份，导出AccountKeyStore字符串/export account KeyStore\n\n参数列表\n----\n| 参数名      |  参数类型  | 参数描述 | 是否非空 |\n| -------- |:------:| ---- |:----:|\n| chainId  |  int   | 链id  |  是   |\n| address  | string | 账户地址 |  是   |\n| password | string | 账户密码 |  是   |\n| filePath | string | 备份地址 |  是   |\n\n返回值\n---\n| 字段名  |  字段类型  | 参数描述      |\n| ---- |:------:| --------- |\n| path | string | 实际备份文件的地址 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "password",
+        "des": "账户密码",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "filePath",
+        "des": "备份地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "path",
+        "des": "实际备份文件的地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_updatePassword",
+    "des": "根据原密码修改账户密码/Modify the account password by the original password",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_updatePassword\n==================\n### scope:public\n### version:1.0\n根据原密码修改账户密码/Modify the account password by the original password\n\n参数列表\n----\n| 参数名         |  参数类型  | 参数描述  | 是否非空 |\n| ----------- |:------:| ----- |:----:|\n| chainId     |  int   | 链id   |  是   |\n| address     | string | 账户地址  |  是   |\n| password    | string | 账户旧密码 |  是   |\n| newPassword | string | 账户新密码 |  是   |\n\n返回值\n---\n| 字段名   |  字段类型   | 参数描述   |\n| ----- |:-------:| ------ |\n| value | boolean | 是否设置成功 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "password",
+        "des": "账户旧密码",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "newPassword",
+        "des": "账户新密码",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "是否设置成功",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_updateOfflineAccountPassword",
+    "des": "离线账户修改密码/Offline account change password",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_updateOfflineAccountPassword\n================================\n### scope:public\n### version:1.0\n离线账户修改密码/Offline account change password\n\n参数列表\n----\n| 参数名         |  参数类型  | 参数描述  | 是否非空 |\n| ----------- |:------:| ----- |:----:|\n| chainId     |  int   | 链id   |  是   |\n| address     | string | 账户地址  |  是   |\n| password    | string | 账户旧密码 |  是   |\n| newPassword | string | 账户新密码 |  是   |\n| priKey      | string | 账户私钥  |  是   |\n\n返回值\n---\n| 字段名             |  字段类型  | 参数描述       |\n| --------------- |:------:| ---------- |\n| encryptedPriKey | string | 返回修改后加密的私钥 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "password",
+        "des": "账户旧密码",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "newPassword",
+        "des": "账户新密码",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "priKey",
+        "des": "账户私钥",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "encryptedPriKey",
+        "des": "返回修改后加密的私钥",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_validationPassword",
+    "des": "验证账户密码是否正确/Verify that the account password is correct",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_validationPassword\n======================\n### scope:public\n### version:1.0\n验证账户密码是否正确/Verify that the account password is correct\n\n参数列表\n----\n| 参数名      |  参数类型  | 参数描述 | 是否非空 |\n| -------- |:------:| ---- |:----:|\n| chainId  |  int   | 链id  |  是   |\n| address  | string | 账户地址 |  是   |\n| password | string | 账户密码 |  是   |\n\n返回值\n---\n| 字段名   |  字段类型   | 参数描述     |\n| ----- |:-------:| -------- |\n| value | boolean | 账户密码是否正确 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "password",
+        "des": "账户密码",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "账户密码是否正确",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_verifySignData",
+    "des": "验证数据签名/Verification Data Signature",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_verifySignData\n==================\n### scope:public\n### version:1.0\n验证数据签名/Verification Data Signature\n\n参数列表\n----\n| 参数名    |  参数类型  | 参数描述  | 是否非空 |\n| ------ |:------:| ----- |:----:|\n| pubKey | string | 账户公钥  |  是   |\n| sig    | string | 签名    |  是   |\n| data   | string | 待签名数据 |  是   |\n\n返回值\n---\n| 字段名       |  字段类型   | 参数描述   |\n| --------- |:-------:| ------ |\n| signature | boolean | 签名是否正确 |\n\n",
+    "parameters": [
+      {
+        "name": "pubKey",
+        "des": "账户公钥",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "sig",
+        "des": "签名",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "data",
+        "des": "待签名数据",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "signature",
+        "des": "签名是否正确",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_removeAccount",
+    "des": "移除指定账户/Remove specified account",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_removeAccount\n=================\n### scope:public\n### version:1.0\n移除指定账户/Remove specified account\n\n参数列表\n----\n| 参数名      |  参数类型  | 参数描述 | 是否非空 |\n| -------- |:------:| ---- |:----:|\n| chainId  |  int   | 链id  |  是   |\n| address  | string | 账户地址 |  是   |\n| password | string | 账户密码 |  是   |\n\n返回值\n---\n| 字段名   |  字段类型   | 参数描述 |\n| ----- |:-------:| ---- |\n| value | boolean | 是否成功 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "password",
+        "des": "账户密码",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "是否成功",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_getAccountList",
+    "des": "获取所有账户集合,并放入缓存/query all account collections and put them in cache",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_getAccountList\n==================\n### scope:public\n### version:1.0\n获取所有账户集合,并放入缓存/query all account collections and put them in cache\n\n参数列表\n----\n| 参数名     | 参数类型 | 参数描述 | 是否非空 |\n| ------- |:----:| ---- |:----:|\n| chainId | int  | 链id  |  是   |\n\n返回值\n---\n| 字段名                                                                |      字段类型       | 参数描述   |\n| ------------------------------------------------------------------ |:---------------:| ------ |\n| list                                                               | list&lt;object> | 返回账户集合 |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address            |     string      | 账户地址   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alias              |     string      | 别名     |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pubkeyHex          |     string      | 公钥     |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;encryptedPrikeyHex |     string      | 已加密私钥  |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "list",
+        "des": "返回账户集合",
+        "type": "list&lt;object>",
+        "list": [
+          {
+            "name": "address",
+            "des": "账户地址",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "alias",
+            "des": "别名",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "pubkeyHex",
+            "des": "公钥",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "encryptedPrikeyHex",
+            "des": "已加密私钥",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_getAliasByAddress",
+    "des": "根据地址获取别名/get the alias by address",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_getAliasByAddress\n=====================\n### scope:public\n### version:1.0\n根据地址获取别名/get the alias by address\n\n参数列表\n----\n| 参数名     |  参数类型  | 参数描述 | 是否非空 |\n| ------- |:------:| ---- |:----:|\n| chainId |  int   | 链id  |  是   |\n| address | string | 账户地址 |  是   |\n\n返回值\n---\n| 字段名   |  字段类型  | 参数描述 |\n| ----- |:------:| ---- |\n| alias | string | 别名   |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "alias",
+        "des": "别名",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_setAlias",
+    "des": "设置别名/Set the alias of account",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_setAlias\n============\n### scope:public\n### version:1.0\n设置别名/Set the alias of account\n\n参数列表\n----\n| 参数名      |  参数类型  | 参数描述 | 是否非空 |\n| -------- |:------:| ---- |:----:|\n| chainId  |  int   | 链id  |  是   |\n| address  | string | 账户地址 |  是   |\n| password | string | 账户密码 |  是   |\n| alias    | string | 别名   |  是   |\n\n返回值\n---\n| 字段名    |  字段类型  | 参数描述       |\n| ------ |:------:| ---------- |\n| txHash | string | 设置别名交易hash |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "password",
+        "des": "账户密码",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "alias",
+        "des": "别名",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "txHash",
+        "des": "设置别名交易hash",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_isAliasUsable",
+    "des": "检查别名是否可用/check whether the account is usable",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_isAliasUsable\n=================\n### scope:public\n### version:1.0\n检查别名是否可用/check whether the account is usable\n\n参数列表\n----\n| 参数名     |  参数类型  | 参数描述 | 是否非空 |\n| ------- |:------:| ---- |:----:|\n| chainId |  int   | 链id  |  是   |\n| alias   | string | 别名   |  是   |\n\n返回值\n---\n| 字段名   |  字段类型   | 参数描述     |\n| ----- |:-------:| -------- |\n| value | boolean | 别名是否可以使用 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "alias",
+        "des": "别名",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "别名是否可以使用",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_transfer",
+    "des": "创建转账交易/create transfer transaction",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_transfer\n============\n### scope:public\n### version:1.0\n创建转账交易/create transfer transaction\n\n参数列表\n----\n| 参数名                                                           |    参数类型    | 参数描述           | 是否非空 |\n| ------------------------------------------------------------- |:----------:| -------------- |:----:|\n| chainId                                                       |    int     | 链id            |  是   |\n| inputs                                                        |    list    | 交易支付方数据        |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address       |   string   | 账户地址           |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assetsChainId |  integer   | 资产的链ID         |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assetsId      |  integer   | 资产ID           |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;amount        | biginteger | 数量             |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password      |   string   | 转出账户的密码, 接收方忽略 |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lockTime      |    long    | 解锁时间, -1为一直锁定  |  是   |\n| outputs                                                       |    list    | 交易接受方数据        |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address       |   string   | 账户地址           |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assetsChainId |  integer   | 资产的链ID         |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assetsId      |  integer   | 资产ID           |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;amount        | biginteger | 数量             |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password      |   string   | 转出账户的密码, 接收方忽略 |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lockTime      |    long    | 解锁时间, -1为一直锁定  |  是   |\n| remark                                                        |   string   | 交易备注           |  是   |\n\n返回值\n---\n| 字段名   |  字段类型  | 参数描述   |\n| ----- |:------:| ------ |\n| value | string | 交易hash |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "inputs",
+        "des": "交易支付方数据",
+        "type": "list",
+        "list": [
+          {
+            "name": "address",
+            "des": "账户地址",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "assetsChainId",
+            "des": "资产的链ID",
+            "type": "integer",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "assetsId",
+            "des": "资产ID",
+            "type": "integer",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "amount",
+            "des": "数量",
+            "type": "biginteger",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "password",
+            "des": "转出账户的密码, 接收方忽略",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "lockTime",
+            "des": "解锁时间, -1为一直锁定",
+            "type": "long",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      },
+      {
+        "name": "outputs",
+        "des": "交易接受方数据",
+        "type": "list",
+        "list": [
+          {
+            "name": "address",
+            "des": "账户地址",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "assetsChainId",
+            "des": "资产的链ID",
+            "type": "integer",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "assetsId",
+            "des": "资产ID",
+            "type": "integer",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "amount",
+            "des": "数量",
+            "type": "biginteger",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "password",
+            "des": "转出账户的密码, 接收方忽略",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "lockTime",
+            "des": "解锁时间, -1为一直锁定",
+            "type": "long",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      },
+      {
+        "name": "remark",
+        "des": "交易备注",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "交易hash",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_createMultiSignTransfer",
+    "des": "创建多签地址转账交易/create multi sign transfer",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_createMultiSignTransfer\n===========================\n### scope:public\n### version:1.0\n创建多签地址转账交易/create multi sign transfer\n\n参数列表\n----\n| 参数名                                                           |    参数类型    | 参数描述           | 是否非空 |\n| ------------------------------------------------------------- |:----------:| -------------- |:----:|\n| chainId                                                       |    int     | 链id            |  是   |\n| inputs                                                        |    list    | 交易支付方数据        |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address       |   string   | 账户地址           |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assetsChainId |  integer   | 资产的链ID         |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assetsId      |  integer   | 资产ID           |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;amount        | biginteger | 数量             |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password      |   string   | 转出账户的密码, 接收方忽略 |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lockTime      |    long    | 解锁时间, -1为一直锁定  |  是   |\n| outputs                                                       |    list    | 交易接受方数据        |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address       |   string   | 账户地址           |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assetsChainId |  integer   | 资产的链ID         |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assetsId      |  integer   | 资产ID           |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;amount        | biginteger | 数量             |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password      |   string   | 转出账户的密码, 接收方忽略 |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lockTime      |    long    | 解锁时间, -1为一直锁定  |  是   |\n| remark                                                        |   string   | 交易备注           |  是   |\n| signAddress                                                   |   string   | 第一个签名账户地址      |  是   |\n| password                                                      |   string   | 第一个签名账户密码      |  是   |\n\n返回值\n---\n| 字段名       |  字段类型   | 参数描述                                  |\n| --------- |:-------:| ------------------------------------- |\n| tx        | string  | 完整交易序列化字符串,如果交易没达到最小签名数可继续签名(没有广播)    |\n| txhash    | string  | 交易hash,交易已完成(已广播)                     |\n| completed | boolean | true:交易已完成(已广播),false:交易没完成,没有达到最小签名数 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "inputs",
+        "des": "交易支付方数据",
+        "type": "list",
+        "list": [
+          {
+            "name": "address",
+            "des": "账户地址",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "assetsChainId",
+            "des": "资产的链ID",
+            "type": "integer",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "assetsId",
+            "des": "资产ID",
+            "type": "integer",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "amount",
+            "des": "数量",
+            "type": "biginteger",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "password",
+            "des": "转出账户的密码, 接收方忽略",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "lockTime",
+            "des": "解锁时间, -1为一直锁定",
+            "type": "long",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      },
+      {
+        "name": "outputs",
+        "des": "交易接受方数据",
+        "type": "list",
+        "list": [
+          {
+            "name": "address",
+            "des": "账户地址",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "assetsChainId",
+            "des": "资产的链ID",
+            "type": "integer",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "assetsId",
+            "des": "资产ID",
+            "type": "integer",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "amount",
+            "des": "数量",
+            "type": "biginteger",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "password",
+            "des": "转出账户的密码, 接收方忽略",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "lockTime",
+            "des": "解锁时间, -1为一直锁定",
+            "type": "long",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      },
+      {
+        "name": "remark",
+        "des": "交易备注",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "signAddress",
+        "des": "第一个签名账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "password",
+        "des": "第一个签名账户密码",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "tx",
+        "des": "完整交易序列化字符串,如果交易没达到最小签名数可继续签名(没有广播)",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "txhash",
+        "des": "交易hash,交易已完成(已广播)",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "completed",
+        "des": "true:交易已完成(已广播),false:交易没完成,没有达到最小签名数",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_signMultiSignTransaction",
+    "des": "多签交易签名/sign MultiSign Transaction",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_signMultiSignTransaction\n============================\n### scope:public\n### version:1.0\n多签交易签名/sign MultiSign Transaction\n\n参数列表\n----\n| 参数名         |  参数类型  | 参数描述    | 是否非空 |\n| ----------- |:------:| ------- |:----:|\n| chainId     |  int   | 链id     |  是   |\n| tx          | string | 交易数据字符串 |  是   |\n| signAddress | string | 签名账户地址  |  是   |\n| password    | string | 签名账户密码  |  是   |\n\n返回值\n---\n| 字段名       |  字段类型   | 参数描述                                  |\n| --------- |:-------:| ------------------------------------- |\n| tx        | string  | 完整交易序列化字符串,如果交易没达到最小签名数可继续签名(没有广播)    |\n| txhash    | string  | 交易hash,交易已完成(已广播)                     |\n| completed | boolean | true:交易已完成(已广播),false:交易没完成,没有达到最小签名数 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "tx",
+        "des": "交易数据字符串",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "signAddress",
+        "des": "签名账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "password",
+        "des": "签名账户密码",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "tx",
+        "des": "完整交易序列化字符串,如果交易没达到最小签名数可继续签名(没有广播)",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "txhash",
+        "des": "交易hash,交易已完成(已广播)",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "completed",
+        "des": "true:交易已完成(已广播),false:交易没完成,没有达到最小签名数",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_createMultiSigAccount",
+    "des": "创建多签账户/create a multi sign account",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_createMultiSigAccount\n=========================\n### scope:public\n### version:1.0\n创建多签账户/create a multi sign account\n\n参数列表\n----\n| 参数名                                                     |      参数类型       | 参数描述  | 是否非空 |\n| ------------------------------------------------------- |:---------------:| ----- |:----:|\n| chainId                                                 |       int       | 链id   |  是   |\n| pubKeys                                                 |      list       | 公钥集合  |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pubKeys | list&lt;string> | 公钥集合  |  是   |\n| minSigns                                                |       int       | 最小签名数 |  是   |\n\n返回值\n---\n| 字段名     |  字段类型  | 参数描述   |\n| ------- |:------:| ------ |\n| address | string | 多签账户地址 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "pubKeys",
+        "des": "公钥集合",
+        "type": "list",
+        "list": [
+          {
+            "name": "pubKeys",
+            "des": "公钥集合",
+            "type": "list&lt;String>",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      },
+      {
+        "name": "minSigns",
+        "des": "最小签名数",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "address",
+        "des": "多签账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_importMultiSigAccount",
+    "des": "导入多签账户/Inport a multi sign account",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_importMultiSigAccount\n=========================\n### scope:public\n### version:1.0\n导入多签账户/Inport a multi sign account\n\n参数列表\n----\n| 参数名                                                     |      参数类型       | 参数描述   | 是否非空 |\n| ------------------------------------------------------- |:---------------:| ------ |:----:|\n| chainId                                                 |       int       | 链id    |  是   |\n| address                                                 |     string      | 多签账户地址 |  是   |\n| pubKeys                                                 |      list       | 公钥集合   |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pubKeys | list&lt;string> | 公钥集合   |  是   |\n| minSigns                                                |       int       | 最小签名数  |  是   |\n\n返回值\n---\n| 字段名     |  字段类型  | 参数描述   |\n| ------- |:------:| ------ |\n| address | string | 多签账户地址 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "多签账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "pubKeys",
+        "des": "公钥集合",
+        "type": "list",
+        "list": [
+          {
+            "name": "pubKeys",
+            "des": "公钥集合",
+            "type": "list&lt;String>",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      },
+      {
+        "name": "minSigns",
+        "des": "最小签名数",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "address",
+        "des": "多签账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_removeMultiSigAccount",
+    "des": "移除多签账户/remove the multi sign account",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_removeMultiSigAccount\n=========================\n### scope:public\n### version:1.0\n移除多签账户/remove the multi sign account\n\n参数列表\n----\n| 参数名     |  参数类型  | 参数描述   | 是否非空 |\n| ------- |:------:| ------ |:----:|\n| chainId |  int   | 链id    |  是   |\n| address | string | 多签账户地址 |  是   |\n\n返回值\n---\n| 字段名   |  字段类型   | 参数描述   |\n| ----- |:-------:| ------ |\n| value | boolean | 是否移除成功 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "多签账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "是否移除成功",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_setMultiSigAlias",
+    "des": "设置多签账户别名,默认签第一个名/set the alias of multi sign account",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_setMultiSigAlias\n====================\n### scope:public\n### version:1.0\n设置多签账户别名,默认签第一个名/set the alias of multi sign account\n\n参数列表\n----\n| 参数名         |  参数类型  | 参数描述      | 是否非空 |\n| ----------- |:------:| --------- |:----:|\n| chainId     |  int   | 链id       |  是   |\n| address     | string | 多签账户地址    |  是   |\n| alias       | string | 别名        |  是   |\n| signAddress | string | 第一个签名账户地址 |  是   |\n| password    | string | 第一个签名账户密码 |  是   |\n\n返回值\n---\n| 字段名       |  字段类型   | 参数描述                                  |\n| --------- |:-------:| ------------------------------------- |\n| tx        | string  | 完整交易序列化字符串,如果交易没达到最小签名数可继续签名(没有广播)    |\n| txhash    | string  | 交易hash,交易已完成(已广播)                     |\n| completed | boolean | true:交易已完成(已广播),false:交易没完成,没有达到最小签名数 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "多签账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "alias",
+        "des": "别名",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "signAddress",
+        "des": "第一个签名账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "password",
+        "des": "第一个签名账户密码",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "tx",
+        "des": "完整交易序列化字符串,如果交易没达到最小签名数可继续签名(没有广播)",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "txhash",
+        "des": "交易hash,交易已完成(已广播)",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "completed",
+        "des": "true:交易已完成(已广播),false:交易没完成,没有达到最小签名数",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "ac_getMultiSigAccount",
+    "des": "根据地址获取多签地址/Search for multi-signature accounts by address",
+    "scope": "public",
+    "version": 1.0,
+    "md": "ac\\_getMultiSigAccount\n======================\n### scope:public\n### version:1.0\n根据地址获取多签地址/Search for multi-signature accounts by address\n\n参数列表\n----\n| 参数名     |  参数类型  | 参数描述   | 是否非空 |\n| ------- |:------:| ------ |:----:|\n| chainId |  int   | 链id    |  是   |\n| address | string | 多签账户地址 |  是   |\n\n返回值\n---\n| 字段名   |  字段类型  | 参数描述         |\n| ----- |:------:| ------------ |\n| value | string | 多签账户序列化数据字符串 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "多签账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "多签账户序列化数据字符串",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  }
+]

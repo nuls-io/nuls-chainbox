@@ -5,15 +5,13 @@ NULS引擎操作入口，提供获取程序、集成打包等操作。[命令参
 文档列表
 ## example
 基于java模块模板开发的一个加密邮件的示例模块程序源码。
-## template
-存储目前支持的语言的模板列表
 # 准备开发环境
 1. 暂时只支持macOS,centos,ubuntu等linux内核的操作系统。
 2. NULS引擎会通过git命令在github.com上拉取代码，需要提前安装git客户端程序。
 3. NULS2.0是基于JAVA语言开发，要运行NULS2.0节点需要安装JDK，目前依赖的JDK版本是jdk-11.0.2
 
 # 获取NULS2.0运行环境
-NULS2.0运行环境包含一套最基础的区块链程序，里面包含了账户、账本、区块、网络、交易、共识（poc）6大核心模块。运行NULS2.0基础运行环境你可以得到包含账户模型、转账交易、POC共识激励等区块链底层的核心功能。如果只想发一条简单的转账交易的链，修改一下配置文件就完成了（完整的配置列表）。你可以在基础环境中集成自己的业务模块，通过扩展一个新的交易类型的方式完成自己的业务，在下面一个段落中我会详细介绍如何构建自己的业务。
+NULS2.0运行环境包含一套最基础的区块链程序，里面包含了账户、账本、区块、网络、交易、共识（poc）6大核心模块。运行NULS2.0基础运行环境你可以得到包含账户模型、转账交易、POC共识激励等区块链底层的核心功能。如果只想发一条简单的转账交易的链，通过修改配置文件就可以完成（[完整的配置列表](https://github.com/nuls-io/nuls-v2/blob/develop/useguide.md#nulsncf-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6)）。你可以在基础环境中集成自己的业务模块，通过扩展一个新的交易类型的方式完成自己的业务，在下面一个段落中我会详细介绍如何构建自己的业务。
 
 使用tools脚本获取NULS2.0运行环境
 
@@ -27,9 +25,9 @@ NULS2.0运行环境包含一套最基础的区块链程序，里面包含了账�
 ============ ~/nuls-engine/NULS-WALLET-RUNTIME PACKAGE FINISH 🍺🍺🍺🎉🎉🎉 ===============
 ```
 ## NULS-WALLET-RUNTIME目录结构
-### start-mykernel
+### start-dev
 启动节点
-### stop-mykernel
+### stop-dev
 停止节点
 ### check-status 
 检查各个模块运行状态
@@ -38,8 +36,8 @@ NULS2.0运行环境包含一套最基础的区块链程序，里面包含了账�
 ### create-address
 创建地址工具
 ### nuls.ncf
-配置文件（首次运行start-mykernel脚本后创建）
-#### 更多使用方法参考（NULS2.0钱包使用手册）
+配置文件（首次运行start-dev脚本后创建）
+#### 更多使用方法参考（[NULS2.0钱包使用手册](https://github.com/nuls-io/nuls-v2/blob/develop/useguide.md)）
 ## 如何开发自己的模块
 NULS2.0是用JAVA语言编写的分布式微服务架构的程序，整个节点程序由多个模块组成，每个模块之间通过websocket协议通信。NULS2.0定义了一套标准的[模块通信协议](https://github.com/nuls-io/nuls-v2-docs/blob/master/design-zh-CHS/r.rpc-tool-websocket%E8%AE%BE%E8%AE%A1v1.3.md)，可以通过各种开发语言实现此标准协议与其他模块通信，进而实现自己的业务逻辑。扩展自己的业务逻辑主要是通过扩展新的交易类型实现，在交易的txData中存储自己的业务数据，txData将跟随交易存储在链上。
 ### 创建交易流程
@@ -212,6 +210,11 @@ BlockHeader为区块头对象，主要存储前一块的hash值、[merkle tree](
 1. 1个byte存储公钥长度。
 2. 公钥数据（长度根据1中获取）
 3. 变长类型存储签名数据。
+
+##### 变长类型存储结构
+变长类型由2部分组成，第一部分为varint类型存储数据所占byte位的长度，第二部分为数据部分。读取变长类型结构的方式是先读取varint数据，冉读取对应长度的业务数据。
+1. [varint](https://learnmeabitcoin.com/glossary/varint)类型存储数据byte数组长度。
+2. 将业务数据转换成byte数组存储进去。
 
 
 

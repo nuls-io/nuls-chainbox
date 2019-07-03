@@ -56,3 +56,6 @@ build/tmp
 target
 *.iml
 logs
+log
+www
+bin

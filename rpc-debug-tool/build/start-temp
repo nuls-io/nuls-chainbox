@@ -66,25 +66,25 @@ log(){
     echo "${now}    $@" >> ${STDOUT_FILE}
     echoGreen "$@"
 }
-#获取参数
-if [ ! -n "$1" ]; then 
-    echo "args is error" 
-    exit 0;
-fi
-
-while [ ! -z $1 ] ; do
-    case "$1" in
-        "--jre") 
-            #log "jre path : $2"
-            JAVA_HOME=$2
-            shift 2 ;;
-        "--managerurl") 
-            #log "NulstarUrl is : $2"; 
-            NulstarUrl=$2;    
-            shift 2 ;;
-        * ) shift
-    esac
-done  
+##获取参数
+#if [ ! -n "$1" ]; then
+#    echo "args is error"
+#    exit 0;
+#fi
+#
+#while [ ! -z $1 ] ; do
+#    case "$1" in
+#        "--jre")
+#            #log "jre path : $2"
+#            JAVA_HOME=$2
+#            shift 2 ;;
+#        "--managerurl")
+#            #log "NulstarUrl is : $2";
+#            NulstarUrl=$2;
+#            shift 2 ;;
+#        * ) shift
+#    esac
+#done
 
 if [ ! -d $LOGS_DIR ]; then
     mkdir $LOGS_DIR
@@ -145,12 +145,12 @@ JAVA_OOM_DUMP="-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=${LOGS_DIR}/oom-
 JAVA_OPTS="$JAVA_OPTS $JAVA_GC_LOG $JAVA_OOM_DUMP  -Dapp.name=$APP_NAME "
 echo "${JAVA} ${JAVA_OPTS} ${CLASSPATH} ${MAIN_CLASS} ${NulstarUrl}"
 CMD="${JAVA} ${JAVA_OPTS} ${CLASSPATH} ${MAIN_CLASS} ${NulstarUrl} "
-CMD="${CMD} > ${STDOUT_FILE}"
-CMD="$CMD 2>&1 & ";
+#CMD="${CMD} > ${STDOUT_FILE}"
+#CMD="$CMD 2>&1 & ";
 eval $CMD
 #nohup ${JAVA} ${JAVA_OPTS} ${CLASSPATH} ${MAIN_CLASS} ${NulstarUrl} > ${STDOUT_FILE} 2>&1 &
 
-log "${APP_NAME} IS STARTING \n ${APP_NAME} START CMD: $CMD  \n ${APP_NAME} 日志文件: ${STDOUT_FILE}"
+#log "${APP_NAME} IS STARTING \n ${APP_NAME} START CMD: $CMD  \n ${APP_NAME} 日志文件: ${STDOUT_FILE}"
 # echo "${APP_NAME} start cmd:" $'\e[0;31m'${JAVA} ${JAVA_OPTS} ${CLASSPATH} ${MAIN_CLASS} ${NulstarUrl}$'\e[0m'
 # echo "${APP_NAME} 日志文件: " $'\e[0;31m'${STDOUT_FILE}$'\e[0m'
 

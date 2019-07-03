@@ -3,6 +3,7 @@ package io.nuls;
 import io.nuls.controller.WebServerManager;
 import io.nuls.core.core.annotation.Autowired;
 import io.nuls.core.core.annotation.Component;
+import io.nuls.core.log.Log;
 import io.nuls.core.rpc.model.ModuleE;
 import io.nuls.core.rpc.modulebootstrap.Module;
 import io.nuls.core.rpc.modulebootstrap.RpcModuleState;
@@ -28,6 +29,9 @@ public class MyModule {
     public RpcModuleState startModule(String moduleName){
         //注册交易
         WebServerManager.getInstance().startServer("0.0.0.0", 1999);
+        Log.info("=".repeat(100));
+        Log.info("http://localhost:1999/");
+        Log.info("=".repeat(100));
         return RpcModuleState.Running;
     }
 

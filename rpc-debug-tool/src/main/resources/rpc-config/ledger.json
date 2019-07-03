@@ -1,0 +1,750 @@
+[
+  {
+    "cmdName": "blockValidate",
+    "des": "整区块入账校验",
+    "scope": "public",
+    "version": 1.0,
+    "md": "blockValidate\n=============\n### scope:public\n### version:1.0\n整区块入账校验\n\n参数列表\n----\n| 参数名                                                    |      参数类型       | 参数描述                 | 是否非空 |\n| ------------------------------------------------------ |:---------------:| -------------------- |:----:|\n| chainId                                                |       int       | 运行的链Id,取值区间[1-65535] |  是   |\n| txList                                                 |      list       | []交易Hex值列表           |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;txList | list&lt;string> | []交易Hex值列表           |  是   |\n| blockHeight                                            |      long       | 区块高度                 |  是   |\n\n返回值\n---\n| 字段名   |  字段类型   | 参数描述               |\n| ----- |:-------:| ------------------ |\n| value | boolean | true处理成功，false处理失败 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "运行的链Id,取值区间[1-65535]",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "txList",
+        "des": "[]交易Hex值列表",
+        "type": "list",
+        "list": [
+          {
+            "name": "txList",
+            "des": "[]交易Hex值列表",
+            "type": "list&lt;String>",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      },
+      {
+        "name": "blockHeight",
+        "des": "区块高度",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "true处理成功，false处理失败",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "verifyCoinData",
+    "des": "未确认交易校验",
+    "scope": "public",
+    "version": 1.0,
+    "md": "verifyCoinData\n==============\n### scope:public\n### version:1.0\n未确认交易校验\n\n参数列表\n----\n| 参数名     |  参数类型  | 参数描述                 | 是否非空 |\n| ------- |:------:| -------------------- |:----:|\n| chainId |  int   | 运行的链Id,取值区间[1-65535] |  是   |\n| tx      | string | 交易Hex值               |  是   |\n\n返回值\n---\n| 字段名    |  字段类型   | 参数描述            |\n| ------ |:-------:| --------------- |\n| orphan | boolean | true孤儿，false非孤儿 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "运行的链Id,取值区间[1-65535]",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "tx",
+        "des": "交易Hex值",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "orphan",
+        "des": "true孤儿，false非孤儿",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "rollbackTxValidateStatus",
+    "des": "回滚打包校验状态",
+    "scope": "public",
+    "version": 1.0,
+    "md": "rollbackTxValidateStatus\n========================\n### scope:public\n### version:1.0\n回滚打包校验状态\n\n参数列表\n----\n| 参数名     |  参数类型  | 参数描述                 | 是否非空 |\n| ------- |:------:| -------------------- |:----:|\n| chainId |  int   | 运行的链Id,取值区间[1-65535] |  是   |\n| tx      | string | 交易Hex值               |  是   |\n\n返回值\n---\n| 字段名   |  字段类型   | 参数描述               |\n| ----- |:-------:| ------------------ |\n| value | boolean | true回滚成功，false回滚失败 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "运行的链Id,取值区间[1-65535]",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "tx",
+        "des": "交易Hex值",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "true回滚成功，false回滚失败",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "verifyCoinDataBatchPackaged",
+    "des": "打包交易校验",
+    "scope": "public",
+    "version": 1.0,
+    "md": "verifyCoinDataBatchPackaged\n===========================\n### scope:public\n### version:1.0\n打包交易校验\n\n参数列表\n----\n| 参数名                                                    |      参数类型       | 参数描述                 | 是否非空 |\n| ------------------------------------------------------ |:---------------:| -------------------- |:----:|\n| chainId                                                |       int       | 运行的链Id,取值区间[1-65535] |  是   |\n| txList                                                 |      list       | []交易列表（HEX值列表）       |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;txList | list&lt;string> | []交易列表（HEX值列表）       |  是   |\n\n返回值\n---\n| 字段名     |      字段类型       | 参数描述          |\n| ------- |:---------------:| ------------- |\n| fail    | list&lt;string> | 校验失败Hash值列表   |\n| orphan  | list&lt;string> | 校验为孤儿的Hash值列表 |\n| success | list&lt;string> | 校验成功的Hash值列表  |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "运行的链Id,取值区间[1-65535]",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "txList",
+        "des": "[]交易列表（HEX值列表）",
+        "type": "list",
+        "list": [
+          {
+            "name": "txList",
+            "des": "[]交易列表（HEX值列表）",
+            "type": "list&lt;String>",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "fail",
+        "des": "校验失败Hash值列表",
+        "type": "list&lt;String>",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "orphan",
+        "des": "校验为孤儿的Hash值列表",
+        "type": "list&lt;String>",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "success",
+        "des": "校验成功的Hash值列表",
+        "type": "list&lt;String>",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "batchValidateBegin",
+    "des": "开始批量打包:状态通知",
+    "scope": "public",
+    "version": 1.0,
+    "md": "batchValidateBegin\n==================\n### scope:public\n### version:1.0\n开始批量打包:状态通知\n\n参数列表\n----\n| 参数名     | 参数类型 | 参数描述                 | 是否非空 |\n| ------- |:----:| -------------------- |:----:|\n| chainId | int  | 运行的链Id,取值区间[1-65535] |  是   |\n\n返回值\n---\n| 字段名   |  字段类型   | 参数描述               |\n| ----- |:-------:| ------------------ |\n| value | boolean | true处理成功，false处理失败 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "运行的链Id,取值区间[1-65535]",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "true处理成功，false处理失败",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "commitUnconfirmedTx",
+    "des": "未确认交易提交账本(校验并更新nonce值)",
+    "scope": "public",
+    "version": 1.0,
+    "md": "commitUnconfirmedTx\n===================\n### scope:public\n### version:1.0\n未确认交易提交账本(校验并更新nonce值)\n\n参数列表\n----\n| 参数名     |  参数类型  | 参数描述                 | 是否非空 |\n| ------- |:------:| -------------------- |:----:|\n| chainId | string | 运行的链Id,取值区间[1-65535] |  是   |\n| tx      | string | 交易Hex值               |  是   |\n\n返回值\n---\n| 字段名    |  字段类型   | 参数描述                  |\n| ------ |:-------:| --------------------- |\n| orphan | boolean | true 孤儿交易，false 非孤儿交易 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "运行的链Id,取值区间[1-65535]",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "tx",
+        "des": "交易Hex值",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "orphan",
+        "des": "true 孤儿交易，false 非孤儿交易",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "commitBatchUnconfirmedTxs",
+    "des": "未确认交易批量提交账本(校验并更新nonce值)",
+    "scope": "public",
+    "version": 1.0,
+    "md": "commitBatchUnconfirmedTxs\n=========================\n### scope:public\n### version:1.0\n未确认交易批量提交账本(校验并更新nonce值)\n\n参数列表\n----\n| 参数名     |  参数类型  | 参数描述                 | 是否非空 |\n| ------- |:------:| -------------------- |:----:|\n| chainId | string | 运行的链Id,取值区间[1-65535] |  是   |\n| txList  | string | []交易Hex值列表           |  是   |\n\n返回值\n---\n| 字段名    |      字段类型       | 参数描述         |\n| ------ |:---------------:| ------------ |\n| orphan | list&lt;string> | 孤儿交易Hash列表   |\n| fail   | list&lt;string> | 校验失败交易Hash列表 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "运行的链Id,取值区间[1-65535]",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "txList",
+        "des": "[]交易Hex值列表",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "orphan",
+        "des": "孤儿交易Hash列表",
+        "type": "list&lt;String>",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "fail",
+        "des": "校验失败交易Hash列表",
+        "type": "list&lt;String>",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "rollBackUnconfirmTx",
+    "des": "回滚提交的未确认交易",
+    "scope": "public",
+    "version": 1.0,
+    "md": "rollBackUnconfirmTx\n===================\n### scope:public\n### version:1.0\n回滚提交的未确认交易\n\n参数列表\n----\n| 参数名     |  参数类型  | 参数描述                 | 是否非空 |\n| ------- |:------:| -------------------- |:----:|\n| chainId |  int   | 运行的链Id,取值区间[1-65535] |  是   |\n| tx      | string | 交易Hex值               |  是   |\n\n返回值\n---\n| 字段名   |  字段类型   | 参数描述             |\n| ----- |:-------:| ---------------- |\n| value | boolean | true 成功，false 失败 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "运行的链Id,取值区间[1-65535]",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "tx",
+        "des": "交易Hex值",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "true 成功，false 失败",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "clearUnconfirmTxs",
+    "des": "清除所有账户未确认交易",
+    "scope": "public",
+    "version": 1.0,
+    "md": "clearUnconfirmTxs\n=================\n### scope:public\n### version:1.0\n清除所有账户未确认交易\n\n参数列表\n----\n| 参数名     | 参数类型 | 参数描述                 | 是否非空 |\n| ------- |:----:| -------------------- |:----:|\n| chainId | int  | 运行的链Id,取值区间[1-65535] |  是   |\n\n返回值\n---\n| 字段名   |  字段类型   | 参数描述             |\n| ----- |:-------:| ---------------- |\n| value | boolean | true 成功，false 失败 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "运行的链Id,取值区间[1-65535]",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "true 成功，false 失败",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "commitBlockTxs",
+    "des": "提交区块",
+    "scope": "public",
+    "version": 1.0,
+    "md": "commitBlockTxs\n==============\n### scope:public\n### version:1.0\n提交区块\n\n参数列表\n----\n| 参数名                                                    |      参数类型       | 参数描述                 | 是否非空 |\n| ------------------------------------------------------ |:---------------:| -------------------- |:----:|\n| chainId                                                |       int       | 运行的链Id,取值区间[1-65535] |  是   |\n| txList                                                 |      list       | 交易Hex值列表             |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;txList | list&lt;string> | 交易Hex值列表             |  是   |\n| blockHeight                                            |      long       | 区块高度                 |  是   |\n\n返回值\n---\n| 字段名   |  字段类型   | 参数描述             |\n| ----- |:-------:| ---------------- |\n| value | boolean | true 成功，false 失败 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "运行的链Id,取值区间[1-65535]",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "txList",
+        "des": "交易Hex值列表",
+        "type": "list",
+        "list": [
+          {
+            "name": "txList",
+            "des": "交易Hex值列表",
+            "type": "list&lt;String>",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      },
+      {
+        "name": "blockHeight",
+        "des": "区块高度",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "true 成功，false 失败",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "rollBackBlockTxs",
+    "des": "区块回滚",
+    "scope": "public",
+    "version": 1.0,
+    "md": "rollBackBlockTxs\n================\n### scope:public\n### version:1.0\n区块回滚\n\n参数列表\n----\n| 参数名                                                    |      参数类型       | 参数描述                 | 是否非空 |\n| ------------------------------------------------------ |:---------------:| -------------------- |:----:|\n| chainId                                                |       int       | 运行的链Id,取值区间[1-65535] |  是   |\n| txList                                                 |      list       | []交易Hex值列表           |  是   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;txList | list&lt;string> | []交易Hex值列表           |  是   |\n| blockHeight                                            |     string      | 区块高度                 |  是   |\n\n返回值\n---\n| 字段名   |  字段类型   | 参数描述             |\n| ----- |:-------:| ---------------- |\n| value | boolean | true 成功，false 失败 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "运行的链Id,取值区间[1-65535]",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "txList",
+        "des": "[]交易Hex值列表",
+        "type": "list",
+        "list": [
+          {
+            "name": "txList",
+            "des": "[]交易Hex值列表",
+            "type": "list&lt;String>",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      },
+      {
+        "name": "blockHeight",
+        "des": "区块高度",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "true 成功，false 失败",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "getAssetsById",
+    "des": "清除所有账户未确认交易",
+    "scope": "public",
+    "version": 1.0,
+    "md": "getAssetsById\n=============\n### scope:public\n### version:1.0\n清除所有账户未确认交易\n\n参数列表\n----\n| 参数名      |  参数类型  | 参数描述                 | 是否非空 |\n| -------- |:------:| -------------------- |:----:|\n| chainId  |  int   | 运行的链Id,取值区间[1-65535] |  是   |\n| assetIds | string | 资产id,逗号分隔            |  是   |\n\n返回值\n---\n| 字段名             |    字段类型    | 参数描述 |\n| --------------- |:----------:| ---- |\n| assetId         |  integer   | 资产id |\n| availableAmount | biginteger | 可用金额 |\n| freeze          | biginteger | 冻结金额 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "运行的链Id,取值区间[1-65535]",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "assetIds",
+        "des": "资产id,逗号分隔",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "assetId",
+        "des": "资产id",
+        "type": "integer",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "availableAmount",
+        "des": "可用金额",
+        "type": "biginteger",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "freeze",
+        "des": "冻结金额",
+        "type": "biginteger",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "getNonce",
+    "des": "获取账户资产NONCE值",
+    "scope": "public",
+    "version": 1.0,
+    "md": "getNonce\n========\n### scope:public\n### version:1.0\n获取账户资产NONCE值\n\n参数列表\n----\n| 参数名          |  参数类型  | 参数描述                 | 是否非空 |\n| ------------ |:------:| -------------------- |:----:|\n| chainId      |  int   | 运行的链Id,取值区间[1-65535] |  是   |\n| assetChainId |  int   | 资产链Id,取值区间[1-65535]  |  是   |\n| assetId      |  int   | 资产Id,取值区间[1-65535]   |  是   |\n| address      | string | 资产所在地址               |  是   |\n\n返回值\n---\n| 字段名       |  字段类型   | 参数描述                      |\n| --------- |:-------:| ------------------------- |\n| nonce     | string  | 账户资产nonce值                |\n| nonceType | integer | 1：已确认的nonce值,0：未确认的nonce值 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "运行的链Id,取值区间[1-65535]",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "assetChainId",
+        "des": "资产链Id,取值区间[1-65535]",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "assetId",
+        "des": "资产Id,取值区间[1-65535]",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "资产所在地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "nonce",
+        "des": "账户资产nonce值",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "nonceType",
+        "des": "1：已确认的nonce值,0：未确认的nonce值",
+        "type": "integer",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "getBalance",
+    "des": "获取账户资产(已入区块)",
+    "scope": "public",
+    "version": 1.0,
+    "md": "getBalance\n==========\n### scope:public\n### version:1.0\n获取账户资产(已入区块)\n\n参数列表\n----\n| 参数名          |  参数类型  | 参数描述                | 是否非空 |\n| ------------ |:------:| ------------------- |:----:|\n| chainId      |  int   | 运行链Id,取值区间[1-65535] |  是   |\n| assetChainId |  int   | 资产链Id,取值区间[1-65535] |  是   |\n| assetId      |  int   | 资产Id,取值区间[1-65535]  |  是   |\n| address      | string | 资产所在地址              |  是   |\n\n返回值\n---\n| 字段名       |    字段类型    | 参数描述 |\n| --------- |:----------:| ---- |\n| total     | biginteger | 总金额  |\n| freeze    | biginteger | 冻结金额 |\n| available |   string   | 可用金额 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "运行链Id,取值区间[1-65535]",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "assetChainId",
+        "des": "资产链Id,取值区间[1-65535]",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "assetId",
+        "des": "资产Id,取值区间[1-65535]",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "资产所在地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "total",
+        "des": "总金额",
+        "type": "biginteger",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "freeze",
+        "des": "冻结金额",
+        "type": "biginteger",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "available",
+        "des": "可用金额",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "getBalanceNonce",
+    "des": "获取账户资产余额与NONCE值",
+    "scope": "public",
+    "version": 1.0,
+    "md": "getBalanceNonce\n===============\n### scope:public\n### version:1.0\n获取账户资产余额与NONCE值\n\n参数列表\n----\n| 参数名          |  参数类型  | 参数描述                 | 是否非空 |\n| ------------ |:------:| -------------------- |:----:|\n| chainId      |  int   | 运行的链Id,取值区间[1-65535] |  是   |\n| assetChainId |  int   | 资产链Id,取值区间[1-65535]  |  是   |\n| assetId      |  int   | 资产Id,取值区间[1-65535]   |  是   |\n| address      | string | 资产所在地址               |  是   |\n\n返回值\n---\n| 字段名              |    字段类型    | 参数描述                      |\n| ---------------- |:----------:| ------------------------- |\n| nonce            |   string   | 账户资产nonce值                |\n| nonceType        |  integer   | 1：已确认的nonce值,0：未确认的nonce值 |\n| available        | biginteger | 可用金额                      |\n| permanentLocked  | biginteger | 永久锁定金额                    |\n| timeHeightLocked | biginteger | 高度或时间锁定金额                 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "运行的链Id,取值区间[1-65535]",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "assetChainId",
+        "des": "资产链Id,取值区间[1-65535]",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "assetId",
+        "des": "资产Id,取值区间[1-65535]",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "资产所在地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "nonce",
+        "des": "账户资产nonce值",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "nonceType",
+        "des": "1：已确认的nonce值,0：未确认的nonce值",
+        "type": "integer",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "available",
+        "des": "可用金额",
+        "type": "biginteger",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "permanentLocked",
+        "des": "永久锁定金额",
+        "type": "biginteger",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "timeHeightLocked",
+        "des": "高度或时间锁定金额",
+        "type": "biginteger",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "getFreezeList",
+    "des": "分页获取账户锁定资产列表",
+    "scope": "public",
+    "version": 1.0,
+    "md": "getFreezeList\n=============\n### scope:public\n### version:1.0\n分页获取账户锁定资产列表\n\n参数列表\n----\n| 参数名        |  参数类型  | 参数描述                | 是否非空 |\n| ---------- |:------:| ------------------- |:----:|\n| chainId    |  int   | 资产链Id,取值区间[1-65535] |  是   |\n| assetId    |  int   | 资产Id,取值区间[1-65535]  |  是   |\n| address    | string | 资产所在地址              |  是   |\n| pageNumber |  int   | 起始页数                |  是   |\n| pageSize   |  int   | 每页显示数量              |  是   |\n\n返回值\n---\n| 字段名                                                         |      字段类型       | 参数描述            |\n| ----------------------------------------------------------- |:---------------:| --------------- |\n| totalCount                                                  |     integer     | 记录总数            |\n| pageNumber                                                  |     integer     | 起始页数            |\n| pageSize                                                    |     integer     | 每页显示数量          |\n| list                                                        | list&lt;object> | 锁定金额列表          |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;txHash      |     string      | 交易hash          |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;amount      |   biginteger    | 锁定金额            |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lockedValue |      long       | 锁定时间或高度，-1为永久锁定 |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time        |      long       | 交易产生时间,秒        |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "资产链Id,取值区间[1-65535]",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "assetId",
+        "des": "资产Id,取值区间[1-65535]",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "资产所在地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "pageNumber",
+        "des": "起始页数",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "pageSize",
+        "des": "每页显示数量",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "totalCount",
+        "des": "记录总数",
+        "type": "integer",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "pageNumber",
+        "des": "起始页数",
+        "type": "integer",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "pageSize",
+        "des": "每页显示数量",
+        "type": "integer",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "list",
+        "des": "锁定金额列表",
+        "type": "list&lt;object>",
+        "list": [
+          {
+            "name": "txHash",
+            "des": "交易hash",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "amount",
+            "des": "锁定金额",
+            "type": "biginteger",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "lockedValue",
+            "des": "锁定时间或高度，-1为永久锁定",
+            "type": "long",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "time",
+            "des": "交易产生时间,秒",
+            "type": "long",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      }
+    ]
+  }
+]
