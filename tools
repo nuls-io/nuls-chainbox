@@ -7,7 +7,7 @@
 
 cd `dirname $0`
 ROOT_PATH=`pwd`
-NULS2_REPO="https://github.com/nuls-io/nuls-v2.git"
+NULS2_REPO="http://github.com/nuls-io/nuls-v2.git"
 NULS2_BRANCH="beta-1"
 NULS2_RUNTIME_DIR="NULS-WALLET-RUNTIME"
 NULS2_REPO_DIR=".NULS2.0"
