@@ -13,7 +13,7 @@ rpc-debug-tool可以帮助开发者调试其他模块通信接口。
 ```
 ============ PACKAGE FINISH 🍺🍺🍺🎉🎉🎉 ===============
 ```
-编译完成后在当前目录会新增bin目录，目录结构如下
+编译完成后在当前目录会新增bin目录，目录结构如下：
 
 ```
 .
@@ -26,12 +26,12 @@ rpc-debug-tool可以帮助开发者调试其他模块通信接口。
 ```
 ### 启动服务
 首先需要在nuls-chainbox中获取NULS2.0运行环境(NULS-WALLET-RUNTIME),启动NULS2.0程序([启动方法](https://github.com/nuls-io/nuls-v2/blob/beta-1/useguide.md)）。
-然后启动rpc-debug-tool.
+然后启动rpc-debug-tool。
 ```
 cd ./bin
 ./start
 ```
-看到以下内容启动成功
+看到以下内容启动成功。
 
 ```
 ==================================================
