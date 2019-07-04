@@ -5,6 +5,7 @@ import io.nuls.base.basic.AddressTool;
 import io.nuls.controller.core.BaseController;
 import io.nuls.controller.core.Result;
 import io.nuls.controller.vo.GetMailListReq;
+import io.nuls.controller.vo.MailAddressData;
 import io.nuls.controller.vo.MailContentData;
 import io.nuls.controller.vo.ViewMailReq;
 import io.nuls.core.core.annotation.Autowired;
@@ -14,7 +15,9 @@ import io.nuls.core.crypto.HexUtil;
 import io.nuls.core.exception.CryptoException;
 import io.nuls.core.exception.NulsException;
 import io.nuls.rpc.AccountTools;
+import io.nuls.service.MailAddressService;
 import io.nuls.service.SendMailService;
+import io.nuls.service.dto.MailAddress;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -23,6 +26,7 @@ import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * @Author: zhoulijun
@@ -42,6 +46,9 @@ public class GetMailController implements BaseController {
     @Autowired
     SendMailService sendMailService;
 
+    @Autowired
+    MailAddressService mailAddressService;
+
     /**
      * 生成一个邮件收件地址
      * 需要扣除1个NULS作为手续费
@@ -54,12 +61,17 @@ public class GetMailController implements BaseController {
     @POST
     public Result<MailContentData> viewMail(ViewMailReq req){
         return call(()->{
-            Objects.requireNonNull(req.getAddress(),"address can't null");
+            Objects.requireNonNull(req.getMailAddress(),"address can't null");
             Objects.requireNonNull(req.getPassword(),"sender address password can't null");
             Objects.requireNonNull(req.getHash(),"hash can't null");
-            String priKey = accountTools.getAddressPriKey(config.getChainId(),req.getAddress(),req.getPassword());
+            Optional<MailAddressData> optionalMailAddress = mailAddressService.getMailAddressPubKey(req.getMailAddress());
+            if(optionalMailAddress.isEmpty()){
+                return new Result<>(false,"not found mail");
+            }
+            String address = optionalMailAddress.get().getAddress();
+            String priKey = accountTools.getAddressPriKey(config.getChainId(),address,req.getPassword());
             ECKey ecKey = ECKey.fromPrivate(HexUtil.decode(priKey));
-            MailContentData mcd = sendMailService.getMailContent(req.getHash(),ecKey,AddressTool.getAddress(req.getAddress()));
+            MailContentData mcd = sendMailService.getMailContent(req.getHash(),ecKey,AddressTool.getAddress(address));
             mcd.setHash(req.getHash());
             return new Result<>(mcd);
         });

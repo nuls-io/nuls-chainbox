@@ -7,18 +7,18 @@ package io.nuls.controller.vo;
  */
 public class ViewMailReq {
 
-    private String address;
+    private String mailAddress;
 
     private String hash;
 
     private String password;
 
-    public String getAddress() {
-        return address;
+    public String getMailAddress() {
+        return mailAddress;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setMailAddress(String mailAddress) {
+        this.mailAddress = mailAddress;
     }
 
     public String getHash() {

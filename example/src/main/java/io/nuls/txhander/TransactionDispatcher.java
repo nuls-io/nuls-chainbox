@@ -53,12 +53,6 @@ public final class TransactionDispatcher extends BaseCmd {
         throw new RuntimeException("不支持的txType：" + txType);
     }
 
-    /**
-     * 获取最新主链高度
-     *
-     * @param params
-     * @return
-     */
     @CmdAnnotation(cmd = BaseConstant.TX_VALIDATOR, version = 1.0, description = "")
     @Parameter(parameterName = "chainId", parameterType = "int")
     @Parameter(parameterName = "txList", parameterType = "List")
@@ -76,12 +70,6 @@ public final class TransactionDispatcher extends BaseCmd {
         return success(resultMap);
     }
 
-    /**
-     * 获取最新主链高度
-     *
-     * @param params
-     * @return
-     */
     @CmdAnnotation(cmd = BaseConstant.TX_COMMIT, version = 1.0, description = "")
     @Parameter(parameterName = "chainId", parameterType = "int")
     @Parameter(parameterName = "txList", parameterType = "List")
@@ -90,12 +78,6 @@ public final class TransactionDispatcher extends BaseCmd {
         return handle(params,(chainId,tx,blockHeader)-> getProcessor(tx.getType()).commit(chainId,tx,blockHeader));
     }
 
-    /**
-     * 获取最新主链高度
-     *
-     * @param params
-     * @return
-     */
     @CmdAnnotation(cmd = BaseConstant.TX_ROLLBACK, version = 1.0, description = "")
     @Parameter(parameterName = "chainId", parameterType = "int")
     @Parameter(parameterName = "txList", parameterType = "List")
