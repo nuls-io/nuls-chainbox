@@ -503,9 +503,10 @@ ServiceManager判断依赖都已启动后，会返回一个Response，数据中�
 }
 ```
 #### 参考文档：
-[Websocket-Tool设计文档](https://github.com/nuls-io/nuls-v2-docs/blob/master/design-zh-CHS/r.rpc-tool-websocket%E8%AE%BE%E8%AE%A1v1.3.md)
-    [Nulstar Module Specification](https://github.com/nuls-io/Nulstar/blob/master/Documents/Nulstar%20-%20Documentation%20-%20Module%20Specification.pdf)
-    [基础模块接口文档](#doclist)
+* [Websocket-Tool设计文档](https://github.com/nuls-io/nuls-v2-docs/blob/master/design-zh-CHS/r.rpc-tool-websocket%E8%AE%BE%E8%AE%A1v1.3.md)
+*     [Nulstar Module Specification](https://github.com/nuls-io/Nulstar/blob/master/Documents/Nulstar%20-%20Documentation%20-%20Module%20Specification.pdf)
+*     [基础模块接口文档](#doclist)
+
 ### 获取各种开发语言的模块开发模板
 理论上只要通过websocket与模块建立连接，然后按照约定的协议与模块进行信息交换就可以实现业务模块的扩展。但是这样从头造轮子的方式效率比较低，门槛也比较高，为了降低模块开发的难度，我们将为各种语言提供快速开始的模板(目前只提供了java），开发人员只需要在模板中的指定位置插入具体的业务逻辑代码就可以完成扩展模块的开发。
 
