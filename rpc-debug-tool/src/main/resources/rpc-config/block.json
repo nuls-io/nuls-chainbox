@@ -1,0 +1,532 @@
+[
+  {
+    "cmdName": "info",
+    "des": "returns network node height and local node height",
+    "scope": "public",
+    "version": 1.0,
+    "md": "info\n====\n### scope:public\n### version:1.0\nreturns network node height and local node height\n\n参数列表\n----\n| 参数名     | 参数类型 | 参数描述 | 是否非空 |\n| ------- |:----:| ---- |:----:|\n| chainId | int  | 链ID  |  是   |\n\n返回值\n---\n| 字段名           | 字段类型 | 参数描述       |\n| ------------- |:----:| ---------- |\n| networkHeight | long | 网络节点最新区块高度 |\n| localHeight   | long | 本地节点最新区块高度 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链ID",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "networkHeight",
+        "des": "网络节点最新区块高度",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "localHeight",
+        "des": "本地节点最新区块高度",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "latestHeight",
+    "des": "the latest height of master chain",
+    "scope": "public",
+    "version": 1.0,
+    "md": "latestHeight\n============\n### scope:public\n### version:1.0\nthe latest height of master chain\n\n参数列表\n----\n| 参数名     | 参数类型 | 参数描述 | 是否非空 |\n| ------- |:----:| ---- |:----:|\n| chainId | int  | 链ID  |  是   |\n\n返回值\n---\n| 字段名   | 字段类型 | 参数描述   |\n| ----- |:----:| ------ |\n| value | long | 最新主链高度 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链ID",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "最新主链高度",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "latestBlockHeader",
+    "des": "the latest block header of master chain",
+    "scope": "public",
+    "version": 1.0,
+    "md": "latestBlockHeader\n=================\n### scope:public\n### version:1.0\nthe latest block header of master chain\n\n参数列表\n----\n| 参数名     | 参数类型 | 参数描述 | 是否非空 |\n| ------- |:----:| ---- |:----:|\n| chainId | int  | 链ID  |  是   |\n\n返回值\n---\n| 字段名 |  字段类型  | 参数描述               |\n| --- |:------:| ------------------ |\n| 返回值 | string | 返回一个区块头序列化后的HEX字符串 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链ID",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "返回值",
+        "des": "返回一个区块头序列化后的HEX字符串",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "latestBlockHeaderPo",
+    "des": "the latest block header po of master chain",
+    "scope": "public",
+    "version": 1.0,
+    "md": "latestBlockHeaderPo\n===================\n### scope:public\n### version:1.0\nthe latest block header po of master chain\n\n参数列表\n----\n| 参数名     | 参数类型 | 参数描述 | 是否非空 |\n| ------- |:----:| ---- |:----:|\n| chainId | int  | 链ID  |  是   |\n\n返回值\n---\n| 字段名 |  字段类型  | 参数描述                 |\n| --- |:------:| -------------------- |\n| 返回值 | string | 返回一个区块头PO序列化后的HEX字符串 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链ID",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "返回值",
+        "des": "返回一个区块头PO序列化后的HEX字符串",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "getBlockHeaderByHeight",
+    "des": "get a block header by height",
+    "scope": "public",
+    "version": 1.0,
+    "md": "getBlockHeaderByHeight\n======================\n### scope:public\n### version:1.0\nget a block header by height\n\n参数列表\n----\n| 参数名     | 参数类型 | 参数描述 | 是否非空 |\n| ------- |:----:| ---- |:----:|\n| chainId | int  | 链ID  |  是   |\n| height  | long | 区块高度 |  是   |\n\n返回值\n---\n| 字段名 |  字段类型  | 参数描述               |\n| --- |:------:| ------------------ |\n| 返回值 | string | 返回一个区块头序列化后的HEX字符串 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链ID",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "height",
+        "des": "区块高度",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "返回值",
+        "des": "返回一个区块头序列化后的HEX字符串",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "getBlockHeaderPoByHeight",
+    "des": "get a block header po by height",
+    "scope": "public",
+    "version": 1.0,
+    "md": "getBlockHeaderPoByHeight\n========================\n### scope:public\n### version:1.0\nget a block header po by height\n\n参数列表\n----\n| 参数名     | 参数类型 | 参数描述 | 是否非空 |\n| ------- |:----:| ---- |:----:|\n| chainId | int  | 链ID  |  是   |\n| height  | long | 区块高度 |  是   |\n\n返回值\n---\n| 字段名 |  字段类型  | 参数描述                 |\n| --- |:------:| -------------------- |\n| 返回值 | string | 返回一个区块头PO序列化后的HEX字符串 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链ID",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "height",
+        "des": "区块高度",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "返回值",
+        "des": "返回一个区块头PO序列化后的HEX字符串",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "getBlockByHeight",
+    "des": "get a block by height",
+    "scope": "public",
+    "version": 1.0,
+    "md": "getBlockByHeight\n================\n### scope:public\n### version:1.0\nget a block by height\n\n参数列表\n----\n| 参数名     | 参数类型 | 参数描述 | 是否非空 |\n| ------- |:----:| ---- |:----:|\n| chainId | int  | 链ID  |  是   |\n| height  | long | 区块高度 |  是   |\n\n返回值\n---\n| 字段名 |  字段类型  | 参数描述                |\n| --- |:------:| ------------------- |\n| 返回值 | string | 返回区块序列化后的HEX字符串List |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链ID",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "height",
+        "des": "区块高度",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "返回值",
+        "des": "返回区块序列化后的HEX字符串List",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "getBlockHeaderByHash",
+    "des": "get a block header by hash",
+    "scope": "public",
+    "version": 1.0,
+    "md": "getBlockHeaderByHash\n====================\n### scope:public\n### version:1.0\nget a block header by hash\n\n参数列表\n----\n| 参数名     |  参数类型  | 参数描述   | 是否非空 |\n| ------- |:------:| ------ |:----:|\n| chainId |  int   | 链ID    |  是   |\n| hash    | string | 区块hash |  是   |\n\n返回值\n---\n| 字段名 |  字段类型  | 参数描述             |\n| --- |:------:| ---------------- |\n| 返回值 | string | 返回区块头序列化后的HEX字符串 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链ID",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "hash",
+        "des": "区块hash",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "返回值",
+        "des": "返回区块头序列化后的HEX字符串",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "getBlockHeaderPoByHash",
+    "des": "get a block header po by hash",
+    "scope": "public",
+    "version": 1.0,
+    "md": "getBlockHeaderPoByHash\n======================\n### scope:public\n### version:1.0\nget a block header po by hash\n\n参数列表\n----\n| 参数名     |  参数类型  | 参数描述   | 是否非空 |\n| ------- |:------:| ------ |:----:|\n| chainId |  int   | 链ID    |  是   |\n| hash    | string | 区块hash |  是   |\n\n返回值\n---\n| 字段名 |  字段类型  | 参数描述               |\n| --- |:------:| ------------------ |\n| 返回值 | string | 返回区块头PO序列化后的HEX字符串 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链ID",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "hash",
+        "des": "区块hash",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "返回值",
+        "des": "返回区块头PO序列化后的HEX字符串",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "getLatestBlockHeaders",
+    "des": "get the latest number of block headers",
+    "scope": "public",
+    "version": 1.0,
+    "md": "getLatestBlockHeaders\n=====================\n### scope:public\n### version:1.0\nget the latest number of block headers\n\n参数列表\n----\n| 参数名     | 参数类型 | 参数描述 | 是否非空 |\n| ------- |:----:| ---- |:----:|\n| chainId | int  | 链ID  |  是   |\n| size    | int  | 数量   |  是   |\n\n返回值\n---\n| 字段名 |      字段类型       | 参数描述                 |\n| --- |:---------------:| -------------------- |\n| 返回值 | list&lt;string> | 返回区块头序列化后的HEX字符串List |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链ID",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "size",
+        "des": "数量",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "返回值",
+        "des": "返回区块头序列化后的HEX字符串List",
+        "type": "list&lt;String>",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "getLatestRoundBlockHeaders",
+    "des": "get the latest several rounds of block headers",
+    "scope": "public",
+    "version": 1.0,
+    "md": "getLatestRoundBlockHeaders\n==========================\n### scope:public\n### version:1.0\nget the latest several rounds of block headers\n\n参数列表\n----\n| 参数名     | 参数类型 | 参数描述 | 是否非空 |\n| ------- |:----:| ---- |:----:|\n| chainId | int  | 链ID  |  是   |\n| round   | int  | 共识轮次 |  是   |\n\n返回值\n---\n| 字段名 |      字段类型       | 参数描述                 |\n| --- |:---------------:| -------------------- |\n| 返回值 | list&lt;string> | 返回区块头序列化后的HEX字符串List |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链ID",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "round",
+        "des": "共识轮次",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "返回值",
+        "des": "返回区块头序列化后的HEX字符串List",
+        "type": "list&lt;String>",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "getRoundBlockHeaders",
+    "des": "get the latest several rounds of block headers",
+    "scope": "public",
+    "version": 1.0,
+    "md": "getRoundBlockHeaders\n====================\n### scope:public\n### version:1.0\nget the latest several rounds of block headers\n\n参数列表\n----\n| 参数名     | 参数类型 | 参数描述 | 是否非空 |\n| ------- |:----:| ---- |:----:|\n| chainId | int  | 链ID  |  是   |\n| height  | long | 起始高度 |  是   |\n| round   | int  | 共识轮次 |  是   |\n\n返回值\n---\n| 字段名 |      字段类型       | 参数描述                 |\n| --- |:---------------:| -------------------- |\n| 返回值 | list&lt;string> | 返回区块头序列化后的HEX字符串List |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链ID",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "height",
+        "des": "起始高度",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "round",
+        "des": "共识轮次",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "返回值",
+        "des": "返回区块头序列化后的HEX字符串List",
+        "type": "list&lt;String>",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "receivePackingBlock",
+    "des": "receive the new packaged block",
+    "scope": "public",
+    "version": 1.0,
+    "md": "receivePackingBlock\n===================\n### scope:public\n### version:1.0\nreceive the new packaged block\n\n参数列表\n----\n| 参数名     |  参数类型  | 参数描述          | 是否非空 |\n| ------- |:------:| ------------- |:----:|\n| chainId |  int   | 链ID           |  是   |\n| block   | string | 区块序列化后的HEX字符串 |  是   |\n\n返回值\n---\n| 字段名 | 字段类型 | 参数描述 |\n| --- |:----:| ---- |\n| N/A | void | 无返回值 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链ID",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "block",
+        "des": "区块序列化后的HEX字符串",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "N/A",
+        "des": "无返回值",
+        "type": "void",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "getBlockHeadersByHeightRange",
+    "des": "get the block headers according to the height range",
+    "scope": "public",
+    "version": 1.0,
+    "md": "getBlockHeadersByHeightRange\n============================\n### scope:public\n### version:1.0\nget the block headers according to the height range\n\n参数列表\n----\n| 参数名     | 参数类型 | 参数描述 | 是否非空 |\n| ------- |:----:| ---- |:----:|\n| chainId | int  | 链ID  |  是   |\n| begin   | long | 起始高度 |  是   |\n| end     | long | 结束高度 |  是   |\n\n返回值\n---\n| 字段名 |      字段类型       | 参数描述                 |\n| --- |:---------------:| -------------------- |\n| 返回值 | list&lt;string> | 返回区块头序列化后的HEX字符串List |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链ID",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "begin",
+        "des": "起始高度",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "end",
+        "des": "结束高度",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "返回值",
+        "des": "返回区块头序列化后的HEX字符串List",
+        "type": "list&lt;String>",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "getBlockHeadersForProtocol",
+    "des": "get block headers for protocol upgrade module",
+    "scope": "public",
+    "version": 1.0,
+    "md": "getBlockHeadersForProtocol\n==========================\n### scope:public\n### version:1.0\nget block headers for protocol upgrade module\n\n参数列表\n----\n| 参数名      | 参数类型 | 参数描述     | 是否非空 |\n| -------- |:----:| -------- |:----:|\n| chainId  | int  | 链ID      |  是   |\n| interval | int  | 协议升级统计区间 |  是   |\n\n返回值\n---\n| 字段名 |      字段类型       | 参数描述                 |\n| --- |:---------------:| -------------------- |\n| 返回值 | list&lt;string> | 返回区块头序列化后的HEX字符串List |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链ID",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "interval",
+        "des": "协议升级统计区间",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "返回值",
+        "des": "返回区块头序列化后的HEX字符串List",
+        "type": "list&lt;String>",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "latestBlock",
+    "des": "the latest block of master chain",
+    "scope": "public",
+    "version": 1.0,
+    "md": "latestBlock\n===========\n### scope:public\n### version:1.0\nthe latest block of master chain\n\n参数列表\n----\n| 参数名     | 参数类型 | 参数描述 | 是否非空 |\n| ------- |:----:| ---- |:----:|\n| chainId | int  | 链ID  |  是   |\n\n返回值\n---\n| 字段名 |  字段类型  | 参数描述              |\n| --- |:------:| ----------------- |\n| 返回值 | string | 返回一个区块序列化后的HEX字符串 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链ID",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "返回值",
+        "des": "返回一个区块序列化后的HEX字符串",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "downloadBlockByHash",
+    "des": "get a block by hash",
+    "scope": "public",
+    "version": 1.0,
+    "md": "downloadBlockByHash\n===================\n### scope:public\n### version:1.0\nget a block by hash\n\n参数列表\n----\n| 参数名     |  参数类型  | 参数描述   | 是否非空 |\n| ------- |:------:| ------ |:----:|\n| chainId |  int   | 链ID    |  是   |\n| hash    | string | 区块hash |  是   |\n\n返回值\n---\n| 字段名 |  字段类型  | 参数描述            |\n| --- |:------:| --------------- |\n| 返回值 | string | 返回区块序列化后的HEX字符串 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链ID",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "hash",
+        "des": "区块hash",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "返回值",
+        "des": "返回区块序列化后的HEX字符串",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  }
+]

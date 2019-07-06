@@ -3,7 +3,7 @@ cd `dirname $0`
 . build/func
 ROOT_PATH=`pwd`
 BUILD_PATH="${ROOT_PATH}/build"
-OUT_PATH="${ROOT_PATH}/outer"
+OUT_PATH="${ROOT_PATH}/bin"
 if [ -d $OUT_PATH ]; then
     rm -rf $OUT_PATH
 fi
@@ -20,16 +20,6 @@ fi
 cd $ROOT_PATH
 moduleName=`getModuleItem  ./module.ncf "APP_NAME"`;
 version=`getModuleItem  ./module.ncf "VERSION"`;
-if [ ! -d "${OUT_PATH}/${moduleName}" ];then
-	mkdir ${OUT_PATH}/${moduleName}
-fi
-if [ -d "${OUT_PATH}/${moduleName}/${version}" ]; then
-	rm -r "${OUT_PATH}/${moduleName}/${version}"
-fi
-moduleOutPath="${OUT_PATH}/${moduleName}/${version}"
-if [ ! -d "$moduleOutPath" ]; then
-    mkdir $moduleOutPath
-fi
 mainClass=`getModuleItem  ./module.ncf "MAIN_CLASS"`;
 mainClassName=`awk -v s="${mainClass}" 'BEGIN{ len = split(s,ary,"."); print ary[len]}'`
 moduleBuildPath="${BUILD_PATH}/tmp"
@@ -94,4 +84,11 @@ cd $ROOT_PATH
 mvn package -Dmaven.test.skip=true
 mv "target/${APP_NAME}.jar" ${OUT_PATH}/${APP_NAME}-${version}.jar
 cp -r "target/libs" "${OUT_PATH}/lib"
+if [ "$1" == "n" ]; then
+    cd front-end
+    npm install
+    npm run build
+    cd ..
+fi
+cp -r www ${OUT_PATH}/www
 echo "============ PACKAGE FINISH 🍺🍺🍺🎉🎉🎉 ==============="

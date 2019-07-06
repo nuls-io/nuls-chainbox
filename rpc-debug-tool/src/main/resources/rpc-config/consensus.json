@@ -1,0 +1,2208 @@
+[
+  {
+    "cmdName": "cs_stopAgent",
+    "des": "注销节点/stop agent",
+    "scope": "public",
+    "version": 1.0,
+    "md": "cs\\_stopAgent\n=============\n### scope:public\n### version:1.0\n注销节点/stop agent\n\n参数列表\n----\n| 参数名      |  参数类型  | 参数描述 | 是否非空 |\n| -------- |:------:| ---- |:----:|\n| chainId  |  int   | 链id  |  是   |\n| address  | string | 节点地址 |  是   |\n| password | string | 密码   |  是   |\n\n返回值\n---\n| 字段名    |  字段类型  | 参数描述       |\n| ------ |:------:| ---------- |\n| txHash | string | 停止节点交易HASH |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "节点地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "password",
+        "des": "密码",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "txHash",
+        "des": "停止节点交易HASH",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "cs_getAgentList",
+    "des": "查询当前网络中的共识节点列表/Query the list of consensus nodes in the current network",
+    "scope": "public",
+    "version": 1.0,
+    "md": "cs\\_getAgentList\n================\n### scope:public\n### version:1.0\n查询当前网络中的共识节点列表/Query the list of consensus nodes in the current network\n\n参数列表\n----\n| 参数名        |  参数类型  | 参数描述 | 是否非空 |\n| ---------- |:------:| ---- |:----:|\n| chainId    |  int   | 链id  |  是   |\n| pageNumber |  int   | 页码   |  是   |\n| pageSize   |  int   | 每页大小 |  是   |\n| keyWord    | string | 关键字  |  是   |\n\n返回值\n---\n| 字段名            |  字段类型  | 参数描述       |\n| -------------- |:------:| ---------- |\n| agentHash      | string | 节点HASH     |\n| agentAddress   | string | 节点地址       |\n| packingAddress | string | 节点出块地址     |\n| rewardAddress  | string | 节点奖励地址     |\n| deposit        | string | 抵押金额       |\n| commissionRate |  byte  | 佣金比例       |\n| agentName      | string | 节点名称       |\n| agentId        | string | 节点ID       |\n| introduction   | string | 节点简介       |\n| time           |  long  | 节点创建时间     |\n| blockHeight    |  long  | 节点打包高度     |\n| delHeight      |  long  | 节点失效高度     |\n| status         |  int   | 状态         |\n| creditVal      | double | 信誉值        |\n| totalDeposit   | string | 总委托金额      |\n| txHash         | string | 创建节点交易HASH |\n| memberCount    |  int   | 委托人数       |\n| version        | string | 版本         |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "pageNumber",
+        "des": "页码",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "pageSize",
+        "des": "每页大小",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "keyWord",
+        "des": "关键字",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "agentHash",
+        "des": "节点HASH",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "agentAddress",
+        "des": "节点地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "packingAddress",
+        "des": "节点出块地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "rewardAddress",
+        "des": "节点奖励地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "deposit",
+        "des": "抵押金额",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "commissionRate",
+        "des": "佣金比例",
+        "type": "byte",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "agentName",
+        "des": "节点名称",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "agentId",
+        "des": "节点ID",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "introduction",
+        "des": "节点简介",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "time",
+        "des": "节点创建时间",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "blockHeight",
+        "des": "节点打包高度",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "delHeight",
+        "des": "节点失效高度",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "status",
+        "des": "状态",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "creditVal",
+        "des": "信誉值",
+        "type": "double",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "totalDeposit",
+        "des": "总委托金额",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "txHash",
+        "des": "创建节点交易HASH",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "memberCount",
+        "des": "委托人数",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "version",
+        "des": "版本",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "cs_createAgent",
+    "des": "创建节点交易/create agent transaction",
+    "scope": "public",
+    "version": 1.0,
+    "md": "cs\\_createAgent\n===============\n### scope:public\n### version:1.0\n创建节点交易/create agent transaction\n\n参数列表\n----\n| 参数名            |  参数类型  | 参数描述        | 是否非空 |\n| -------------- |:------:| ----------- |:----:|\n| chainId        |  int   | 链id         |  是   |\n| agentAddress   | string | 节点地址        |  是   |\n| packingAddress | string | 节点出块地址      |  是   |\n| rewardAddress  | string | 奖励地址,默认节点地址 |  是   |\n| commissionRate |  int   | 佣金比例        |  是   |\n| deposit        | string | 抵押金额        |  是   |\n| password       | string | 密码          |  是   |\n\n返回值\n---\n| 字段名    |  字段类型  | 参数描述       |\n| ------ |:------:| ---------- |\n| txHash | string | 创建节点交易HASH |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "agentAddress",
+        "des": "节点地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "packingAddress",
+        "des": "节点出块地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "rewardAddress",
+        "des": "奖励地址,默认节点地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "commissionRate",
+        "des": "佣金比例",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "deposit",
+        "des": "抵押金额",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "password",
+        "des": "密码",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "txHash",
+        "des": "创建节点交易HASH",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "cs_getAgentInfo",
+    "des": "查询指点节点节点详细信息/Query pointer node details",
+    "scope": "public",
+    "version": 1.0,
+    "md": "cs\\_getAgentInfo\n================\n### scope:public\n### version:1.0\n查询指点节点节点详细信息/Query pointer node details\n\n参数列表\n----\n| 参数名       |  参数类型  | 参数描述   | 是否非空 |\n| --------- |:------:| ------ |:----:|\n| chainId   |  int   | 链id    |  是   |\n| agentHash | string | 节点HASH |  是   |\n\n返回值\n---\n| 字段名            |  字段类型  | 参数描述       |\n| -------------- |:------:| ---------- |\n| agentHash      | string | 节点HASH     |\n| agentAddress   | string | 节点地址       |\n| packingAddress | string | 节点出块地址     |\n| rewardAddress  | string | 节点奖励地址     |\n| deposit        | string | 抵押金额       |\n| commissionRate |  byte  | 佣金比例       |\n| agentName      | string | 节点名称       |\n| agentId        | string | 节点ID       |\n| introduction   | string | 节点简介       |\n| time           |  long  | 节点创建时间     |\n| blockHeight    |  long  | 节点打包高度     |\n| delHeight      |  long  | 节点失效高度     |\n| status         |  int   | 状态         |\n| creditVal      | double | 信誉值        |\n| totalDeposit   | string | 总委托金额      |\n| txHash         | string | 创建节点交易HASH |\n| memberCount    |  int   | 委托人数       |\n| version        | string | 版本         |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "agentHash",
+        "des": "节点HASH",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "agentHash",
+        "des": "节点HASH",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "agentAddress",
+        "des": "节点地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "packingAddress",
+        "des": "节点出块地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "rewardAddress",
+        "des": "节点奖励地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "deposit",
+        "des": "抵押金额",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "commissionRate",
+        "des": "佣金比例",
+        "type": "byte",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "agentName",
+        "des": "节点名称",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "agentId",
+        "des": "节点ID",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "introduction",
+        "des": "节点简介",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "time",
+        "des": "节点创建时间",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "blockHeight",
+        "des": "节点打包高度",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "delHeight",
+        "des": "节点失效高度",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "status",
+        "des": "状态",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "creditVal",
+        "des": "信誉值",
+        "type": "double",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "totalDeposit",
+        "des": "总委托金额",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "txHash",
+        "des": "创建节点交易HASH",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "memberCount",
+        "des": "委托人数",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "version",
+        "des": "版本",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "cs_getAgentStatus",
+    "des": "查询指定共识节点状态/query the specified consensus node status 1.0",
+    "scope": "public",
+    "version": 1.0,
+    "md": "cs\\_getAgentStatus\n==================\n### scope:public\n### version:1.0\n查询指定共识节点状态/query the specified consensus node status 1.0\n\n参数列表\n----\n| 参数名       |  参数类型  | 参数描述   | 是否非空 |\n| --------- |:------:| ------ |:----:|\n| chainId   |  int   | 链id    |  是   |\n| agentHash | string | 节点HASH |  是   |\n\n返回值\n---\n| 字段名    | 字段类型 | 参数描述 |\n| ------ |:----:| ---- |\n| status | byte | 节点状态 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "agentHash",
+        "des": "节点HASH",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "status",
+        "des": "节点状态",
+        "type": "byte",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "cs_updateAgentConsensusStatus",
+    "des": "修改节点共识状态/modifying the Node Consensus State",
+    "scope": "public",
+    "version": 1.0,
+    "md": "cs\\_updateAgentConsensusStatus\n==============================\n### scope:public\n### version:1.0\n修改节点共识状态/modifying the Node Consensus State\n\n参数列表\n----\n| 参数名     | 参数类型 | 参数描述 | 是否非空 |\n| ------- |:----:| ---- |:----:|\n| chainId | int  | 链id  |  是   |\n\n返回值\n---\n| 字段名 | 字段类型 | 参数描述                    |\n| --- |:----:| ----------------------- |\n| N/A | void | 无特定返回值，无错误则表示节点共识状态修改成功 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "N/A",
+        "des": "无特定返回值，无错误则表示节点共识状态修改成功",
+        "type": "void",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "cs_updateAgentStatus",
+    "des": "修改节点打包状态/modifying the Packing State of Nodes",
+    "scope": "public",
+    "version": 1.0,
+    "md": "cs\\_updateAgentStatus\n=====================\n### scope:public\n### version:1.0\n修改节点打包状态/modifying the Packing State of Nodes\n\n参数列表\n----\n| 参数名     | 参数类型 | 参数描述 | 是否非空 |\n| ------- |:----:| ---- |:----:|\n| chainId | int  | 链id  |  是   |\n| status  | int  | 节点状态 |  是   |\n\n返回值\n---\n| 字段名 | 字段类型 | 参数描述                    |\n| --- |:----:| ----------------------- |\n| N/A | void | 无特定返回值，无错误则表示节点打包状态修改成功 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "status",
+        "des": "节点状态",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "N/A",
+        "des": "无特定返回值，无错误则表示节点打包状态修改成功",
+        "type": "void",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "cs_getNodePackingAddress",
+    "des": "获取当前节点出块地址/Get the current node's out-of-block address",
+    "scope": "public",
+    "version": 1.0,
+    "md": "cs\\_getNodePackingAddress\n=========================\n### scope:public\n### version:1.0\n获取当前节点出块地址/Get the current node's out-of-block address\n\n参数列表\n----\n| 参数名     | 参数类型 | 参数描述 | 是否非空 |\n| ------- |:----:| ---- |:----:|\n| chainId | int  | 链id  |  是   |\n\n返回值\n---\n| 字段名         |  字段类型  | 参数描述     |\n| ----------- |:------:| -------- |\n| packAddress | string | 当前节点出块地址 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "packAddress",
+        "des": "当前节点出块地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "cs_getAgentAddressList",
+    "des": "获取当前网络共识节点出块地址列表或则查询最近N个区块的出块地址/Get all node out-of-block addresses or specify N block out-of-block designations",
+    "scope": "public",
+    "version": 1.0,
+    "md": "cs\\_getAgentAddressList\n=======================\n### scope:public\n### version:1.0\n获取当前网络共识节点出块地址列表或则查询最近N个区块的出块地址/Get all node out-of-block addresses or specify N block out-of-block designations\n\n参数列表\n----\n| 参数名     | 参数类型 | 参数描述 | 是否非空 |\n| ------- |:----:| ---- |:----:|\n| chainId | int  | 链id  |  是   |\n\n返回值\n---\n| 字段名         |  字段类型  | 参数描述   |\n| ----------- |:------:| ------ |\n| packAddress | string | 共识节点列表 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "packAddress",
+        "des": "共识节点列表",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "cs_getPackerInfo",
+    "des": "获取当前节点的出块账户信息/modifying the Packing State of Nodes",
+    "scope": "public",
+    "version": 1.0,
+    "md": "cs\\_getPackerInfo\n=================\n### scope:public\n### version:1.0\n获取当前节点的出块账户信息/modifying the Packing State of Nodes\n\n参数列表\n----\n| 参数名     | 参数类型 | 参数描述 | 是否非空 |\n| ------- |:----:| ---- |:----:|\n| chainId | int  | 链id  |  是   |\n\n返回值\n---\n| 字段名             |      字段类型       | 参数描述     |\n| --------------- |:---------------:| -------- |\n| address         |     string      | 当前节点出块地址 |\n| password        |     string      | 当前节点密码   |\n| packAddressList | list&lt;string> | 当前打包地址列表 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "address",
+        "des": "当前节点出块地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "password",
+        "des": "当前节点密码",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "packAddressList",
+        "des": "当前打包地址列表",
+        "type": "list&lt;String>",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "cs_doubleSpendRecord",
+    "des": "双花交易记录/double spend transaction record ",
+    "scope": "public",
+    "version": 1.0,
+    "md": "cs\\_doubleSpendRecord\n=====================\n### scope:public\n### version:1.0\n双花交易记录/double spend transaction record \n\n参数列表\n----\n| 参数名     |  参数类型  | 参数描述 | 是否非空 |\n| ------- |:------:| ---- |:----:|\n| chainId |  int   | 链id  |  是   |\n| block   | string | 区块信息 |  是   |\n| tx      | string | 分叉交易 |  是   |\n\n返回值\n---\n| 字段名   |  字段类型   | 参数描述 |\n| ----- |:-------:| ---- |\n| value | boolean | 处理结果 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "block",
+        "des": "区块信息",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "tx",
+        "des": "分叉交易",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "处理结果",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "cs_getWholeInfo",
+    "des": "查询全网共识数据/query the consensus information of the whole network",
+    "scope": "public",
+    "version": 1.0,
+    "md": "cs\\_getWholeInfo\n================\n### scope:public\n### version:1.0\n查询全网共识数据/query the consensus information of the whole network\n\n参数列表\n----\n| 参数名     | 参数类型 | 参数描述 | 是否非空 |\n| ------- |:----:| ---- |:----:|\n| chainId | int  | 链id  |  是   |\n\n返回值\n---\n| 字段名                    |  字段类型  | 参数描述       |\n| ---------------------- |:------:| ---------- |\n| agentCount             |  int   | 节点数量       |\n| totalDeposit           | string | 总委托两       |\n| rewardOfDay            | string | 当天共识奖励总量   |\n| consensusAccountNumber |  int   | 参与共识人数     |\n| packingAgentCount      |  int   | 当前轮次出块节点数量 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "agentCount",
+        "des": "节点数量",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "totalDeposit",
+        "des": "总委托两",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "rewardOfDay",
+        "des": "当天共识奖励总量",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "consensusAccountNumber",
+        "des": "参与共识人数",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "packingAgentCount",
+        "des": "当前轮次出块节点数量",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "cs_getInfo",
+    "des": "查询指定账户共识数据/query consensus information for specified accounts",
+    "scope": "public",
+    "version": 1.0,
+    "md": "cs\\_getInfo\n===========\n### scope:public\n### version:1.0\n查询指定账户共识数据/query consensus information for specified accounts\n\n参数列表\n----\n| 参数名     |  参数类型  | 参数描述 | 是否非空 |\n| ------- |:------:| ---- |:----:|\n| chainId |  int   | 链id  |  是   |\n| address | string | 账户地址 |  是   |\n\n返回值\n---\n| 字段名            |  字段类型  | 参数描述      |\n| -------------- |:------:| --------- |\n| agentCount     |  int   | 节点数量      |\n| totalDeposit   | string | 参与共识的总金额  |\n| joinAgentCount |  int   | 参与共识节点的数量 |\n| usableBalance  | string | 可用余额      |\n| reward         | string | 获得的共识奖励   |\n| rewardOfDay    | string | 当天获得的共识奖励 |\n| agentHash      | string | 创建的节点HASH |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "agentCount",
+        "des": "节点数量",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "totalDeposit",
+        "des": "参与共识的总金额",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "joinAgentCount",
+        "des": "参与共识节点的数量",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "usableBalance",
+        "des": "可用余额",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "reward",
+        "des": "获得的共识奖励",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "rewardOfDay",
+        "des": "当天获得的共识奖励",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "agentHash",
+        "des": "创建的节点HASH",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "cs_getPublishList",
+    "des": "查询红黄牌记录/query punish list",
+    "scope": "public",
+    "version": 1.0,
+    "md": "cs\\_getPublishList\n==================\n### scope:public\n### version:1.0\n查询红黄牌记录/query punish list\n\n参数列表\n----\n| 参数名     |  参数类型  | 参数描述                    | 是否非空 |\n| ------- |:------:| ----------------------- |:----:|\n| chainId |  int   | 链id                     |  是   |\n| address | string | 地址                      |  是   |\n| type    |  int   | 惩罚类型 0红黄牌记录 1红牌记录 2黄牌记录 |  是   |\n\n返回值\n---\n| 字段名          |      字段类型       | 参数描述      |\n| ------------ |:---------------:| --------- |\n| redPunish    | list&lt;string> | 获得的红牌列表   |\n| yellowPunish | list&lt;string> | 获得的黄牌惩罚列表 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "type",
+        "des": "惩罚类型 0红黄牌记录 1红牌记录 2黄牌记录",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "redPunish",
+        "des": "获得的红牌列表",
+        "type": "list&lt;String>",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "yellowPunish",
+        "des": "获得的黄牌惩罚列表",
+        "type": "list&lt;String>",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "cs_getRoundInfo",
+    "des": "获取当前轮次信息/get current round information",
+    "scope": "public",
+    "version": 1.0,
+    "md": "cs\\_getRoundInfo\n================\n### scope:public\n### version:1.0\n获取当前轮次信息/get current round information\n\n参数列表\n----\n| 参数名     | 参数类型 | 参数描述 | 是否非空 |\n| ------- |:----:| ---- |:----:|\n| chainId | int  | 链id  |  是   |\n\n返回值\n---\n| 字段名                                                                                                            |          字段类型           | 参数描述                                  |\n| -------------------------------------------------------------------------------------------------------------- |:-----------------------:| ------------------------------------- |\n| totalWeight                                                                                                    |         double          | 当前轮次总权重                               |\n| index                                                                                                          |          long           | 轮次下标                                  |\n| startTime                                                                                                      |          long           | 轮次开始时间                                |\n| endTime                                                                                                        |          long           | 轮次结束时间                                |\n| memberCount                                                                                                    |           int           | 本轮次出块节点数                              |\n| memberList                                                                                                     |     list&lt;object>     | 本轮次出块成员信息                             |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;roundIndex                                                     |          long           | 轮次下标                                  |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;roundStartTime                                                 |          long           | 轮次开始时间                                |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;packingIndexOfRound                                            |           int           | 该节点在本轮次中第几个出块                         |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;agent                                                          |         object          | 共识节点信息                                |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;agentAddress   |         byte[]          | 节点地址                                  |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;packingAddress |         byte[]          | 出块地址                                  |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewardAddress  |         byte[]          | 奖励地址                                  |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;deposit        |       biginteger        | 保证金                                   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;commissionRate |          byte           | 佣金比例                                  |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time           |          long           | 创建时间                                  |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;blockHeight    |          long           | 所在区块高度                                |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delHeight      |          long           | 节点注销高度                                |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;status         |           int           | 状态，0:待共识 unConsensus, 1:共识中 consensus |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creditVal      |         double          | 信誉值                                   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;totalDeposit   |       biginteger        | 节点总委托金额                               |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;txHash         |        nulshash         | 创建该节点的交易HASH                          |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memberCount    |           int           | 参与共识人数                                |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alais          |         string          | 节点别名                                  |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;depositList                                                    |     list&lt;object>     | 当前节点委托信息                              |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;deposit        |       biginteger        | 委托金额                                  |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;agentHash      |        nulshash         | 委托的节点HASH                             |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address        |         byte[]          | 委托账户                                  |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time           |          long           | 委托时间                                  |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;status         |           int           | 状态                                    |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;txHash         |        nulshash         | 委托交易HASH                              |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;blockHeight    |          long           | 委托交易被打包的高度                            |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delHeight      |          long           | 退出委托高度                                |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sortValue                                                      |         string          | 排序值                                   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;packStartTime                                                  |          long           | 当前节点开始出块时间                            |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;packEndTime                                                    |          long           | 当前节点出块结束时间                            |\n| preRound                                                                                                       | object&lt;meetinground> | 上一轮信息                                 |\n| myMember                                                                                                       |         object          | 当前节点出块信息                              |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;roundIndex                                                     |          long           | 轮次下标                                  |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;roundStartTime                                                 |          long           | 轮次开始时间                                |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;packingIndexOfRound                                            |           int           | 该节点在本轮次中第几个出块                         |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;agent                                                          |         object          | 共识节点信息                                |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;agentAddress   |         byte[]          | 节点地址                                  |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;packingAddress |         byte[]          | 出块地址                                  |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewardAddress  |         byte[]          | 奖励地址                                  |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;deposit        |       biginteger        | 保证金                                   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;commissionRate |          byte           | 佣金比例                                  |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time           |          long           | 创建时间                                  |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;blockHeight    |          long           | 所在区块高度                                |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delHeight      |          long           | 节点注销高度                                |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;status         |           int           | 状态，0:待共识 unConsensus, 1:共识中 consensus |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creditVal      |         double          | 信誉值                                   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;totalDeposit   |       biginteger        | 节点总委托金额                               |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;txHash         |        nulshash         | 创建该节点的交易HASH                          |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memberCount    |           int           | 参与共识人数                                |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alais          |         string          | 节点别名                                  |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;depositList                                                    |     list&lt;object>     | 当前节点委托信息                              |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;deposit        |       biginteger        | 委托金额                                  |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;agentHash      |        nulshash         | 委托的节点HASH                             |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address        |         byte[]          | 委托账户                                  |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time           |          long           | 委托时间                                  |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;status         |           int           | 状态                                    |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;txHash         |        nulshash         | 委托交易HASH                              |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;blockHeight    |          long           | 委托交易被打包的高度                            |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delHeight      |          long           | 退出委托高度                                |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sortValue                                                      |         string          | 排序值                                   |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;packStartTime                                                  |          long           | 当前节点开始出块时间                            |\n| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;packEndTime                                                    |          long           | 当前节点出块结束时间                            |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "totalWeight",
+        "des": "当前轮次总权重",
+        "type": "double",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "index",
+        "des": "轮次下标",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "startTime",
+        "des": "轮次开始时间",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "endTime",
+        "des": "轮次结束时间",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "memberCount",
+        "des": "本轮次出块节点数",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "memberList",
+        "des": "本轮次出块成员信息",
+        "type": "list&lt;object>",
+        "list": [
+          {
+            "name": "roundIndex",
+            "des": "轮次下标",
+            "type": "long",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "roundStartTime",
+            "des": "轮次开始时间",
+            "type": "long",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "packingIndexOfRound",
+            "des": "该节点在本轮次中第几个出块",
+            "type": "int",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "agent",
+            "des": "共识节点信息",
+            "type": "object",
+            "list": [
+              {
+                "name": "agentAddress",
+                "des": "节点地址",
+                "type": "byte[]",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "packingAddress",
+                "des": "出块地址",
+                "type": "byte[]",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "rewardAddress",
+                "des": "奖励地址",
+                "type": "byte[]",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "deposit",
+                "des": "保证金",
+                "type": "biginteger",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "commissionRate",
+                "des": "佣金比例",
+                "type": "byte",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "time",
+                "des": "创建时间",
+                "type": "long",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "blockHeight",
+                "des": "所在区块高度",
+                "type": "long",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "delHeight",
+                "des": "节点注销高度",
+                "type": "long",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "status",
+                "des": "状态，0:待共识 unConsensus, 1:共识中 consensus",
+                "type": "int",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "creditVal",
+                "des": "信誉值",
+                "type": "double",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "totalDeposit",
+                "des": "节点总委托金额",
+                "type": "biginteger",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "txHash",
+                "des": "创建该节点的交易HASH",
+                "type": "nulshash",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "memberCount",
+                "des": "参与共识人数",
+                "type": "int",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "alais",
+                "des": "节点别名",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              }
+            ],
+            "canNull": false
+          },
+          {
+            "name": "depositList",
+            "des": "当前节点委托信息",
+            "type": "list&lt;object>",
+            "list": [
+              {
+                "name": "deposit",
+                "des": "委托金额",
+                "type": "biginteger",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "agentHash",
+                "des": "委托的节点HASH",
+                "type": "nulshash",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "address",
+                "des": "委托账户",
+                "type": "byte[]",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "time",
+                "des": "委托时间",
+                "type": "long",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "status",
+                "des": "状态",
+                "type": "int",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "txHash",
+                "des": "委托交易HASH",
+                "type": "nulshash",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "blockHeight",
+                "des": "委托交易被打包的高度",
+                "type": "long",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "delHeight",
+                "des": "退出委托高度",
+                "type": "long",
+                "list": null,
+                "canNull": false
+              }
+            ],
+            "canNull": false
+          },
+          {
+            "name": "sortValue",
+            "des": "排序值",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "packStartTime",
+            "des": "当前节点开始出块时间",
+            "type": "long",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "packEndTime",
+            "des": "当前节点出块结束时间",
+            "type": "long",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      },
+      {
+        "name": "preRound",
+        "des": "上一轮信息",
+        "type": "object&lt;meetinground>",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "myMember",
+        "des": "当前节点出块信息",
+        "type": "object",
+        "list": [
+          {
+            "name": "roundIndex",
+            "des": "轮次下标",
+            "type": "long",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "roundStartTime",
+            "des": "轮次开始时间",
+            "type": "long",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "packingIndexOfRound",
+            "des": "该节点在本轮次中第几个出块",
+            "type": "int",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "agent",
+            "des": "共识节点信息",
+            "type": "object",
+            "list": [
+              {
+                "name": "agentAddress",
+                "des": "节点地址",
+                "type": "byte[]",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "packingAddress",
+                "des": "出块地址",
+                "type": "byte[]",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "rewardAddress",
+                "des": "奖励地址",
+                "type": "byte[]",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "deposit",
+                "des": "保证金",
+                "type": "biginteger",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "commissionRate",
+                "des": "佣金比例",
+                "type": "byte",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "time",
+                "des": "创建时间",
+                "type": "long",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "blockHeight",
+                "des": "所在区块高度",
+                "type": "long",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "delHeight",
+                "des": "节点注销高度",
+                "type": "long",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "status",
+                "des": "状态，0:待共识 unConsensus, 1:共识中 consensus",
+                "type": "int",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "creditVal",
+                "des": "信誉值",
+                "type": "double",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "totalDeposit",
+                "des": "节点总委托金额",
+                "type": "biginteger",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "txHash",
+                "des": "创建该节点的交易HASH",
+                "type": "nulshash",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "memberCount",
+                "des": "参与共识人数",
+                "type": "int",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "alais",
+                "des": "节点别名",
+                "type": "string",
+                "list": null,
+                "canNull": false
+              }
+            ],
+            "canNull": false
+          },
+          {
+            "name": "depositList",
+            "des": "当前节点委托信息",
+            "type": "list&lt;object>",
+            "list": [
+              {
+                "name": "deposit",
+                "des": "委托金额",
+                "type": "biginteger",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "agentHash",
+                "des": "委托的节点HASH",
+                "type": "nulshash",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "address",
+                "des": "委托账户",
+                "type": "byte[]",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "time",
+                "des": "委托时间",
+                "type": "long",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "status",
+                "des": "状态",
+                "type": "int",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "txHash",
+                "des": "委托交易HASH",
+                "type": "nulshash",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "blockHeight",
+                "des": "委托交易被打包的高度",
+                "type": "long",
+                "list": null,
+                "canNull": false
+              },
+              {
+                "name": "delHeight",
+                "des": "退出委托高度",
+                "type": "long",
+                "list": null,
+                "canNull": false
+              }
+            ],
+            "canNull": false
+          },
+          {
+            "name": "sortValue",
+            "des": "排序值",
+            "type": "string",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "packStartTime",
+            "des": "当前节点开始出块时间",
+            "type": "long",
+            "list": null,
+            "canNull": false
+          },
+          {
+            "name": "packEndTime",
+            "des": "当前节点出块结束时间",
+            "type": "long",
+            "list": null,
+            "canNull": false
+          }
+        ],
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "cs_getRoundMemberList",
+    "des": "查询指定区块所在轮次的成员列表/Query the membership list of the specified block's rounds",
+    "scope": "public",
+    "version": 1.0,
+    "md": "cs\\_getRoundMemberList\n======================\n### scope:public\n### version:1.0\n查询指定区块所在轮次的成员列表/Query the membership list of the specified block's rounds\n\n参数列表\n----\n| 参数名     |  参数类型  | 参数描述    | 是否非空 |\n| ------- |:------:| ------- |:----:|\n| chainId |  int   | 链id     |  是   |\n| extend  | string | 区块头扩展信息 |  是   |\n\n返回值\n---\n| 字段名             |      字段类型       | 参数描述       |\n| --------------- |:---------------:| ---------- |\n| packAddressList | list&lt;string> | 当前伦次出块地址列表 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "extend",
+        "des": "区块头扩展信息",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "packAddressList",
+        "des": "当前伦次出块地址列表",
+        "type": "list&lt;String>",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "cs_getConsensusConfig",
+    "des": "获取共识模块配置信息/get consensus config",
+    "scope": "public",
+    "version": 1.0,
+    "md": "cs\\_getConsensusConfig\n======================\n### scope:public\n### version:1.0\n获取共识模块配置信息/get consensus config\n\n参数列表\n----\n| 参数名     | 参数类型 | 参数描述 | 是否非空 |\n| ------- |:----:| ---- |:----:|\n| chainId | int  | 链id  |  是   |\n\n返回值\n---\n| 字段名             |  字段类型   | 参数描述              |\n| --------------- |:-------:| ----------------- |\n| seedNodes       | string  | 种子节点列表            |\n| inflationAmount | integer | 委托金额最大值           |\n| agentAssetId    | integer | 共识资产ID            |\n| agentChainId    | integer | 共识资产链ID           |\n| awardAssetId    | integer | 奖励资产ID（共识奖励为本链资产） |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "seedNodes",
+        "des": "种子节点列表",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "inflationAmount",
+        "des": "委托金额最大值",
+        "type": "integer",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "agentAssetId",
+        "des": "共识资产ID",
+        "type": "integer",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "agentChainId",
+        "des": "共识资产链ID",
+        "type": "integer",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "awardAssetId",
+        "des": "奖励资产ID（共识奖励为本链资产）",
+        "type": "integer",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "cs_addEvidenceRecord",
+    "des": "链分叉证据记录/add evidence record",
+    "scope": "public",
+    "version": 1.0,
+    "md": "cs\\_addEvidenceRecord\n=====================\n### scope:public\n### version:1.0\n链分叉证据记录/add evidence record\n\n参数列表\n----\n| 参数名            |  参数类型  | 参数描述   | 是否非空 |\n| -------------- |:------:| ------ |:----:|\n| chainId        |  int   | 链id    |  是   |\n| blockHeader    | string | 分叉区块头一 |  是   |\n| evidenceHeader | string | 分叉区块头二 |  是   |\n\n返回值\n---\n| 字段名   |  字段类型   | 参数描述 |\n| ----- |:-------:| ---- |\n| value | boolean | 处理结果 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "blockHeader",
+        "des": "分叉区块头一",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "evidenceHeader",
+        "des": "分叉区块头二",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "处理结果",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "cs_contractDeposit",
+    "des": "智能合约委托共识/contract deposit agent transaction",
+    "scope": "public",
+    "version": 1.0,
+    "md": "cs\\_contractDeposit\n===================\n### scope:public\n### version:1.0\n智能合约委托共识/contract deposit agent transaction\n\n参数列表\n----\n| 参数名             |  参数类型  | 参数描述          | 是否非空 |\n| --------------- |:------:| ------------- |:----:|\n| chainId         |  int   | 链id           |  是   |\n| agentHash       | string | 委托的节点HASH     |  是   |\n| deposit         | string | 委托金额          |  是   |\n| contractAddress |  int   | 合约地址          |  是   |\n| contractSender  |  int   | 合约调用者地址       |  是   |\n| contractBalance |  int   | 合约地址的当前余额     |  是   |\n| contractNonce   |  int   | 合约地址的当前nonce值 |  是   |\n| blockTime       |  int   | 当前打包的区块时间     |  是   |\n\n返回值\n---\n| 字段名 |      字段类型       | 参数描述        |\n| --- |:---------------:| ----------- |\n| 返回值 | list&lt;string> | 返回交易HASH和交易 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "agentHash",
+        "des": "委托的节点HASH",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "deposit",
+        "des": "委托金额",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractAddress",
+        "des": "合约地址",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractSender",
+        "des": "合约调用者地址",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractBalance",
+        "des": "合约地址的当前余额",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractNonce",
+        "des": "合约地址的当前nonce值",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "blockTime",
+        "des": "当前打包的区块时间",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "返回值",
+        "des": "返回交易HASH和交易",
+        "type": "list&lt;String>",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "cs_contractWithdraw",
+    "des": "智能合约退出共识/contract withdraw deposit agent transaction",
+    "scope": "public",
+    "version": 1.0,
+    "md": "cs\\_contractWithdraw\n====================\n### scope:public\n### version:1.0\n智能合约退出共识/contract withdraw deposit agent transaction\n\n参数列表\n----\n| 参数名             |  参数类型  | 参数描述          | 是否非空 |\n| --------------- |:------:| ------------- |:----:|\n| chainId         |  int   | 链id           |  是   |\n| joinAgentHash   | string | 节点HASH        |  是   |\n| contractAddress |  int   | 合约地址          |  是   |\n| contractSender  |  int   | 合约调用者地址       |  是   |\n| contractBalance |  int   | 合约地址的当前余额     |  是   |\n| contractNonce   |  int   | 合约地址的当前nonce值 |  是   |\n| blockTime       |  int   | 当前打包的区块时间     |  是   |\n\n返回值\n---\n| 字段名 |      字段类型       | 参数描述        |\n| --- |:---------------:| ----------- |\n| 返回值 | list&lt;string> | 返回交易HASH和交易 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "joinAgentHash",
+        "des": "节点HASH",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractAddress",
+        "des": "合约地址",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractSender",
+        "des": "合约调用者地址",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractBalance",
+        "des": "合约地址的当前余额",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractNonce",
+        "des": "合约地址的当前nonce值",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "blockTime",
+        "des": "当前打包的区块时间",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "返回值",
+        "des": "返回交易HASH和交易",
+        "type": "list&lt;String>",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "cs_stopContractAgent",
+    "des": "智能合约注销节点/contract stop agent",
+    "scope": "public",
+    "version": 1.0,
+    "md": "cs\\_stopContractAgent\n=====================\n### scope:public\n### version:1.0\n智能合约注销节点/contract stop agent\n\n参数列表\n----\n| 参数名             | 参数类型 | 参数描述          | 是否非空 |\n| --------------- |:----:| ------------- |:----:|\n| chainId         | int  | 链id           |  是   |\n| contractAddress | int  | 合约地址          |  是   |\n| contractSender  | int  | 合约调用者地址       |  是   |\n| contractBalance | int  | 合约地址的当前余额     |  是   |\n| contractNonce   | int  | 合约地址的当前nonce值 |  是   |\n| blockTime       | int  | 当前打包的区块时间     |  是   |\n\n返回值\n---\n| 字段名 |      字段类型       | 参数描述        |\n| --- |:---------------:| ----------- |\n| 返回值 | list&lt;string> | 返回交易HASH和交易 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractAddress",
+        "des": "合约地址",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractSender",
+        "des": "合约调用者地址",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractBalance",
+        "des": "合约地址的当前余额",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractNonce",
+        "des": "合约地址的当前nonce值",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "blockTime",
+        "des": "当前打包的区块时间",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "返回值",
+        "des": "返回交易HASH和交易",
+        "type": "list&lt;String>",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "cs_createContractAgent",
+    "des": "智能合约创建节点/contract create agent",
+    "scope": "public",
+    "version": 1.0,
+    "md": "cs\\_createContractAgent\n=======================\n### scope:public\n### version:1.0\n智能合约创建节点/contract create agent\n\n参数列表\n----\n| 参数名             |  参数类型  | 参数描述          | 是否非空 |\n| --------------- |:------:| ------------- |:----:|\n| chainId         |  int   | 链id           |  是   |\n| packingAddress  | string | 出块地址          |  是   |\n| deposit         | string | 抵押金额          |  是   |\n| commissionRate  | string | 佣金比例          |  是   |\n| contractAddress |  int   | 合约地址          |  是   |\n| contractSender  |  int   | 合约调用者地址       |  是   |\n| contractBalance |  int   | 合约地址的当前余额     |  是   |\n| contractNonce   |  int   | 合约地址的当前nonce值 |  是   |\n| blockTime       |  int   | 当前打包的区块时间     |  是   |\n\n返回值\n---\n| 字段名 |      字段类型       | 参数描述        |\n| --- |:---------------:| ----------- |\n| 返回值 | list&lt;string> | 返回交易HASH和交易 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "packingAddress",
+        "des": "出块地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "deposit",
+        "des": "抵押金额",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "commissionRate",
+        "des": "佣金比例",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractAddress",
+        "des": "合约地址",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractSender",
+        "des": "合约调用者地址",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractBalance",
+        "des": "合约地址的当前余额",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractNonce",
+        "des": "合约地址的当前nonce值",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "blockTime",
+        "des": "当前打包的区块时间",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "返回值",
+        "des": "返回交易HASH和交易",
+        "type": "list&lt;String>",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "cs_getContractAgentInfo",
+    "des": "智能合约节点/contract get agent info",
+    "scope": "public",
+    "version": 1.0,
+    "md": "cs\\_getContractAgentInfo\n========================\n### scope:public\n### version:1.0\n智能合约节点/contract get agent info\n\n参数列表\n----\n| 参数名             |  参数类型  | 参数描述    | 是否非空 |\n| --------------- |:------:| ------- |:----:|\n| chainId         |  int   | 链id     |  是   |\n| agentHash       | string | 节点HASH  |  是   |\n| contractAddress |  int   | 合约地址    |  是   |\n| contractSender  |  int   | 合约调用者地址 |  是   |\n\n返回值\n---\n| 字段名 |      字段类型       | 参数描述 |\n| --- |:---------------:| ---- |\n| 返回值 | list&lt;string> | 节点信息 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "agentHash",
+        "des": "节点HASH",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractAddress",
+        "des": "合约地址",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractSender",
+        "des": "合约调用者地址",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "返回值",
+        "des": "节点信息",
+        "type": "list&lt;String>",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "cs_getContractDepositInfo",
+    "des": "智能合约查询指定账户委托信息/Intelligent Contract Query for Assigned Account Delegation Information",
+    "scope": "public",
+    "version": 1.0,
+    "md": "cs\\_getContractDepositInfo\n==========================\n### scope:public\n### version:1.0\n智能合约查询指定账户委托信息/Intelligent Contract Query for Assigned Account Delegation Information\n\n参数列表\n----\n| 参数名             |  参数类型  | 参数描述    | 是否非空 |\n| --------------- |:------:| ------- |:----:|\n| chainId         |  int   | 链id     |  是   |\n| joinAgentHash   | string | 节点HASH  |  是   |\n| contractAddress |  int   | 合约地址    |  是   |\n| contractSender  |  int   | 合约调用者地址 |  是   |\n\n返回值\n---\n| 字段名 |      字段类型       | 参数描述 |\n| --- |:---------------:| ---- |\n| 返回值 | list&lt;string> | 委托信息 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "joinAgentHash",
+        "des": "节点HASH",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractAddress",
+        "des": "合约地址",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "contractSender",
+        "des": "合约调用者地址",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "返回值",
+        "des": "委托信息",
+        "type": "list&lt;String>",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "cs_triggerCoinBaseContract",
+    "des": "交易模块触发CoinBase智能合约/trigger coin base contract",
+    "scope": "public",
+    "version": 1.0,
+    "md": "cs\\_triggerCoinBaseContract\n===========================\n### scope:public\n### version:1.0\n交易模块触发CoinBase智能合约/trigger coin base contract\n\n参数列表\n----\n| 参数名         |  参数类型  | 参数描述      | 是否非空 |\n| ----------- |:------:| --------- |:----:|\n| chainId     |  int   | 链id       |  是   |\n| tx          | string | 交易信息      |  是   |\n| blockHeader | string | 区块头       |  是   |\n| stateRoot   | string | stateRoot |  是   |\n\n返回值\n---\n| 字段名   |  字段类型  | 参数描述      |\n| ----- |:------:| --------- |\n| value | string | stateRoot |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "tx",
+        "des": "交易信息",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "blockHeader",
+        "des": "区块头",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "stateRoot",
+        "des": "stateRoot",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "stateRoot",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "cs_getDepositList",
+    "des": "查询指定账户或指定节点的委托信息/Query delegation information for a specified account or node",
+    "scope": "public",
+    "version": 1.0,
+    "md": "cs\\_getDepositList\n==================\n### scope:public\n### version:1.0\n查询指定账户或指定节点的委托信息/Query delegation information for a specified account or node\n\n参数列表\n----\n| 参数名        |  参数类型  | 参数描述   | 是否非空 |\n| ---------- |:------:| ------ |:----:|\n| chainId    |  int   | 链id    |  是   |\n| pageNumber |  int   | 页码     |  是   |\n| pageSize   |  int   | 每页数量   |  是   |\n| address    | string | 账户地址   |  是   |\n| agentHash  | string | 节点HASH |  是   |\n\n返回值\n---\n| 字段名          |  字段类型  | 参数描述              |\n| ------------ |:------:| ----------------- |\n| deposit      | string | 委托金额              |\n| agentHash    | string | 节点HASH            |\n| address      | string | 账户地址              |\n| time         |  long  | 委托时间              |\n| txHash       | string | 委托交易HASH          |\n| blockHeight  |  long  | 委托交易被打包高度         |\n| delHeight    |  long  | 退出委托高度            |\n| status       |  int   | 节点状态 0:待共识, 1:已共识 |\n| agentName    | string | 节点名称              |\n| agentAddress | string | 节点地址              |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "pageNumber",
+        "des": "页码",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "pageSize",
+        "des": "每页数量",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "agentHash",
+        "des": "节点HASH",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "deposit",
+        "des": "委托金额",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "agentHash",
+        "des": "节点HASH",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "time",
+        "des": "委托时间",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "txHash",
+        "des": "委托交易HASH",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "blockHeight",
+        "des": "委托交易被打包高度",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "delHeight",
+        "des": "退出委托高度",
+        "type": "long",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "status",
+        "des": "节点状态 0:待共识, 1:已共识",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "agentName",
+        "des": "节点名称",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "agentAddress",
+        "des": "节点地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "cs_depositToAgent",
+    "des": "创建委托交易/deposit agent transaction",
+    "scope": "public",
+    "version": 1.0,
+    "md": "cs\\_depositToAgent\n==================\n### scope:public\n### version:1.0\n创建委托交易/deposit agent transaction\n\n参数列表\n----\n| 参数名       |  参数类型  | 参数描述   | 是否非空 |\n| --------- |:------:| ------ |:----:|\n| chainId   |  int   | 链id    |  是   |\n| address   | string | 账户地址   |  是   |\n| agentHash | string | 节点HASH |  是   |\n| deposit   | string | 委托金额   |  是   |\n| password  | string | 账户密码   |  是   |\n\n返回值\n---\n| 字段名    |  字段类型  | 参数描述       |\n| ------ |:------:| ---------- |\n| txHash | string | 加入共识交易Hash |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "agentHash",
+        "des": "节点HASH",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "deposit",
+        "des": "委托金额",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "password",
+        "des": "账户密码",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "txHash",
+        "des": "加入共识交易Hash",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "cs_withdraw",
+    "des": "退出委托交易/withdraw deposit agent transaction",
+    "scope": "public",
+    "version": 1.0,
+    "md": "cs\\_withdraw\n============\n### scope:public\n### version:1.0\n退出委托交易/withdraw deposit agent transaction\n\n参数列表\n----\n| 参数名      |  参数类型  | 参数描述       | 是否非空 |\n| -------- |:------:| ---------- |:----:|\n| chainId  |  int   | 链id        |  是   |\n| address  | string | 账户地址       |  是   |\n| txHash   | string | 加入共识交易HASH |  是   |\n| password | string | 账户密码       |  是   |\n\n返回值\n---\n| 字段名    |  字段类型  | 参数描述       |\n| ------ |:------:| ---------- |\n| txHash | string | 退出共识交易Hash |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "address",
+        "des": "账户地址",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "txHash",
+        "des": "加入共识交易HASH",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "password",
+        "des": "账户密码",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "txHash",
+        "des": "退出共识交易Hash",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "cs_chainRollBack",
+    "des": "区块回滚/chain rollback",
+    "scope": "public",
+    "version": 1.0,
+    "md": "cs\\_chainRollBack\n=================\n### scope:public\n### version:1.0\n区块回滚/chain rollback\n\n参数列表\n----\n| 参数名     | 参数类型 | 参数描述     | 是否非空 |\n| ------- |:----:| -------- |:----:|\n| chainId | int  | 链id      |  是   |\n| height  | int  | 区块回滚到的高度 |  是   |\n\n返回值\n---\n| 字段名   |  字段类型   | 参数描述   |\n| ----- |:-------:| ------ |\n| value | boolean | 区块回滚结果 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "height",
+        "des": "区块回滚到的高度",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "区块回滚结果",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "cs_addBlock",
+    "des": "接收并缓存新区块/Receiving and caching new blocks",
+    "scope": "public",
+    "version": 1.0,
+    "md": "cs\\_addBlock\n============\n### scope:public\n### version:1.0\n接收并缓存新区块/Receiving and caching new blocks\n\n参数列表\n----\n| 参数名         |  参数类型  | 参数描述 | 是否非空 |\n| ----------- |:------:| ---- |:----:|\n| chainId     |  int   | 链id  |  是   |\n| blockHeader | string | 区块头  |  是   |\n\n返回值\n---\n| 字段名   |  字段类型   | 参数描述     |\n| ----- |:-------:| -------- |\n| value | boolean | 接口执行成功与否 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "blockHeader",
+        "des": "区块头",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "接口执行成功与否",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "cs_receiveHeaderList",
+    "des": "接收并缓存区块列表/Receive and cache block lists",
+    "scope": "public",
+    "version": 1.0,
+    "md": "cs\\_receiveHeaderList\n=====================\n### scope:public\n### version:1.0\n接收并缓存区块列表/Receive and cache block lists\n\n参数列表\n----\n| 参数名        |  参数类型  | 参数描述  | 是否非空 |\n| ---------- |:------:| ----- |:----:|\n| chainId    |  int   | 链id   |  是   |\n| headerList | string | 区块头列表 |  是   |\n\n返回值\n---\n| 字段名   |  字段类型   | 参数描述     |\n| ----- |:-------:| -------- |\n| value | boolean | 是否成功接收处理 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "headerList",
+        "des": "区块头列表",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "是否成功接收处理",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  },
+  {
+    "cmdName": "cs_validBlock",
+    "des": "验证区块/verify block correctness",
+    "scope": "public",
+    "version": 1.0,
+    "md": "cs\\_validBlock\n==============\n### scope:public\n### version:1.0\n验证区块/verify block correctness\n\n参数列表\n----\n| 参数名      |  参数类型  | 参数描述 | 是否非空 |\n| -------- |:------:| ---- |:----:|\n| chainId  |  int   | 链id  |  是   |\n| download |  int   | 区块状态 |  是   |\n| block    | string | 区块信息 |  是   |\n\n返回值\n---\n| 字段名   |  字段类型   | 参数描述 |\n| ----- |:-------:| ---- |\n| value | boolean | 验证结果 |\n\n",
+    "parameters": [
+      {
+        "name": "chainId",
+        "des": "链id",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "download",
+        "des": "区块状态",
+        "type": "int",
+        "list": null,
+        "canNull": false
+      },
+      {
+        "name": "block",
+        "des": "区块信息",
+        "type": "string",
+        "list": null,
+        "canNull": false
+      }
+    ],
+    "result": [
+      {
+        "name": "value",
+        "des": "验证结果",
+        "type": "boolean",
+        "list": null,
+        "canNull": false
+      }
+    ]
+  }
+]

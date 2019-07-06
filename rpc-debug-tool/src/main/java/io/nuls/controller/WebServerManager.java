@@ -29,6 +29,7 @@ import io.nuls.core.log.Log;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.http.server.NetworkListener;
 import org.glassfish.grizzly.http.server.ServerConfiguration;
+import org.glassfish.grizzly.http.server.StaticHttpHandler;
 import org.glassfish.grizzly.nio.transport.TCPNIOTransport;
 import org.glassfish.grizzly.servlet.WebappContext;
 import org.glassfish.grizzly.strategies.WorkerThreadIOStrategy;
@@ -83,6 +84,10 @@ public class WebServerManager {
         httpServer.addListener(listener);
         ServerConfiguration config = httpServer.getServerConfiguration();
         config.setDefaultQueryEncoding(Charsets.UTF8_CHARSET);
+        final StaticHttpHandler staticHandler = new StaticHttpHandler("www");
+        // change to true in the deploy time
+        staticHandler.setFileCacheEnabled(true);
+        httpServer.getServerConfiguration().addHttpHandler(staticHandler, "/dist");
         webappContext.deploy(httpServer);
         try {
             httpServer.start();

@@ -17,12 +17,17 @@
         <dependency>
             <groupId>io.nuls.v2</groupId>
             <artifactId>nuls-core-rpc</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>1.0.0-alpha</version>
         </dependency>
         <dependency>
             <groupId>io.nuls.v2</groupId>
             <artifactId>nuls-base</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>1.0.0-alpha</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.grizzly</groupId>
+            <artifactId>grizzly-servlet-webserver</artifactId>
+            <version>1.9.10</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
@@ -32,6 +37,10 @@
                 <exclusion>
                     <artifactId>grizzly-http-server</artifactId>
                     <groupId>org.glassfish.grizzly</groupId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.glassfish.jersey.core</groupId>
+                    <artifactId>jersey-client</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -65,6 +74,20 @@
             <artifactId>grizzly-http-server</artifactId>
             <version>2.4.4</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.glassfish.jersey.core/jersey-client -->
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>2.27</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.glassfish.jersey.media/jersey-media-json-jackson -->
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-jackson</artifactId>
+            <version>2.27</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
         <dependency>
             <groupId>javax.xml.bind</groupId>
@@ -89,6 +112,17 @@
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>4.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.connectors</groupId>
+            <artifactId>jersey-apache-connector</artifactId>
+            <version>2.17</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.glassfish.jersey.core</groupId>
+                    <artifactId>jersey-client</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 
