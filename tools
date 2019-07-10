@@ -24,11 +24,12 @@ help()
             -t <language> [folder name] 获取指定开发语言的模块程序模块 
                 <language> 开发语言 ，如java
                 [folder name] 下载到指定名字的目录下
+            -r <folder name> 重新获取模块代码     
             -l 查看支持的模板列表    
             -n [模块目录...] 获取NULS2.0运行环境(从nuls-v2/nuls-engine分支拉) 默认构建6个核心模块，可以通过传入可选模块名称的方式添加可选模块
             -p <模块目录> [模块目录...]   集成指定模块到NULS2.0运行环境中
             -a 添加一个基础模块
-            -r 移除一个基础模块
+            -d 移除一个基础模块
             -s 查看配置的待打包的基础模块列表            
             -h 查看帮助
             
@@ -237,8 +238,19 @@ getModuleTemplate(){
         rm -f ./init.sh
     fi
     cat README.md
-    rm -rf .git
+    #rm -rf .git
 
+}
+
+updateTemplate(){
+    module=$1
+    if [ ! -d "${module}" ]; then
+        echo "not found module folder"
+        exit 0
+    fi
+    cd $module
+    git pull
+    ./package
 }
 
 packageToNuls(){
@@ -294,7 +306,7 @@ packageToNuls(){
 }
 
 
-while getopts nt:p:ha:r:sl name
+while getopts nt:p:ha:r:sld: name
 do
             case $name in
             p)     
@@ -312,6 +324,7 @@ do
                    getModuleTemplate "$OPTARG" "$dir"
                    exit 0
                    ;;
+            r)     updateTemplate "$OPTARG"       
             n)     modules=()
                    len=$#
                    for ((i=$OPTIND - 1;i<=$len;i++));do
@@ -324,7 +337,7 @@ do
             a)     updatePackage "$OPTARG" 1
                    exit 0
                    ;;
-            r)     updatePackage "$OPTARG" 0
+            d)     updatePackage "$OPTARG" 0
                    exit 0
                    ;;
             s)     showPackageModule
