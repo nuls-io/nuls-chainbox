@@ -255,6 +255,9 @@ updateTemplate(){
 
 packageToNuls(){
     outPath="./NULS-WALLET"
+    if [ -d "$outPath/Modules/Nuls" ]; then
+        rm -rf "$outPath/Modules/Nuls"
+    fi
     initAndUpdateNulsRuntime $outPath
     baseModules=
     while read line
