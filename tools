@@ -254,7 +254,20 @@ updateTemplate(){
 }
 
 packageToNuls(){
-    initAndUpdateNulsRuntime "./NULS-WALLET"
+    outPath="./NULS-WALLET"
+    if [ -d "$outPath/Modules/Nuls" ]; then
+        rm -rf "$outPath/Modules/Nuls"
+    fi
+    initAndUpdateNulsRuntime $outPath
+    baseModules=
+    while read line
+    do
+        if [ -n "$baseModules" ]; then
+                baseModules="${baseModules},"
+        fi
+        baseModules="${baseModules}${line}"
+    done < "$outPath/.modules"
+    echo $baseModules
     for module in $@
     do
         # module=$1
@@ -265,8 +278,8 @@ packageToNuls(){
         fi
         cd $module
         if [ ! -d "outer" ]; then
-            if [ -f "./package" ]; then
-                ./package
+            if [ -f "./package" ]; then                
+                ./package $baseModules
             fi
             if [ ! -d "outer" ]; then
                 echo "not found outer folder"

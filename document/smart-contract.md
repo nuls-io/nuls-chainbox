@@ -1,22 +1,11 @@
-模块说明
+## NULS-SMART CONTRACT MODULE
 
-```
-这个文件夹下才开始放置代码，可以是任意语言开发的代码
-```
+NULS2.0智能合约模块
 
-RegisterAPI
-===========
-### scope:public
-### version:1.0
-Register API
-
-参数列表
-----
-无参数
-
-返回值
----
-无返回值
+- NULS智能合约采用了模块化设计的创新理念，并将其加入NULS的模块仓库，使得开发者在搭链时，可以直接选取NULS智能合约模块，就可以完成相关配置。
+- NULS智能合约实现了分钟级别部署，在开发者编写完智能合约之后，可以快速在链上进行部署。
+- NULS智能合约的NVM是基于JVM实现，NULS智能合约解释器将无缝支持JVM体系编程语言，并将陆续支持其他主流编程语言，应用开发者可以使用自己熟悉的语言，设计NULS智能合约。
+- 通过这样的创新设计思维，NULS希望让智能合约的开发、部署和调用能够更加的便捷化，从而增加开发者对应用开发的兴趣，在不久的将来，能够打造一个丰富的智能合约库。
 
 sc\_invoke\_contract
 ====================
@@ -28,7 +17,7 @@ sc\_invoke\_contract
 ----
 | 参数名     |  参数类型  | 参数描述           | 是否非空 |
 | ------- |:------:| -------------- |:----:|
-| chainId |  int   | 链id            |  是   |
+| chainId | string | 链id            |  是   |
 | tx      | string | 交易序列化的HEX编码字符串 |  是   |
 
 返回值
@@ -47,9 +36,9 @@ sc\_batch\_begin
 ----
 | 参数名            |  参数类型  | 参数描述         | 是否非空 |
 | -------------- |:------:| ------------ |:----:|
-| chainId        |  int   | 链id          |  是   |
-| blockHeight    |  long  | 当前打包的区块高度    |  是   |
-| blockTime      |  long  | 当前打包的区块时间    |  是   |
+| chainId        | string | 链id          |  是   |
+| blockHeight    | string | 当前打包的区块高度    |  是   |
+| blockTime      | string | 当前打包的区块时间    |  是   |
 | packingAddress | string | 当前打包的区块打包地址  |  是   |
 | preStateRoot   | string | 上一个stateRoot |  是   |
 
@@ -59,25 +48,6 @@ sc\_batch\_begin
 | --- |:----:| -------------- |
 | N/A | void | 无特定返回值，没有错误即成功 |
 
-sc\_batch\_before\_end
-======================
-### scope:public
-### version:1.0
-交易模块打包完交易，在做统一验证前，通知合约模块，合约模块停止接收交易，开始异步处理这个批次的结果/batch before end
-
-参数列表
-----
-| 参数名         | 参数类型 | 参数描述      | 是否非空 |
-| ----------- |:----:| --------- |:----:|
-| chainId     | int  | 链id       |  是   |
-| blockHeight | long | 当前打包的区块高度 |  是   |
-
-返回值
----
-| 字段名 | 字段类型 | 参数描述                                                 |
-| --- |:----:| ---------------------------------------------------- |
-| N/A | void | 无特定返回值，没有错误即成功，如果返回错误，则废弃这个批次，批次内已执行的合约交易退还到待打包交易队列中 |
-
 sc\_batch\_end
 ==============
 ### scope:public
@@ -86,10 +56,10 @@ sc\_batch\_end
 
 参数列表
 ----
-| 参数名         | 参数类型 | 参数描述      | 是否非空 |
-| ----------- |:----:| --------- |:----:|
-| chainId     | int  | 链id       |  是   |
-| blockHeight | long | 当前打包的区块高度 |  是   |
+| 参数名         |  参数类型  | 参数描述      | 是否非空 |
+| ----------- |:------:| --------- |:----:|
+| chainId     | string | 链id       |  是   |
+| blockHeight | string | 当前打包的区块高度 |  是   |
 
 返回值
 ---
@@ -97,6 +67,25 @@ sc\_batch\_end
 | --------- |:---------------:| -------------------------------------- |
 | stateRoot |     string      | 当前stateRoot                            |
 | txList    | list&lt;string> | 合约新生成的交易序列化字符串列表(可能有合约转账、合约共识、合约返回GAS) |
+
+sc\_batch\_before\_end
+======================
+### scope:public
+### version:1.0
+交易模块打包完交易，在做统一验证前，通知合约模块，合约模块停止接收交易，开始异步处理这个批次的结果/batch before end
+
+参数列表
+----
+| 参数名         |  参数类型  | 参数描述      | 是否非空 |
+| ----------- |:------:| --------- |:----:|
+| chainId     | string | 链id       |  是   |
+| blockHeight | string | 当前打包的区块高度 |  是   |
+
+返回值
+---
+| 字段名 | 字段类型 | 参数描述                                                 |
+| --- |:----:| ---------------------------------------------------- |
+| N/A | void | 无特定返回值，没有错误即成功，如果返回错误，则废弃这个批次，批次内已执行的合约交易退还到待打包交易队列中 |
 
 sc\_contract\_offline\_tx\_hash\_list
 =====================================
@@ -108,7 +97,7 @@ sc\_contract\_offline\_tx\_hash\_list
 ----
 | 参数名       |  参数类型  | 参数描述   | 是否非空 |
 | --------- |:------:| ------ |:----:|
-| chainId   |  int   | 链id    |  是   |
+| chainId   | string | 链id    |  是   |
 | blockHash | string | 区块hash |  是   |
 
 返回值
@@ -127,7 +116,7 @@ sc\_initial\_account\_token
 ----
 | 参数名     |  参数类型  | 参数描述 | 是否非空 |
 | ------- |:------:| ---- |:----:|
-| chainId |  int   | 链id  |  是   |
+| chainId | string | 链id  |  是   |
 | address | string | 账户地址 |  是   |
 
 返回值
@@ -146,9 +135,9 @@ sc\_register\_cmd\_for\_contract
 ----
 | 参数名             |  参数类型  | 参数描述   | 是否非空 |
 | --------------- |:------:| ------ |:----:|
-| chainId         |  int   | 链id    |  是   |
+| chainId         | string | 链id    |  是   |
 | moduleCode      | string | 模块代码   |  是   |
-| cmdRegisterList |  list  | 注册信息列表 |  是   |
+| cmdRegisterList | string | 注册信息列表 |  是   |
 
 返回值
 ---
@@ -166,9 +155,9 @@ sc\_trigger\_payable\_for\_consensus\_contract
 ----
 | 参数名             |  参数类型  | 参数描述                     | 是否非空 |
 | --------------- |:------:| ------------------------ |:----:|
-| chainId         |  int   | 链id                      |  是   |
+| chainId         | string | 链id                      |  是   |
 | stateRoot       | string | 当前的stateRoot             |  是   |
-| blockHeight     |  long  | 当前打包的区块高度                |  是   |
+| blockHeight     | string | 当前打包的区块高度                |  是   |
 | contractAddress | string | 合约地址                     |  是   |
 | tx              | string | 当前打包区块中的CoinBase交易序列化字符串 |  是   |
 
@@ -206,7 +195,7 @@ contract code constructor
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;view                                                     |     boolean     | 是否视图方法（调用此方法数据不上链） |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;event                                                    |     boolean     | 是否是事件              |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;payable                                                  |     boolean     | 是否是可接受主链资产转账的方法    |
-| isNrc20                                                                                                  |     boolean     | 是否是NRC20合约         |
+| nrc20                                                                                                    |     boolean     | 是否是NRC20合约         |
 
 sc\_delete
 ==========
@@ -220,8 +209,8 @@ delete contract
 | --------------- |:------:| --------- |:----:|
 | chainId         |  int   | 链id       |  是   |
 | sender          | string | 交易创建者账户地址 |  是   |
-| contractAddress | string | 合约地址      |  是   |
 | password        | string | 交易账户密码    |  是   |
+| contractAddress | string | 合约地址      |  是   |
 | remark          | string | 交易备注      |  否   |
 
 返回值
@@ -279,6 +268,75 @@ sc\_transfer
 | 字段名    |  字段类型  | 参数描述   |
 | ------ |:------:| ------ |
 | txHash | string | 交易hash |
+
+sc\_validate\_create
+====================
+### scope:public
+### version:1.0
+验证发布合约/validate create contract
+
+参数列表
+----
+| 参数名          |   参数类型   | 参数描述                 | 是否非空 |
+| ------------ |:--------:| -------------------- |:----:|
+| chainId      |   int    | 链id                  |  是   |
+| sender       |  string  | 交易创建者账户地址            |  是   |
+| gasLimit     |   long   | GAS限制                |  是   |
+| price        |   long   | GAS单价                |  是   |
+| contractCode |  string  | 智能合约代码(字节码的Hex编码字符串) |  是   |
+| args         | object[] | 参数列表                 |  否   |
+
+返回值
+---
+| 字段名 | 字段类型 | 参数描述             |
+| --- |:----:| ---------------- |
+| N/A | void | 无特定返回值，没有错误即验证成功 |
+
+sc\_validate\_call
+==================
+### scope:public
+### version:1.0
+validate call contract
+
+参数列表
+----
+| 参数名             |    参数类型    | 参数描述                                     | 是否非空 |
+| --------------- |:----------:| ---------------------------------------- |:----:|
+| chainId         |    int     | 链id                                      |  是   |
+| sender          |   string   | 交易创建者账户地址                                |  是   |
+| value           | biginteger | 调用者向合约地址转入的主网资产金额，没有此业务时填BigInteger.ZERO |  是   |
+| gasLimit        |    long    | GAS限制                                    |  是   |
+| price           |    long    | GAS单价                                    |  是   |
+| contractAddress |   string   | 合约地址                                     |  是   |
+| methodName      |   string   | 合约方法                                     |  是   |
+| methodDesc      |   string   | 合约方法描述，若合约内方法没有重载，则此参数可以为空               |  否   |
+| args            |  object[]  | 参数列表                                     |  否   |
+
+返回值
+---
+| 字段名 | 字段类型 | 参数描述             |
+| --- |:----:| ---------------- |
+| N/A | void | 无特定返回值，没有错误即验证成功 |
+
+sc\_validate\_delete
+====================
+### scope:public
+### version:1.0
+validate delete contract
+
+参数列表
+----
+| 参数名             |  参数类型  | 参数描述      | 是否非空 |
+| --------------- |:------:| --------- |:----:|
+| chainId         |  int   | 链id       |  是   |
+| sender          | string | 交易创建者账户地址 |  是   |
+| contractAddress | string | 合约地址      |  是   |
+
+返回值
+---
+| 字段名 | 字段类型 | 参数描述             |
+| --- |:----:| ---------------- |
+| N/A | void | 无特定返回值，没有错误即验证成功 |
 
 sc\_contract\_result
 ====================
@@ -343,10 +401,10 @@ contract result list
 
 参数列表
 ----
-| 参数名      |     参数类型     | 参数描述     | 是否非空 |
-| -------- |:------------:| -------- |:----:|
-| chainId  |     int      | 链id      |  是   |
-| hashList | list<string> | 交易hash列表 |  是   |
+| 参数名      |      参数类型       | 参数描述     | 是否非空 |
+| -------- |:---------------:| -------- |:----:|
+| chainId  |       int       | 链id      |  是   |
+| hashList | list&lt;string> | 交易hash列表 |  是   |
 
 返回值
 ---
@@ -529,12 +587,13 @@ sc\_contract\_info
 | address                                                                                                  |     string      | 合约地址                          |
 | creater                                                                                                  |     string      | 合约创建者地址                       |
 | alias                                                                                                    |     string      | 合约别名                          |
-| createTime                                                                                               |     string      | 合约创建时间（单位：秒）                  |
-| blockHeight                                                                                              |     string      | 合约创建时的区块高度                    |
-| isNrc20                                                                                                  |     string      | 是否是NRC20合约                    |
+| createTime                                                                                               |      long       | 合约创建时间（单位：秒）                  |
+| blockHeight                                                                                              |      long       | 合约创建时的区块高度                    |
+| directPayable                                                                                            |     boolean     | 是否接受直接转账                      |
+| nrc20                                                                                                    |     boolean     | 是否是NRC20合约                    |
 | nrc20TokenName                                                                                           |     string      | NRC20-token名称                 |
 | nrc20TokenSymbol                                                                                         |     string      | NRC20-token符号                 |
-| decimals                                                                                                 |     string      | NRC20-token支持的小数位数            |
+| decimals                                                                                                 |      long       | NRC20-token支持的小数位数            |
 | totalSupply                                                                                              |     string      | NRC20-token发行总量               |
 | status                                                                                                   |     string      | 合约状态（not_found, normal, stop） |
 | method                                                                                                   | list&lt;object> | 合约方法列表                        |
@@ -771,75 +830,6 @@ sc\_upload
 | isNrc20                                                                                                  |     boolean     | 是否是NRC20合约           |
 | code                                                                                                     |     string      | 智能合约代码(字节码的Hex编码字符串) |
 
-sc\_validate\_create
-====================
-### scope:public
-### version:1.0
-验证发布合约/validate create contract
-
-参数列表
-----
-| 参数名          |   参数类型   | 参数描述                 | 是否非空 |
-| ------------ |:--------:| -------------------- |:----:|
-| chainId      |   int    | 链id                  |  是   |
-| sender       |  string  | 交易创建者账户地址            |  是   |
-| gasLimit     |   long   | GAS限制                |  是   |
-| price        |   long   | GAS单价                |  是   |
-| contractCode |  string  | 智能合约代码(字节码的Hex编码字符串) |  是   |
-| args         | object[] | 参数列表                 |  否   |
-
-返回值
----
-| 字段名 | 字段类型 | 参数描述             |
-| --- |:----:| ---------------- |
-| N/A | void | 无特定返回值，没有错误即验证成功 |
-
-sc\_validate\_call
-==================
-### scope:public
-### version:1.0
-validate call contract
-
-参数列表
-----
-| 参数名             |    参数类型    | 参数描述                                     | 是否非空 |
-| --------------- |:----------:| ---------------------------------------- |:----:|
-| chainId         |    int     | 链id                                      |  是   |
-| sender          |   string   | 交易创建者账户地址                                |  是   |
-| value           | biginteger | 调用者向合约地址转入的主网资产金额，没有此业务时填BigInteger.ZERO |  是   |
-| gasLimit        |    long    | GAS限制                                    |  是   |
-| price           |    long    | GAS单价                                    |  是   |
-| contractAddress |   string   | 合约地址                                     |  是   |
-| methodName      |   string   | 合约方法                                     |  是   |
-| methodDesc      |   string   | 合约方法描述，若合约内方法没有重载，则此参数可以为空               |  否   |
-| args            |  object[]  | 参数列表                                     |  否   |
-
-返回值
----
-| 字段名 | 字段类型 | 参数描述             |
-| --- |:----:| ---------------- |
-| N/A | void | 无特定返回值，没有错误即验证成功 |
-
-sc\_validate\_delete
-====================
-### scope:public
-### version:1.0
-validate delete contract
-
-参数列表
-----
-| 参数名             |  参数类型  | 参数描述      | 是否非空 |
-| --------------- |:------:| --------- |:----:|
-| chainId         |  int   | 链id       |  是   |
-| sender          | string | 交易创建者账户地址 |  是   |
-| contractAddress | string | 合约地址      |  是   |
-
-返回值
----
-| 字段名 | 字段类型 | 参数描述             |
-| --- |:----:| ---------------- |
-| N/A | void | 无特定返回值，没有错误即验证成功 |
-
 sc\_call
 ========
 ### scope:public
@@ -852,6 +842,7 @@ call contract
 | --------------- |:----------:| ---------------------------------------- |:----:|
 | chainId         |    int     | 链id                                      |  是   |
 | sender          |   string   | 交易创建者账户地址                                |  是   |
+| password        |   string   | 调用者账户密码                                  |  是   |
 | value           | biginteger | 调用者向合约地址转入的主网资产金额，没有此业务时填BigInteger.ZERO |  是   |
 | gasLimit        |    long    | GAS限制                                    |  是   |
 | price           |    long    | GAS单价                                    |  是   |
@@ -859,7 +850,6 @@ call contract
 | methodName      |   string   | 合约方法                                     |  是   |
 | methodDesc      |   string   | 合约方法描述，若合约内方法没有重载，则此参数可以为空               |  否   |
 | args            |  object[]  | 参数列表                                     |  否   |
-| password        |   string   | 调用者账户密码                                  |  是   |
 | remark          |   string   | 交易备注                                     |  否   |
 
 返回值
@@ -867,65 +857,4 @@ call contract
 | 字段名    |  字段类型  | 参数描述        |
 | ------ |:------:| ----------- |
 | txHash | string | 调用合约的交易hash |
-
-listenerDependenciesReady
-=========================
-### scope:private
-### version:1.0
-notify module is ready
-
-参数列表
-----
-无参数
-
-返回值
----
-无返回值
-
-registerModuleDependencies
-==========================
-### scope:private
-### version:1.0
-Register module followerList
-
-参数列表
-----
-无参数
-
-返回值
----
-无返回值
-
-connectReady
-============
-### scope:private
-### version:1.0
-check module rpc is ready
-
-参数列表
-----
-无参数
-
-返回值
----
-无返回值
-
-paramTestCmd
-============
-### scope:public
-### version:1.0
-
-
-参数列表
-----
-| 参数名        | 参数类型  | 参数描述 | 是否非空 |
-| ---------- |:-----:| ---- |:----:|
-| intCount   |  int  |      |  是   |
-| byteCount  | byte  |      |  是   |
-| shortCount | short |      |  是   |
-| longCount  | long  |      |  是   |
-
-返回值
----
-无返回值
 
