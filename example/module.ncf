@@ -13,4 +13,4 @@ chainId=2
 assetId=1
 mailAddressFee=100000000
 sendMailFee=50000000
-dataPath=/Users/zhoulijun/workspace/nuls/nuls_2.0/NULS-Wallet-linux64-alpha2/data
+dataPath=data
