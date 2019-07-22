@@ -114,6 +114,13 @@ PACKAGE_CONFIG="`pwd`/.package.ncf"
 #编辑.package.ncf
 updatePackage(){
     if [ ! -f "${PACKAGE_CONFIG}" ]; then
+        if [ ! -d "$NULS2_REPO_DIR" ]; 
+        then
+            git clone $NULS2_REPO $NULS2_REPO_DIR
+            cd $NULS2_REPO_DIR
+            git checkout $NULS2_BRANCH
+            cd ..
+        fi
         cp "${NULS2_REPO_DIR}/build/package-base.ncf" ${PACKAGE_CONFIG}
         #statements
     fi 
@@ -218,8 +225,9 @@ initAndUpdateNulsRuntime()
         updatePackage $module 1
     done
     #cp ${PACKAGE_CONFIG} ./.package.ncf
+    echo "../$1"
     ./package -a "mykernel"
-    ./package -N -o "../$1"
+    ./package -N -o "$1"
     cd ..
     # rm -rf $NULS2_REPO_DIR
 }
