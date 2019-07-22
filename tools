@@ -11,7 +11,7 @@ NULS2_REPO="https://github.com/nuls-io/nuls-v2.git"
 NULS2_BRANCH="chainbox"
 NULS2_RUNTIME_DIR="NULS-WALLET-RUNTIME"
 NULS2_REPO_DIR=".NULS2.0"
-
+NULS_WALLET_PATH="${ROOT_PATH}/NULS_WALLET"
 JAVA_MODULE_TEMP_REPO="https://github.com/nuls-io/nuls-module-template-java.git"
 
 TEMPLATLIST="java"
@@ -30,7 +30,9 @@ help()
             -p <模块目录> [模块目录...]   集成指定模块到NULS2.0运行环境中
             -a 添加一个基础模块
             -d 移除一个基础模块
-            -s 查看配置的待打包的基础模块列表            
+            -s 查看配置的待打包的基础模块列表   
+            -i <package.ncf>指定需要打包的基础模块的配置文件    
+            -o <folder path> 指定输出目录     
             -h 查看帮助
             
 EOF
@@ -111,6 +113,10 @@ PACKAGE_CONFIG="`pwd`/.package.ncf"
 
 #编辑.package.ncf
 updatePackage(){
+    if [ ! -f "${PACKAGE_CONFIG}" ]; then
+        cp "${NULS2_REPO_DIR}/build/package-base.ncf" ${PACKAGE_CONFIG}
+        #statements
+    fi 
     c="sed -n '/^$1/p' $PACKAGE_CONFIG"
     has=`eval $c`;
     if [ -n "$has" ];
@@ -198,7 +204,8 @@ initAndUpdateNulsRuntime()
         git checkout $NULS2_BRANCH
     else
         cd $NULS2_REPO_DIR
-        git pull         
+        git pull  
+        git checkout $NULS2_BRANCH
     fi
     if [ ! -f "${PACKAGE_CONFIG}" ]; then
         cp "./build/package-base.ncf" ${PACKAGE_CONFIG}
@@ -209,8 +216,8 @@ initAndUpdateNulsRuntime()
         module=`eval echo '$'"$i"`
         # echo $module
         updatePackage $module 1
-    done  
-    cp ${PACKAGE_CONFIG} ./.package.ncf
+    done
+    #cp ${PACKAGE_CONFIG} ./.package.ncf
     ./package -a "mykernel"
     ./package -N -o "../$1"
     cd ..
@@ -254,7 +261,8 @@ updateTemplate(){
 }
 
 packageToNuls(){
-    outPath="./NULS-WALLET"
+    outPath=${NULS_WALLET_PATH}
+    log "NULS_WALLET PATH : ${NULS_WALLET_PATH}"
     if [ -d "$outPath/Modules/Nuls" ]; then
         rm -rf "$outPath/Modules/Nuls"
     fi
@@ -303,25 +311,39 @@ packageToNuls(){
         fi
         cd ..
         
-        if [ ! -d "./NULS-WALLET/Modules/Nuls/$moduleName" ]; then
-            mkdir "./NULS-WALLET/Modules/Nuls/$moduleName"
+        if [ ! -d "${outPath}/Modules/Nuls/$moduleName" ]; then
+            mkdir "${outPath}/Modules/Nuls/$moduleName"
         fi
-        if [ -d "./NULS-WALLET/Modules/Nuls/$moduleName/$version" ]; then
-            rm -rf "./NULS-WALLET/Modules/Nuls/$moduleName/$version"
+        if [ -d "${outPath}/Modules/Nuls/$moduleName/$version" ]; then
+            rm -rf "${outPath}/Modules/Nuls/$moduleName/$version"
         fi
-        mkdir "./NULS-WALLET/Modules/Nuls/$moduleName/$version"
-        cp -r ${module}/outer/* "./NULS-WALLET/Modules/Nuls/$moduleName/$version"
-        echo "copy ${module}/outer/ to ./NULS-WALLET/Modules/Nuls/$moduleName/$version"
+        mkdir "${outPath}/Modules/Nuls/$moduleName/$version"
+        cp -r ${module}/outer/* "${outPath}/Modules/Nuls/$moduleName/$version"
+        echo "copy ${module}/outer/ to ${outPath}/Modules/Nuls/$moduleName/$version"
         # echo $moduleName
-        echo $moduleName >> ./NULS-WALLET/.modules
+        echo $moduleName >> ${outPath}/.modules
         echo "package ${module} finish"
     done
 }
 
 
-while getopts nt:p:ha:r:sld: name
+while getopts i:nt:p:ha:r:sld:o: name
 do
             case $name in
+            i)
+                   if [ ! -f "$OPTARG" ]; then
+                       echo "-i param error , must be file path"
+                       exit 0 
+                   fi
+                   cp $OPTARG ./.package.ncf
+                   ;;
+            o)
+                   if [ ! -d "$OPTARG" ]; then
+                       #statements
+                       mkdir "$OPTARG"
+                   fi
+                   NULS_WALLET_PATH=$OPTARG
+                   ;;
             p)     
                    modules=()
                    len=$#
