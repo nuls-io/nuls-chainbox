@@ -10,6 +10,26 @@
 - 其他实用性和个性化功能  设置账户别名、设置账户备注、验证账户是否加密、签名、验证账户地址格式、验证账户密码是否正确等功能
 
 
+ac\_setRemark
+=============
+### scope:public
+### version:1.0
+为账户设置备注/Set remark for accounts
+
+参数列表
+----
+| 参数名     |  参数类型  | 参数描述 | 是否非空 |
+| ------- |:------:| ---- |:----:|
+| chainId |  int   | 链id  |  是   |
+| address | string | 账户地址 |  是   |
+| remark  | string | 备注   |  是   |
+
+返回值
+---
+| 字段名   |  字段类型   | 参数描述 |
+| ----- |:-------:| ---- |
+| value | boolean | 是否成功 |
+
 ac\_createOfflineAccount
 ========================
 ### scope:public
@@ -56,24 +76,6 @@ ac\_createContractAccount
 | ------- |:------:| ------ |
 | address | string | 智能合约地址 |
 
-ac\_getUnencryptedAddressList
-=============================
-### scope:public
-### version:1.0
-获取本地未加密账户列表/Get a list of local unencrypted accounts
-
-参数列表
-----
-| 参数名     | 参数类型 | 参数描述 | 是否非空 |
-| ------- |:----:| ---- |:----:|
-| chainId | int  | 链id  |  是   |
-
-返回值
----
-| 字段名  |      字段类型       | 参数描述     |
-| ---- |:---------------:| -------- |
-| list | list&lt;string> | 返回账户地址集合 |
-
 ac\_getEncryptedAddressList
 ===========================
 ### scope:public
@@ -116,7 +118,7 @@ ac\_getPriKeyByAddress
 ======================
 ### scope:public
 ### version:1.0
-根据地址查询账户私匙,只返回加密账户私钥，未加密账户不返回/Inquire the account's private key according to the address
+通过账户地址和密码,查询账户私匙/Inquire the account's private key according to the address
 
 参数列表
 ----
@@ -318,47 +320,6 @@ ac\_verifySignData
 | --------- |:-------:| ------ |
 | signature | boolean | 签名是否正确 |
 
-ac\_createAccount
-=================
-### scope:public
-### version:1.0
-创建指定个数的账户/create a specified number of accounts
-
-参数列表
-----
-| 参数名      |  参数类型  | 参数描述      | 是否非空 |
-| -------- |:------:| --------- |:----:|
-| chainId  |  int   | 链id       |  是   |
-| count    |  int   | 需要创建账户的数量 |  是   |
-| password | string | 账户密码      |  是   |
-
-返回值
----
-| 字段名  |      字段类型       | 参数描述      |
-| ---- |:---------------:| --------- |
-| list | list&lt;string> | 创建的账户地址集合 |
-
-ac\_getPubKey
-=============
-### scope:public
-### version:1.0
-根据账户地址和密码,查询账户公钥，未加密账户不返回/Get the account's public key
-
-参数列表
-----
-| 参数名      |  参数类型  | 参数描述 | 是否非空 |
-| -------- |:------:| ---- |:----:|
-| chainId  |  int   | 链id  |  是   |
-| address  | string | 账户地址 |  是   |
-| password | string | 账户密码 |  是   |
-
-返回值
----
-| 字段名    |  字段类型   | 参数描述   |
-| ------ |:-------:| ------ |
-| pubKey | boolean | 公钥     |
-| valid  | boolean | 账户是否存在 |
-
 ac\_removeAccount
 =================
 ### scope:public
@@ -401,6 +362,47 @@ ac\_getAccountList
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pubkeyHex          |     string      | 公钥     |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;encryptedPrikeyHex |     string      | 已加密私钥  |
 
+ac\_createAccount
+=================
+### scope:public
+### version:1.0
+创建指定个数的账户/create a specified number of accounts
+
+参数列表
+----
+| 参数名      |  参数类型  | 参数描述      | 是否非空 |
+| -------- |:------:| --------- |:----:|
+| chainId  |  int   | 链id       |  是   |
+| count    |  int   | 需要创建账户的数量 |  是   |
+| password | string | 账户密码      |  是   |
+
+返回值
+---
+| 字段名  |      字段类型       | 参数描述      |
+| ---- |:---------------:| --------- |
+| list | list&lt;string> | 创建的账户地址集合 |
+
+ac\_getPubKey
+=============
+### scope:public
+### version:1.0
+根据账户地址和密码,查询账户公钥，未加密账户不返回/Get the account's public key
+
+参数列表
+----
+| 参数名      |  参数类型  | 参数描述 | 是否非空 |
+| -------- |:------:| ---- |:----:|
+| chainId  |  int   | 链id  |  是   |
+| address  | string | 账户地址 |  是   |
+| password | string | 账户密码 |  是   |
+
+返回值
+---
+| 字段名    |  字段类型   | 参数描述   |
+| ------ |:-------:| ------ |
+| pubKey | boolean | 公钥     |
+| valid  | boolean | 账户是否存在 |
+
 ac\_signDigest
 ==============
 ### scope:public
@@ -426,7 +428,7 @@ ac\_getAccountByAddress
 =======================
 ### scope:public
 ### version:1.0
-根据地址获取账户/get account according to address
+通过地址获取账户信息/get account info according to address
 
 参数列表
 ----
@@ -443,27 +445,6 @@ ac\_getAccountByAddress
 | alias              | string | 别名    |
 | pubkeyHex          | string | 公钥    |
 | encryptedPrikeyHex | string | 已加密私钥 |
-
-ac\_setOfflineAccountPassword
-=============================
-### scope:public
-### version:1.0
-设置离线账户密码/Set offline account password
-
-参数列表
-----
-| 参数名      |  参数类型  | 参数描述  | 是否非空 |
-| -------- |:------:| ----- |:----:|
-| chainId  |  int   | 链id   |  是   |
-| address  | string | 账户地址  |  是   |
-| password | string | 账户新密码 |  是   |
-| priKey   | string | 账户私钥  |  是   |
-
-返回值
----
-| 字段名             |  字段类型  | 参数描述     |
-| --------------- |:------:| -------- |
-| encryptedPriKey | string | 返回加密后的私钥 |
 
 ac\_signBlockDigest
 ===================
@@ -485,65 +466,6 @@ ac\_signBlockDigest
 | 字段名       |  字段类型  | 参数描述  |
 | --------- |:------:| ----- |
 | signature | string | 签名后数据 |
-
-ac\_setPassword
-===============
-### scope:public
-### version:1.0
-设置账户密码/Set account password
-
-参数列表
-----
-| 参数名      |  参数类型  | 参数描述  | 是否非空 |
-| -------- |:------:| ----- |:----:|
-| chainId  |  int   | 链id   |  是   |
-| address  | string | 账户地址  |  是   |
-| password | string | 账户新密码 |  是   |
-
-返回值
----
-| 字段名   |  字段类型   | 参数描述   |
-| ----- |:-------:| ------ |
-| value | boolean | 是否设置成功 |
-
-ac\_isEncrypted
-===============
-### scope:public
-### version:1.0
-根据账户地址获取账户是否加密/Whether the account is encrypted by the account address
-
-参数列表
-----
-| 参数名     |  参数类型  | 参数描述 | 是否非空 |
-| ------- |:------:| ---- |:----:|
-| chainId |  int   | 链id  |  是   |
-| address | string | 账户地址 |  是   |
-
-返回值
----
-| 字段名   |  字段类型   | 参数描述 |
-| ----- |:-------:| ---- |
-| value | boolean | 是否加密 |
-
-ac\_setRemark
-=============
-### scope:public
-### version:1.0
-为账户设置备注/Set remark for accounts
-
-参数列表
-----
-| 参数名     |  参数类型  | 参数描述 | 是否非空 |
-| ------- |:------:| ---- |:----:|
-| chainId |  int   | 链id  |  是   |
-| address | string | 账户地址 |  是   |
-| remark  | string | 备注   |  是   |
-
-返回值
----
-| 字段名   |  字段类型   | 参数描述 |
-| ----- |:-------:| ---- |
-| value | boolean | 是否成功 |
 
 ac\_getAliasByAddress
 =====================
@@ -608,26 +530,28 @@ ac\_transfer
 ============
 ### scope:public
 ### version:1.0
-创建转账交易/create transfer transaction
+创建普通转账交易/create transfer transaction
 
 参数列表
 ----
-| 参数名           |    参数类型    | 参数描述           | 是否非空 |
-| ------------- |:----------:| -------------- |:----:|
-| chainId       |    int     | 链id            |  是   |
-| address       |   string   | 账户地址           |  是   |
-| assetsChainId |  integer   | 资产的链ID         |  是   |
-| assetsId      |  integer   | 资产ID           |  是   |
-| amount        | biginteger | 数量             |  是   |
-| password      |   string   | 转出账户的密码, 接收方忽略 |  是   |
-| lockTime      |    long    | 解锁时间, -1为一直锁定  |  是   |
-| address       |   string   | 账户地址           |  是   |
-| assetsChainId |  integer   | 资产的链ID         |  是   |
-| assetsId      |  integer   | 资产ID           |  是   |
-| amount        | biginteger | 数量             |  是   |
-| password      |   string   | 转出账户的密码, 接收方忽略 |  是   |
-| lockTime      |    long    | 解锁时间, -1为一直锁定  |  是   |
-| remark        |   string   | 交易备注           |  是   |
+| 参数名                                                           |    参数类型    | 参数描述                          | 是否非空 |
+| ------------------------------------------------------------- |:----------:| ----------------------------- |:----:|
+| chainId                                                       |    int     | 链id                           |  是   |
+| inputs                                                        |    list    | 交易支付方数据                       |  是   |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address       |   string   | 账户地址                          |  是   |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assetsChainId |  integer   | 资产的链ID                        |  是   |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assetsId      |  integer   | 资产ID                          |  是   |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;amount        | biginteger | 数量                            |  是   |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password      |   string   | 转出账户(from)的密码, 组装接收方(to)数据时忽略 |  否   |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lockTime      |    long    | 解锁时间, -1为一直锁定, 0为不锁定(默认)      |  否   |
+| outputs                                                       |    list    | 交易接受方数据                       |  是   |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address       |   string   | 账户地址                          |  是   |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assetsChainId |  integer   | 资产的链ID                        |  是   |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assetsId      |  integer   | 资产ID                          |  是   |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;amount        | biginteger | 数量                            |  是   |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password      |   string   | 转出账户(from)的密码, 组装接收方(to)数据时忽略 |  否   |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lockTime      |    long    | 解锁时间, -1为一直锁定, 0为不锁定(默认)      |  否   |
+| remark                                                        |   string   | 交易备注                          |  是   |
 
 返回值
 ---
@@ -643,24 +567,23 @@ ac\_createMultiSignTransfer
 
 参数列表
 ----
-| 参数名           |    参数类型    | 参数描述                   | 是否非空 |
-| ------------- |:----------:| ---------------------- |:----:|
-| chainId       |    int     | 链id                    |  是   |
-| address       |   string   | 账户地址                   |  是   |
-| assetsChainId |  integer   | 资产的链ID                 |  是   |
-| assetsId      |  integer   | 资产ID                   |  是   |
-| amount        | biginteger | 数量                     |  是   |
-| password      |   string   | 转出账户的密码, 接收方忽略         |  是   |
-| lockTime      |    long    | 解锁时间, -1为一直锁定          |  是   |
-| address       |   string   | 账户地址                   |  是   |
-| assetsChainId |  integer   | 资产的链ID                 |  是   |
-| assetsId      |  integer   | 资产ID                   |  是   |
-| amount        | biginteger | 数量                     |  是   |
-| password      |   string   | 转出账户的密码, 接收方忽略         |  是   |
-| lockTime      |    long    | 解锁时间, -1为一直锁定          |  是   |
-| remark        |   string   | 交易备注                   |  是   |
-| signAddress   |   string   | 第一个签名账户地址(不填则只创建交易不签名) |  否   |
-| password      |   string   | 第一个签名账户密码(不填则只创建交易不签名) |  否   |
+| 参数名                                                           |    参数类型    | 参数描述                     | 是否非空 |
+| ------------------------------------------------------------- |:----------:| ------------------------ |:----:|
+| chainId                                                       |    int     | 链id                      |  是   |
+| inputs                                                        |    list    | 交易支付方数据                  |  是   |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address       |   string   | 账户地址                     |  是   |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assetsChainId |  integer   | 资产的链ID                   |  是   |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assetsId      |  integer   | 资产ID                     |  是   |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;amount        | biginteger | 数量                       |  是   |
+| outputs                                                       |    list    | 交易接受方数据                  |  是   |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address       |   string   | 账户地址                     |  是   |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assetsChainId |  integer   | 资产的链ID                   |  是   |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assetsId      |  integer   | 资产ID                     |  是   |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;amount        | biginteger | 数量                       |  是   |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lockTime      |    long    | 解锁时间, -1为一直锁定, 0为不锁定(默认) |  否   |
+| remark                                                        |   string   | 交易备注                     |  是   |
+| signAddress                                                   |   string   | 第一个签名账户地址(不填则只创建交易不签名)   |  否   |
+| signPassword                                                  |   string   | 第一个签名账户密码(不填则只创建交易不签名)   |  否   |
 
 返回值
 ---
@@ -678,12 +601,12 @@ ac\_signMultiSignTransaction
 
 参数列表
 ----
-| 参数名         |  参数类型  | 参数描述    | 是否非空 |
-| ----------- |:------:| ------- |:----:|
-| chainId     |  int   | 链id     |  是   |
-| tx          | string | 交易数据字符串 |  是   |
-| signAddress | string | 签名账户地址  |  是   |
-| password    | string | 签名账户密码  |  是   |
+| 参数名          |  参数类型  | 参数描述    | 是否非空 |
+| ------------ |:------:| ------- |:----:|
+| chainId      |  int   | 链id     |  是   |
+| tx           | string | 交易数据字符串 |  是   |
+| signAddress  | string | 签名账户地址  |  是   |
+| signPassword | string | 签名账户密码  |  是   |
 
 返回值
 ---
@@ -697,17 +620,17 @@ ac\_setMultiSigAlias
 ====================
 ### scope:public
 ### version:1.0
-设置多签账户别名,默认签第一个名/set the alias of multi sign account
+设置多签账户别名/set the alias of multi sign account
 
 参数列表
 ----
-| 参数名         |  参数类型  | 参数描述                   | 是否非空 |
-| ----------- |:------:| ---------------------- |:----:|
-| chainId     |  int   | 链id                    |  是   |
-| address     | string | 多签账户地址                 |  是   |
-| alias       | string | 别名                     |  是   |
-| signAddress | string | 第一个签名账户地址(不填则只创建交易不签名) |  否   |
-| password    | string | 第一个签名账户密码(不填则只创建交易不签名) |  否   |
+| 参数名          |  参数类型  | 参数描述                   | 是否非空 |
+| ------------ |:------:| ---------------------- |:----:|
+| chainId      |  int   | 链id                    |  是   |
+| address      | string | 多签账户地址                 |  是   |
+| alias        | string | 别名                     |  是   |
+| signAddress  | string | 第一个签名账户地址(不填则只创建交易不签名) |  否   |
+| signPassword | string | 第一个签名账户密码(不填则只创建交易不签名) |  否   |
 
 返回值
 ---
@@ -769,27 +692,6 @@ ac\_createMultiSigAccount
 | chainId  |       int       | 链id                             |  是   |
 | pubKeys  | list&lt;string> | 公钥集合(任意普通地址的公钥或存在于当前节点中的普通账户地址) |  是   |
 | minSigns |       int       | 最小签名数                           |  是   |
-
-返回值
----
-| 字段名     |  字段类型  | 参数描述   |
-| ------- |:------:| ------ |
-| address | string | 多签账户地址 |
-
-ac\_importMultiSigAccount
-=========================
-### scope:public
-### version:1.0
-导入多签账户/Inport a multi sign account
-
-参数列表
-----
-| 参数名      |      参数类型       | 参数描述   | 是否非空 |
-| -------- |:---------------:| ------ |:----:|
-| chainId  |       int       | 链id    |  是   |
-| address  |     string      | 多签账户地址 |  是   |
-| pubKeys  | list&lt;string> | 公钥集合   |  是   |
-| minSigns |       int       | 最小签名数  |  是   |
 
 返回值
 ---
