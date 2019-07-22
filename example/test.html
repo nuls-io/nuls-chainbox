@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>jQuery File Upload Example</title>
+    <title>Encrypted Message Example</title>
     <style>
         label {
             min-width: 200px;
@@ -57,35 +57,35 @@
 <body>
 <div>
     <div class="left">
-        <li data-v="create"><a>申请昵称</a></li>
-        <li data-v="send">发送消息</li>
-        <li data-v="view">查看消息</li>
+        <li data-v="create"><a>Apply Name</a></li>
+        <li data-v="send">Send Message</li>
+        <li data-v="view">View Message</li>
     </div>
     <div class="right">
         <div id="create">
             <!--<h1>绑定邮箱地址</h1>-->
-            <div class="row"><label for="1_address">账户地址：</label><input id="1_address" type="text" size="100"  /></div>
-            <div class="row"><label for="1_mailAddress">昵称：</label><input id="1_mailAddress" size="100" /><br></div>
-            <div class="row"><label>密码：</label><input id="1_password" type="password"  ><br></div>
-            <div class="row row-btn"><button id="createMail" >提交</button></div>
+            <div class="row"><label for="1_address">Account Address：</label><input id="1_address" type="text" size="100"  /></div>
+            <div class="row"><label for="1_mailAddress">Name：</label><input id="1_mailAddress" size="100" /><br></div>
+            <div class="row"><label>Password:</label><input id="1_password" type="password"  ><br></div>
+            <div class="row row-btn"><button id="createMail" >Submit:</button></div>
             <label id="1_res"></label>
         </div>
         <div id="send">
             <!--<h1>发送邮件</h1>-->
-            <div class="row"><label class="label">接收人昵称：</label><input id="2_mailAddress" type="text" size="100"  /><br></div>
-            <div class="row"><label>发送人昵称：</label><input id="2_address" size="100" /><br></div>
-            <div class="row"><label>密码：</label><input id="2_password" type="password"  ><br></div>
-            <div class="row"><label>title：</label><input id="2_title" type="text" size="100"  /><br></div>
-            <div class="row"><label>content：</label><textarea rows="30" cols="100" id="2_content" ></textarea><br></div>
-            <div class="row row-btn"><button id="sendMail" >发送</button><br></div>
+            <div class="row"><label class="label">Receiver Name：</label><input id="2_mailAddress" type="text" size="100"  /><br></div>
+            <div class="row"><label>Sender Name：</label><input id="2_address" size="100" /><br></div>
+            <div class="row"><label>Password：</label><input id="2_password" type="password"  ><br></div>
+            <div class="row"><label>Title：</label><input id="2_title" type="text" size="100"  /><br></div>
+            <div class="row"><label>Content：</label><textarea rows="30" cols="100" id="2_content" ></textarea><br></div>
+            <div class="row row-btn"><button id="sendMail" >Send</button><br></div>
             <label id="2_res"></label><br>
         </div>
         <div id="view">
             <!--<h1>查看邮件内容</h1>-->
-            <div class="row"><label>发送人或接收人昵称：</label><input id="3_address" type="text" size="100"  /></div>
-            <div class="row"><label>密码：</label><input id="3_password" type="password"  ></div>
+            <div class="row"><label>Sender/Receiver Name：</label><input id="3_address" type="text" size="100"  /></div>
+            <div class="row"><label>Password：</label><input id="3_password" type="password"  ></div>
             <div class="row"><label>hash：</label><input id="3_hash" type="text" size="100"  /><br></div>
-            <div class="row row-btn"><button id="viewMail" >查看</button><br></div>
+            <div class="row row-btn"><button id="viewMail" >View</button><br></div>
             <div class="row"><span id="3_res"></span></div>
         </div>
     </div>
