@@ -57,7 +57,7 @@ target
 *.iml
 logs
 .NULS2.0/
-NULS-WALLET-RUNTIME
-NULS-WALLET
+NULS_WALLET_RUNTIME
+NULS_WALLET
 lib/maven
 .package.ncf
