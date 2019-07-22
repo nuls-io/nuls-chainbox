@@ -335,7 +335,7 @@ packageToNuls(){
 }
 
 
-while getopts i:nt:p:ha:r:sld:o: name
+while getopts i:nt:pha:r:sld:o: name
 do
             case $name in
             i)
@@ -355,10 +355,11 @@ do
             p)     
                    modules=()
                    len=$#
-                   for ((i=$OPTIND - 1;i<=$len;i++));do
+                   for ((i=$OPTIND ;i<=$len;i++));do
                        dir=`eval echo '$'"$i"`
                        modules[${#modules[@]}]=$dir
                    done    
+                   echo ${modules[@]/\//}
                    packageToNuls ${modules[@]/\//}
                    exit
                    ;;
