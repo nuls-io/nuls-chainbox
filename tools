@@ -263,9 +263,23 @@ updateTemplate(){
         echo "not found module folder"
         exit 0
     fi
+    baseModules=
+    while read line
+    do
+        TEMP=`echo $line|grep -Eo '\[.+\]'`
+        if [ -z "$TEMP" ]; then
+            isPackage=`echo $line |grep "=1"`
+            if [ -n "$isPackage" ]; then
+                if [ -n "$baseModules" ]; then
+                    baseModules="${baseModules},"
+                fi
+                baseModules="${baseModules}$(echo ${line} | awk -F '=' '{print $1}')"
+            fi
+        fi
+    done < $PACKAGE_CONFIG
     cd $module
     git pull
-    ./package
+    ./package $baseModules
 }
 
 packageToNuls(){
