@@ -264,19 +264,24 @@ updateTemplate(){
         exit 0
     fi
     baseModules=
-    while read line
-    do
-        TEMP=`echo $line|grep -Eo '\[.+\]'`
-        if [ -z "$TEMP" ]; then
-            isPackage=`echo $line |grep "=1"`
-            if [ -n "$isPackage" ]; then
-                if [ -n "$baseModules" ]; then
-                    baseModules="${baseModules},"
+    if [ ! -f "${PACKAGE_CONFIG}" ]; 
+    then
+        echoYellow "not found ${PACKAGE_CONFIG}, don't know basis module list"
+    else
+       while read line
+       do
+            TEMP=`echo $line|grep -Eo '\[.+\]'`
+            if [ -z "$TEMP" ]; then
+                isPackage=`echo $line |grep "=1"`
+                if [ -n "$isPackage" ]; then
+                    if [ -n "$baseModules" ]; then
+                        baseModules="${baseModules},"
+                    fi
+                    baseModules="${baseModules}$(echo ${line} | awk -F '=' '{print $1}')"
                 fi
-                baseModules="${baseModules}$(echo ${line} | awk -F '=' '{print $1}')"
             fi
-        fi
-    done < $PACKAGE_CONFIG
+        done < $PACKAGE_CONFIG     
+    fi
     cd $module
     git pull
     ./package $baseModules
