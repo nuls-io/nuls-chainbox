@@ -3,3 +3,4 @@ java-module=https://github.com/nuls-io/nuls-module-template-java.git
 nuls-module-explorer=https://github.com/nuls-io/nuls-module-explorer.git
 nuls-module-sdk-provider=https://github.com/nuls-io/nuls-sdk-provider
 nuls-module-web-wallet=https://github.com/nuls-io/nuls-module-web-wallet.git
+nuls-module-helloworld=https://github.com/nuls-io/nuls-module-helloworld.git
