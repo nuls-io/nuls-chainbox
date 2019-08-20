@@ -8,10 +8,11 @@
 cd `dirname $0`
 ROOT_PATH=`pwd`
 NULS2_REPO="https://github.com/nuls-io/nuls-v2.git"
-NULS2_BRANCH="chainbox"
+NULS2_BRANCH="release"
 NULS2_RUNTIME_DIR="NULS_WALLET_RUNTIME"
 NULS2_REPO_DIR=".NULS2.0"
-NULS_WALLET_PATH="${ROOT_PATH}/NULS_WALLET"
+WALLET_NAME="NULS_WALLET"
+NULS_WALLET_PATH="${ROOT_PATH}/${WALLET_NAME}"
 JAVA_MODULE_TEMP_REPO="https://github.com/nuls-io/nuls-module-template-java.git"
 
 TEMPLATLIST="java"
@@ -33,6 +34,7 @@ help()
             -s 查看配置的待打包的基础模块列表   
             -i <package.ncf>指定需要打包的基础模块的配置文件    
             -o <folder path> 指定输出目录     
+            -z -p打包时是否输出tar.gz压缩包
             -h 查看帮助
             
 EOF
@@ -349,12 +351,20 @@ packageToNuls(){
         echo "copy ${module}/outer/ to ${outPath}/Modules/Nuls/$moduleName/$version"
         # echo $moduleName
         echo $moduleName >> ${outPath}/.modules
+        
         echo "package ${module} finish"
     done
+
+    cd $ROOT_PATH
+    if [ -n "${BUILD_TAR}" ]; then
+            log "============ BUILD ${WALLET_NAME}.tar.gz ==================="
+            tar -zcPf "${WALLET_NAME}.tar.gz" ./${WALLET_NAME}
+            log "============ BUILD ${WALLET_NAME}.tar.gz FINISH==================="
+    fi
 }
 
 
-while getopts i:nt:ha:r:sld:o:p name
+while getopts i:nt:ha:r:sld:o:zp name
 do
             case $name in
             i)
@@ -371,6 +381,9 @@ do
                    fi
                    NULS_WALLET_PATH=$OPTARG
                    ;;
+            z)
+                   BUILD_TAR="1"    
+                   ;;   
             p)     
                    modules=()
                    len=$#
