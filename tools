@@ -14,7 +14,7 @@ NULS2_REPO_DIR=".NULS2.0"
 WALLET_NAME="NULS_WALLET"
 NULS_WALLET_PATH="${ROOT_PATH}/${WALLET_NAME}"
 JAVA_MODULE_TEMP_REPO="https://github.com/nuls-io/nuls-module-template-java.git"
-
+PACKAGE_JRE=
 TEMPLATLIST="java"
 
 help()
@@ -27,7 +27,6 @@ help()
                 [folder name] 下载到指定名字的目录下
             -r <folder name> 重新获取业务模块代码，并执行package进行编译     
             -l 查看支持的模板列表    
-            -n [基础模块名称...] 获取NULS2.0运行环境(从nuls-v2/nuls-engine分支拉) 默认构建6个核心模块，可以通过传入可选模块名称的方式添加可选模块
             -p [业务模块目录...] 构建NULS2.0钱包，此参数必须放在会后面
             -a 添加一个基础模块
             -d 移除一个基础模块
@@ -35,6 +34,8 @@ help()
             -i <package.ncf>指定需要打包的基础模块的配置文件    
             -o <folder path> 指定输出目录     
             -z -p打包时是否输出tar.gz压缩包
+            -J <jre path> 将jdk集成进程序包中
+            -b 指定nuls-v2分支
             -h 查看帮助
             
 EOF
@@ -184,6 +185,7 @@ showTemplateList(){
 #检查是否已经clone了nuls2.0
 initAndUpdateNulsRuntime()
 {
+
     MAVEN_EXIST=`mvn -version 2>&1 |grep "Apache Maven"`
     # echo $MAVEN_EXIST
     if [ -z "$MAVEN_EXIST" ]; then
@@ -229,7 +231,8 @@ initAndUpdateNulsRuntime()
     cp ${PACKAGE_CONFIG} ./.package.ncf
     echo "../$1"
     ./package -a "mykernel"
-    ./package -N -o "$1"
+    #echo "./package -N -o $1 ${PACKAGE_JRE}"
+    ./package -N -o "$1" ${PACKAGE_JRE}
     cd ..
     # rm -rf $NULS2_REPO_DIR
 }
@@ -364,9 +367,12 @@ packageToNuls(){
 }
 
 
-while getopts i:nt:ha:r:sld:o:zp name
+while getopts b:J:i:t:ha:r:sld:o:zp name
 do
             case $name in
+            b)
+                   NULS2_BRANCH=$OPTARG
+                   ;;    
             i)
                    if [ ! -f "$OPTARG" ]; then
                        echo "-i param error , must be file path"
@@ -381,13 +387,16 @@ do
                    fi
                    NULS_WALLET_PATH=$OPTARG
                    ;;
+            J)     PACKAGE_JRE=" -J `cd $OPTARG; pwd`"
+                   ;;       
             z)
                    BUILD_TAR="1"    
                    ;;   
             p)     
                    modules=()
                    len=$#
-                   for ((i=$OPTIND ;i<=$len;i++));do
+                   echo $OPTIND
+                   for ((i=$OPTIND;i<=$len;i++));do
                        dir=`eval echo '$'"$i"`
                        modules[${#modules[@]}]=$dir
                    done    
@@ -403,15 +412,15 @@ do
             r)     updateTemplate "$OPTARG"    
                    exit 0 
                    ;;  
-            n)     modules=()
-                   len=$#
-                   for ((i=$OPTIND - 1;i<=$len;i++));do
-                       dir=`eval echo '$'"$i"`
-                       modules[${#modules[@]}]=$dir
-                   done   
-                   initAndUpdateNulsRuntime $NULS2_RUNTIME_DIR ${modules[@]}
-                   exit 0
-                   ;;
+            # n)     modules=()
+            #        len=$#
+            #        for ((i=$OPTIND;i<=$len;i++));do
+            #            dir=`eval echo '$'"$i"`
+            #            modules[${#modules[@]}]=$dir
+            #        done   
+            #        initAndUpdateNulsRuntime $NULS2_RUNTIME_DIR ${modules[@]}
+            #        exit 0
+            #        ;;
             a)     updatePackage "$OPTARG" 1
                    exit 0
                    ;;
