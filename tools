@@ -395,7 +395,7 @@ do
             p)     
                    modules=()
                    len=$#
-                   echo $OPTIND
+                   # echo $OPTIND
                    for ((i=$OPTIND;i<=$len;i++));do
                        dir=`eval echo '$'"$i"`
                        modules[${#modules[@]}]=$dir

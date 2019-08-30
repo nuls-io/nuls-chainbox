@@ -6,6 +6,7 @@ import io.nuls.core.core.annotation.Autowired;
 import io.nuls.core.core.annotation.Component;
 import io.nuls.core.exception.NulsException;
 import io.nuls.core.exception.NulsRuntimeException;
+import io.nuls.core.model.StringUtils;
 import io.nuls.core.parse.MapUtils;
 import io.nuls.core.rpc.info.Constants;
 import io.nuls.core.rpc.model.ModuleE;
@@ -56,7 +57,7 @@ public class AccountTools implements CallRpc {
         callParams.put(Constants.CHAIN_ID, chainId);
         callParams.put("address", address);
         callParams.put("password", password);
-        return callRpc(ModuleE.AC.abbr, "ac_getPriKeyByAddress", callParams, (Function<Map<String, Object>, Boolean>) res -> (Boolean) res.get("valid"));
+        return callRpc(ModuleE.AC.abbr, "ac_getPriKeyByAddress", callParams, (Function<Map<String, Object>, Boolean>) res -> StringUtils.isNotBlank((String)res.get("priKey")));
     }
 
 
