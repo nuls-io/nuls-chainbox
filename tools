@@ -17,6 +17,8 @@ NULS_WALLET_PATH="${ROOT_PATH}/${WALLET_NAME}"
 JAVA_MODULE_TEMP_REPO="https://github.com/nuls-io/nuls-module-template-java.git"
 PACKAGE_JRE=
 TEMPLATLIST="java"
+TARGET_OS=linux
+
 
 help()
 {
@@ -37,6 +39,7 @@ help()
             -z -p打包时是否输出tar.gz压缩包
             -J <jre path> 将jdk集成进程序包中
             -b 指定nuls-v2分支
+            -O 指定打包的系统版本可用枚举：window,linux,maos,默认linux
             -h 查看帮助
             
 EOF
@@ -233,7 +236,7 @@ initAndUpdateNulsRuntime()
     echo "../$1"
     ./package -a "mykernel"
     #echo "./package -N -o $1 ${PACKAGE_JRE}"
-    ./package -N -o "$1" ${PACKAGE_JRE}
+    ./package -N -o "$1" ${PACKAGE_JRE} -O $TARGET_OS
     cp $CONF/nuls.ncf $1
     cp $CONF/genesis-block.json $1
     cd ..
@@ -370,9 +373,12 @@ packageToNuls(){
 }
 
 
-while getopts b:J:i:t:ha:r:sld:o:zp name
+while getopts b:J:i:t:ha:r:sld:o:zpO: name
 do
             case $name in
+            O)
+                   TARGET_OS=$OPTARG
+                   ;;    
             b)
                    NULS2_BRANCH=$OPTARG
                    ;;    
