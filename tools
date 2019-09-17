@@ -8,10 +8,11 @@
 cd `dirname $0`
 ROOT_PATH=`pwd`
 NULS2_REPO="https://github.com/nuls-io/nuls-v2.git"
-NULS2_BRANCH="release"
+NULS2_BRANCH="chain_box"
 NULS2_RUNTIME_DIR="NULS_WALLET_RUNTIME"
 NULS2_REPO_DIR=".NULS2.0"
 WALLET_NAME="NULS_WALLET"
+CONF=$ROOT_PATH/conf
 NULS_WALLET_PATH="${ROOT_PATH}/${WALLET_NAME}"
 JAVA_MODULE_TEMP_REPO="https://github.com/nuls-io/nuls-module-template-java.git"
 PACKAGE_JRE=
@@ -233,6 +234,8 @@ initAndUpdateNulsRuntime()
     ./package -a "mykernel"
     #echo "./package -N -o $1 ${PACKAGE_JRE}"
     ./package -N -o "$1" ${PACKAGE_JRE}
+    cp $CONF/nuls.ncf $1
+    cp $CONF/genesis-block.json $1
     cd ..
     # rm -rf $NULS2_REPO_DIR
 }
