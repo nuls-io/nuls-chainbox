@@ -39,6 +39,7 @@ public class MyModule {
 
     public Module[] declareDependent() {
         return new Module[]{
+                Module.build(ModuleE.AC),
                 Module.build(ModuleE.LG),
                 Module.build(ModuleE.TX),
                 Module.build(ModuleE.NW)
