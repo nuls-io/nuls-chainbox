@@ -28,54 +28,58 @@ public class MailAddressService {
     Config config;
 
     public void saveMailAddress(MailAddressData mailAddressData) {
-        synchronized (this){
+        synchronized (this) {
             try {
                 List<MailAddressData> data = getAllMailAddress();
-                if(hasAddressOrMailAddress(data,mailAddressData.getAddress(),mailAddressData.getMailAddress())){
+                if (hasAddressOrMailAddress(data, mailAddressData.getAddress(), mailAddressData.getMailAddress())) {
                     Log.error("address mail exists");
-                    return ;
+                    return;
                 }
                 data.add(mailAddressData);
                 saveMailAddressToFile(data);
             } catch (IOException e) {
-                Log.error("save mail file fail",e);
+                Log.error("save mail file fail", e);
             }
 
         }
     }
 
     public Optional<MailAddressData> getMailAddressPubKey(String mailAddress) throws IOException {
-        return getAllMailAddress().stream().filter(d->d.getMailAddress().equals(mailAddress)).findFirst();
+        return getAllMailAddress().stream().filter(d -> d.getMailAddress().equals(mailAddress)).findFirst();
     }
 
     public Optional<MailAddressData> getMailAddress(String address) throws IOException {
-        return getAllMailAddress().stream().filter(d->d.getAddress().equals(address)).findFirst();
+        return getAllMailAddress().stream().filter(d -> d.getAddress().equals(address)).findFirst();
     }
 
     public void removeMailAddress(String mailAddress) {
-        synchronized (this){
+        synchronized (this) {
             try {
-                List<MailAddressData> data = getAllMailAddress().stream().filter(d->!d.getMailAddress().equals(mailAddress)).collect(Collectors.toList());
+                List<MailAddressData> data = getAllMailAddress().stream().filter(d -> !d.getMailAddress().equals(mailAddress)).collect(Collectors.toList());
                 saveMailAddressToFile(data);
             } catch (IOException e) {
-                Log.error("save mail file fail",e);
+                Log.error("save mail file fail", e);
             }
 
         }
     }
 
-    public boolean hasAddressOrMailAddress(String address,String mailAddress) throws IOException {
-        return hasAddressOrMailAddress(getAllMailAddress(),address,mailAddress);
+    public boolean hasAddressOrMailAddress(String address, String mailAddress) throws IOException {
+        return hasAddressOrMailAddress(getAllMailAddress(), address, mailAddress);
     }
 
-    public boolean hasAddressOrMailAddress(List<MailAddressData> allMailAddress,String address,String mailAddress) throws IOException {
-        return allMailAddress.stream().anyMatch(mad->mad.getAddress().equals(address)||mad.getMailAddress().equals(mailAddress));
+    public boolean hasAddressOrMailAddress(List<MailAddressData> allMailAddress, String address, String mailAddress) throws IOException {
+        return allMailAddress.stream().anyMatch(mad -> mad.getAddress().equals(address) || mad.getMailAddress().equals(mailAddress));
     }
 
     private List<MailAddressData> getAllMailAddress() throws IOException {
         List<MailAddressData> res = new ArrayList<>();
         File file = new File(getDataFile());
         if (!file.exists()) {
+            File folder = new File(file.getParent());
+            if (!folder.exists()) {
+                folder.mkdirs();
+            }
             file.createNewFile();
         }
         BufferedReader reader = new BufferedReader(new FileReader(file));
