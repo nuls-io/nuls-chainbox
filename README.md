@@ -232,7 +232,7 @@ NULS2.0运行环境包含一套最基础的区块链程序，里面包含了账�
 使用tools脚本获取NULS2.0运行环境
 
 ```
-./tools -n
+./tools -p
 ```
 脚本会首先检查当前环境，然后从拉取NULS2.0在github仓库里的代码，执行package完成NULS2.0编译打包，将可运行程序输出到./NULS-WALLET-RUNTIME目录中。
 当看到以下内容时表示打包完成。
