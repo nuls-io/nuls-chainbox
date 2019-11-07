@@ -195,11 +195,14 @@ tNULSeBaMkrt4z9FYEkkR9D6choPVvQr94oYZp #导入地址成功，验证此地址是�
   
 
 - 进入NULS-WELLET/Modules/Nuls/mail-example/1.0.0目录，用浏览器打开mail-test.html（这是一个简单的测试页面，可以测试绑定邮箱地址、收发邮件等功能），首先给账户绑定邮箱地址
-  ![](./document/images/bindmail.png)
-  给两个测试账户分别设置邮箱地址，输入刚才设置的测试账户密码。提交成功后将返回此交易的hash值。此处我们申请邮箱地址分别为asd@nuls.io和l24@nuls.io。设置完成后需要等待10秒左右确认区块。
+
+    ![](./document/images/bindmail.png)
+
+    给两个测试账户分别设置邮箱地址，输入刚才设置的测试账户密码。提交成功后将返回此交易的hash值。此处我们申请邮箱地址分别为asd@nuls.io和l24@nuls.io。设置完成后需要等待10秒左右确认区块。
 
 - 现在我们测试用asd@nuls.io向l24@nuls.io发送邮件。输入收件人邮箱地址、发件人账户地址、发件人账户密码。提交成功后将返回此交易的hash值。
-  ![](./document/images/sendmail.png)
+
+    ![](./document/images/sendmail.png)
 
 - 等待大约10秒钟后（确保交易已经确认），通过发送邮件的hash值查看邮件内容，只有发件人和收件人才能查看。
   ![](./document/images/viewmail.png)
