@@ -546,12 +546,12 @@ tools -t java
 ## 附录
 ## <span id="cmd-doc">tools脚本使用手册</span>
 ### 获取NULS2.0运行环境
-#### 命令：tools -n
+#### 命令：tools -p
 #### 参数列表
 无
 #### 示例
 ```
-tools -n
+tools -p
 ```
 ### 获取指定语言模块开发模板
 #### 命令:tools -t &lt;language> [out folder]
