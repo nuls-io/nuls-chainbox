@@ -360,10 +360,10 @@ packageOutModule(){
 packageToNuls(){
     outPath=${NULS_WALLET_PATH}
     log "NULS_WALLET PATH : ${NULS_WALLET_PATH}"
-    # if [ -d "$outPath/Modules/Nuls" ]; then
-    #     rm -rf "$outPath/Modules/Nuls"
-    # fi
-    #initAndUpdateNulsRuntime $outPath
+    if [ -d "$outPath/Modules/Nuls" ]; then
+        rm -rf "$outPath/Modules/Nuls"
+    fi
+    initAndUpdateNulsRuntime $outPath
     baseModules=
     while read line
     do
