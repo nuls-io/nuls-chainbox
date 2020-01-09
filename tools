@@ -298,45 +298,30 @@ updateTemplate(){
     ./package $baseModules
 }
 
-packageToNuls(){
-    outPath=${NULS_WALLET_PATH}
-    log "NULS_WALLET PATH : ${NULS_WALLET_PATH}"
-    if [ -d "$outPath/Modules/Nuls" ]; then
-        rm -rf "$outPath/Modules/Nuls"
+packageOutModule(){
+    module=$1
+    echo $module
+    if [ ! -d $module ]; then
+        return ;
     fi
-    initAndUpdateNulsRuntime $outPath
-    baseModules=
-    while read line
-    do
-        if [ -n "$baseModules" ]; then
-                baseModules="${baseModules},"
-        fi
-        baseModules="${baseModules}${line}"
-    done < "$outPath/.modules"
-    echo $baseModules
-    for module in $@
-    do
-        # module=$1
-        echo "packing ${module}"
-        if [ ! -d $module ]; then
-            echo "wrong module folder"
-            exit 0;
-        fi
-        cd $module
+    cd $module;
+    if [ -n "`ls |grep module.ncf`" ]; 
+    then 
         if [ ! -d "outer" ]; then
             if [ -f "./package" ]; then                
                 ./package $baseModules
             fi
             if [ ! -d "outer" ]; then
-                echo "not found outer folder"
-                exit 0
+               echo "not found outer folder"
+               exit 0
             fi
-            
+                    
         fi
         if [ ! -f "outer/Module.ncf" ]; then
             echo "not found Module.ncf"
             exit 0
         fi
+        echo "packing ${module}"
         moduleName=`getModuleItem  "outer/Module.ncf" "APP_NAME"`;
         version=`getModuleItem  "outer/Module.ncf" "VERSION"`;
         if [ -z "$moduleName" ]; then
@@ -347,7 +332,6 @@ packageToNuls(){
             echo "must setting VERSION"
             exit 0
         fi
-        cd ..
         
         if [ ! -d "${outPath}/Modules/Nuls/$moduleName" ]; then
             mkdir "${outPath}/Modules/Nuls/$moduleName"
@@ -360,8 +344,96 @@ packageToNuls(){
         echo "copy ${module}/outer/ to ${outPath}/Modules/Nuls/$moduleName/$version"
         # echo $moduleName
         echo $moduleName >> ${outPath}/.modules
-        
         echo "package ${module} finish"
+    else
+        for f in `ls`
+        do
+            if [ -d $f ]; then
+                packageOutModule "`pwd`/${f}"
+            fi  
+        done
+    fi    
+    cd ..
+    # for f in `ls`
+    # do
+    #     if [ $f == 'module.ncf' ]; then
+    #         if [ ! -d "outer" ]; then
+    #         if [ -f "./package" ]; then                
+    #             ./package $baseModules
+    #         fi
+    #         if [ ! -d "outer" ]; then
+    #             echo "not found outer folder"
+    #             exit 0
+    #         fi
+            
+    #     fi
+    #     if [ ! -f "outer/Module.ncf" ]; then
+    #         echo "not found Module.ncf"
+    #         exit 0
+    #     fi
+        # moduleName=`getModuleItem  "outer/Module.ncf" "APP_NAME"`;
+        # version=`getModuleItem  "outer/Module.ncf" "VERSION"`;
+        # if [ -z "$moduleName" ]; then
+        #     echo "must setting APP_NAME"
+        #     exit 0
+        # fi
+        # if [ -z "$version" ]; then
+        #     echo "must setting VERSION"
+        #     exit 0
+        # fi
+        # cd ..
+        
+        # if [ ! -d "${outPath}/Modules/Nuls/$moduleName" ]; then
+        #     mkdir "${outPath}/Modules/Nuls/$moduleName"
+        # fi
+        # if [ -d "${outPath}/Modules/Nuls/$moduleName/$version" ]; then
+        #     rm -rf "${outPath}/Modules/Nuls/$moduleName/$version"
+        # fi
+        # mkdir "${outPath}/Modules/Nuls/$moduleName/$version"
+        # cp -r ${module}/outer/* "${outPath}/Modules/Nuls/$moduleName/$version"
+        # echo "copy ${module}/outer/ to ${outPath}/Modules/Nuls/$moduleName/$version"
+        # # echo $moduleName
+        # echo $moduleName >> ${outPath}/.modules
+        # echo "package ${module} finish"
+    #     findModule=1
+    #     fi    
+    # done
+    # 
+    #     for f in `ls`
+    #     do
+    #         if [ -d $f ]; then
+    #             packageOutModule "${module}/${f}"
+    #         fi  
+    #     done
+    # fi
+    # cd ..   
+}
+
+packageToNuls(){
+    outPath=${NULS_WALLET_PATH}
+    log "NULS_WALLET PATH : ${NULS_WALLET_PATH}"
+    if [ -d "$outPath/Modules/Nuls" ]; then
+        rm -rf "$outPath/Modules/Nuls"
+    fi
+   initAndUpdateNulsRuntime $outPath
+    baseModules=
+    while read line
+    do
+        if [ -n "$baseModules" ]; then
+                baseModules="${baseModules},"
+        fi
+        baseModules="${baseModules}${line}"
+    done < "$outPath/.modules"
+    echo $baseModules
+    for module in $@
+    do
+        # module=$1
+       
+        if [ ! -d $module ]; then
+            echo "wrong module folder"
+            exit 0;
+        fi
+        packageOutModule "`pwd`/$module"
     done
 
     cd $ROOT_PATH
