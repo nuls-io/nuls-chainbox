@@ -309,7 +309,7 @@ packageOutModule(){
     then 
         if [ ! -d "outer" ]; then
             if [ -f "./package" ]; then                
-                ./package $baseModules
+                ./package
             fi
             if [ ! -d "outer" ]; then
                echo "not found outer folder"
