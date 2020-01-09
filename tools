@@ -295,7 +295,7 @@ updateTemplate(){
     fi
     cd $module
     git pull
-    ./package $baseModules
+    ./package
 }
 
 packageOutModule(){
