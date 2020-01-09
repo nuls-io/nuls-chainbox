@@ -354,59 +354,7 @@ packageOutModule(){
         done
     fi    
     cd ..
-    # for f in `ls`
-    # do
-    #     if [ $f == 'module.ncf' ]; then
-    #         if [ ! -d "outer" ]; then
-    #         if [ -f "./package" ]; then                
-    #             ./package $baseModules
-    #         fi
-    #         if [ ! -d "outer" ]; then
-    #             echo "not found outer folder"
-    #             exit 0
-    #         fi
-            
-    #     fi
-    #     if [ ! -f "outer/Module.ncf" ]; then
-    #         echo "not found Module.ncf"
-    #         exit 0
-    #     fi
-        # moduleName=`getModuleItem  "outer/Module.ncf" "APP_NAME"`;
-        # version=`getModuleItem  "outer/Module.ncf" "VERSION"`;
-        # if [ -z "$moduleName" ]; then
-        #     echo "must setting APP_NAME"
-        #     exit 0
-        # fi
-        # if [ -z "$version" ]; then
-        #     echo "must setting VERSION"
-        #     exit 0
-        # fi
-        # cd ..
-        
-        # if [ ! -d "${outPath}/Modules/Nuls/$moduleName" ]; then
-        #     mkdir "${outPath}/Modules/Nuls/$moduleName"
-        # fi
-        # if [ -d "${outPath}/Modules/Nuls/$moduleName/$version" ]; then
-        #     rm -rf "${outPath}/Modules/Nuls/$moduleName/$version"
-        # fi
-        # mkdir "${outPath}/Modules/Nuls/$moduleName/$version"
-        # cp -r ${module}/outer/* "${outPath}/Modules/Nuls/$moduleName/$version"
-        # echo "copy ${module}/outer/ to ${outPath}/Modules/Nuls/$moduleName/$version"
-        # # echo $moduleName
-        # echo $moduleName >> ${outPath}/.modules
-        # echo "package ${module} finish"
-    #     findModule=1
-    #     fi    
-    # done
-    # 
-    #     for f in `ls`
-    #     do
-    #         if [ -d $f ]; then
-    #             packageOutModule "${module}/${f}"
-    #         fi  
-    #     done
-    # fi
-    # cd ..   
+    
 }
 
 packageToNuls(){
@@ -415,7 +363,7 @@ packageToNuls(){
     if [ -d "$outPath/Modules/Nuls" ]; then
         rm -rf "$outPath/Modules/Nuls"
     fi
-   initAndUpdateNulsRuntime $outPath
+    initAndUpdateNulsRuntime $outPath
     baseModules=
     while read line
     do
@@ -428,7 +376,7 @@ packageToNuls(){
     for module in $@
     do
         # module=$1
-       
+        echo $module
         if [ ! -d $module ]; then
             echo "wrong module folder"
             exit 0;
@@ -482,7 +430,7 @@ do
                        modules[${#modules[@]}]=$dir
                    done    
                    #echo ${modules[@]/\//}
-                   packageToNuls ${modules[@]/\//}
+                   packageToNuls ${modules[@]%/}
                    exit
                    ;;
             t)     
