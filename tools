@@ -297,7 +297,7 @@ updateTemplate(){
     fi
     cd $module
     git pull
-    ./package
+    ./package $PACKAGE_ENV
 }
 
 packageOutModule(){
