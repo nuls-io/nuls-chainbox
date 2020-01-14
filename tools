@@ -18,7 +18,9 @@ JAVA_MODULE_TEMP_REPO="https://github.com/nuls-io/nuls-module-template-java.git"
 PACKAGE_JRE=
 TEMPLATLIST="java"
 TARGET_OS=linux
-
+if [ -z "$PACKAGE_ENV" ]; then
+    PACKAGE_ENV=prod
+fi    
 
 help()
 {
@@ -300,6 +302,7 @@ updateTemplate(){
 
 packageOutModule(){
     module=$1
+
     echo $module
     if [ ! -d $module ]; then
         return ;
@@ -309,7 +312,7 @@ packageOutModule(){
     then 
         if [ ! -d "outer" ]; then
             if [ -f "./package" ]; then                
-                ./package
+                ./package $PACKAGE_ENV
             fi
             if [ ! -d "outer" ]; then
                echo "not found outer folder"
