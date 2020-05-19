@@ -8,7 +8,7 @@
 cd `dirname $0`
 ROOT_PATH=`pwd`
 NULS2_REPO="https://github.com/nuls-io/nuls-v2.git"
-NULS2_BRANCH="chain_box"
+NULS2_BRANCH="chain-box-used"
 NULS2_RUNTIME_DIR="NULS_WALLET_RUNTIME"
 NULS2_REPO_DIR=".NULS2.0"
 WALLET_NAME="NULS_WALLET"
