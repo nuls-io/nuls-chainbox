@@ -10,7 +10,8 @@ ROOT_PATH=`pwd`
 NULS2_REPO="https://github.com/nuls-io/nuls-v2.git"
 NULS2_BRANCH="chain-box-used"
 NULS2_RUNTIME_DIR="NULS_WALLET_RUNTIME"
-NULS2_REPO_DIR=".NULS2.0"
+# NULS2_REPO_DIR=".NULS2.0"
+NULS2_REPO_DIR="../nerve-network"
 WALLET_NAME="NULS_WALLET"
 CONF=$ROOT_PATH/conf
 NULS_WALLET_PATH="${ROOT_PATH}/${WALLET_NAME}"
@@ -27,6 +28,7 @@ help()
     cat <<- EOF
     Desc: NULS-engine 脚本程序
     Usage: ./tools
+            -B 打包bata版本
             -t <language> [folder name] 获取指定开发语言的模块程序模块 
                 <language> 开发语言 ，如java
                 [folder name] 下载到指定名字的目录下
@@ -238,7 +240,7 @@ initAndUpdateNulsRuntime()
     echo "../$1"
     ./package -a "mykernel"
     #echo "./package -N -o $1 ${PACKAGE_JRE}"
-    ./package -N -o "$1" ${PACKAGE_JRE} -O $TARGET_OS
+    ./package ${IS_BETA} -N -o "$1" ${PACKAGE_JRE} -O $TARGET_OS
     cp $CONF/nuls.ncf $1
     cp $CONF/genesis-block.json $1
     cd ..
@@ -398,9 +400,11 @@ packageToNuls(){
 }
 
 
-while getopts b:J:i:t:ha:r:sld:o:zpO: name
+while getopts b:J:i:t:ha:r:sld:o:zpO:B name
 do
             case $name in
+            B)     IS_BETA=" -B "
+                   ;;    
             O)
                    TARGET_OS=$OPTARG
                    ;;    
