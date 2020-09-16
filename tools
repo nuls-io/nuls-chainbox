@@ -299,6 +299,16 @@ updateTemplate(){
     fi
     cd $module
     git pull
+    if [ -f ".branch" ]; then
+	BRANCH=`cat .branch`
+        echo "module $module use $BRANCH branch"
+        git checkout $BRANCH
+        branchIsExist=`git branch | grep "* ${BRANCH}"`
+        if [ -z "${branchIsExist}" ]; then
+            echoRed "module : $module branch 【$BRANCH】 not exist"
+            exit 0;
+        fi
+    fi
     ./package $PACKAGE_ENV
 }
 
